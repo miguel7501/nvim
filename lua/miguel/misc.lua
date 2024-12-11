@@ -1,0 +1,118 @@
+local M = {}
+
+local conf = require("telescope.config").values
+function M.harpoon_toggle_telescope(harpoon_files)
+    local file_paths = {}
+    for _, item in ipairs(harpoon_files.items) do
+        table.insert(file_paths, item.value)
+    end
+
+    require("telescope.pickers").new({}, {
+        prompt_title = "Harpoon",
+        finder = require("telescope.finders").new_table({
+            results = file_paths,
+        }),
+        previewer = conf.file_previewer({}),
+        sorter = conf.generic_sorter({}),
+    }):find()
+end
+
+-- function M.preserve_cursor(callback, callback_args)
+--
+--   -- Save the current cursor position and line content
+--   local current_pos = vim.api.nvim_win_get_cursor(0) -- {line, col}
+--   local current_line = vim.api.nvim_get_current_line()
+--
+--   -- Execute the callback
+--   callback(callback_args)
+--
+--   -- Retrieve the buffer lines after the callback
+--   local buf_lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+--
+--   -- Helper to search for the closest match
+--   local function find_line_match(line)
+--     for idx, buf_line in ipairs(buf_lines) do
+--       if buf_line == line then
+--         return idx
+--       end
+--     end
+--     return nil
+--   end
+--
+--   -- Try to find the exact match first
+--   local match_line = find_line_match(current_line)
+--
+--   -- If exact match not found, progressively shorten and try again
+--   local shortened_line = current_line
+--   while not match_line and #shortened_line > 0 do
+--     shortened_line = shortened_line:match("^(.*)%s+[^%s]*$") or ""
+--     match_line = find_line_match(shortened_line)
+--   end
+--
+--   -- Jump to the match if found, otherwise fallback to original position
+--   if match_line then
+--     vim.api.nvim_win_set_cursor(0, {match_line, 0})
+--   else
+--     vim.api.nvim_win_set_cursor(0, current_pos)
+--   end
+-- end
+--
+--
+--
+
+function M.preserve_cursor(callback, callback_args)
+    local current_pos = vim.api.nvim_win_get_cursor(0) -- {line, col}
+    local current_line = vim.api.nvim_get_current_line()
+
+    callback(callback_args)
+
+    local buf_lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+
+    local function find_line_match(line, start_line) -- Helper to search for the closest match, wrapping around if necessary
+        local buf_len = #buf_lines
+        for i = 0, buf_len - 1 do
+            local idx = (start_line + i - 1) % buf_len + 1
+            if buf_lines[idx] == line then
+                return idx
+            end
+        end
+        return nil
+    end
+
+    -- Try to find the exact match starting from the original line position
+    local match_line = find_line_match(current_line, current_pos[1])
+
+    -- If exact match not found, progressively shorten and try again
+    local shortened_line = current_line
+    while not match_line and #shortened_line > 0 do
+        shortened_line = shortened_line:match("^(.*)%s+[^%s]*$") or ""
+        match_line = find_line_match(shortened_line, current_pos[1])
+    end
+
+    -- Jump to the match if found, otherwise fallback to original position
+    if match_line then
+        vim.api.nvim_win_set_cursor(0, { match_line, 0 })
+    else
+        vim.api.nvim_win_set_cursor(0, current_pos)
+    end
+end
+
+function M.gx(path) -- copy of vim.ui.open that can get the link under the cursor and has a high timeout because wslview is so slow
+    if not path then
+        path = vim.fn.expand("<cWORD>")
+    end
+    vim.validate({
+        path = { path, 'string' },
+    })
+    local is_uri = path:match('%w+:')
+    if not is_uri then
+        path = vim.fs.normalize(path)
+    end
+
+    local cmd = { 'wslview', path } --- @type string[]
+
+    print(cmd[1], cmd[2])
+    return vim.system(cmd, { text = true, timeout = 10000, detach = true }), nil
+end
+
+return M
