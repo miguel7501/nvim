@@ -14,6 +14,7 @@ return {
         vim.api.nvim_set_hl(0, "LocalHighlight2", { bg = "#3a376f" })
 
         vim.api.nvim_set_hl(0, "NvimDapVirtualText", { fg = "#6084f9" })
+        vim.api.nvim_set_hl(0, "NvimDapVirtualTextError", { fg = "#f96092" })
 
         vim.api.nvim_set_hl(0, "@lsp.type.parameter.python", {}) -- disable LSP highlighting for variables so treesitter takes over
         -- The LSP still has other semantic tokens that will override treesitter

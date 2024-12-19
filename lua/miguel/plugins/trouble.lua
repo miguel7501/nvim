@@ -51,6 +51,7 @@ return {
                                 "Property",
                                 "Struct",
                                 "Trait",
+                                "Variable",
                             },
                         },
                     },

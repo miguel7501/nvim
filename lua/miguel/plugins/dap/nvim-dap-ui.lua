@@ -1,5 +1,5 @@
 return {
-    "rcarriga/nvim-dap-ui", -- TODO open UI when start debugging and close on terminated session
+    "rcarriga/nvim-dap-ui",
     dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
     config = function()
         local cfg = {

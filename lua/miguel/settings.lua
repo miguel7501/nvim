@@ -17,7 +17,7 @@ vim.opt.breakindent = true
 vim.opt.linebreak = true
 vim.opt.splitright = true
 vim.opt.splitbelow = true
-vim.opt.cursorline = true
+-- vim.opt.cursorline = true -- see plugins/reticle.lua
 vim.opt.updatetime = 200
 -- vim.g.netrw_liststyle = 3
 

@@ -20,7 +20,8 @@ vim.keymap.set('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>zz')
 vim.keymap.set('n', 'go', '<cmd>lua vim.lsp.buf.type_definition()<cr>zz')
 -- vim.keymap.set('n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>zz')
 vim.keymap.set('n', 'gr', '<cmd>Trouble lsp_references toggle<cr>zz')
-vim.keymap.set('n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<cr>zz')
+-- vim.keymap.set('n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<cr>zz')
+vim.keymap.set('n', 'gs', vim.lsp.buf.signature_help)
 vim.keymap.set('i', '<C-s>', vim.lsp.buf.signature_help)
 vim.keymap.set({ 'n', 'i' }, '<F2>', '<cmd>lua vim.lsp.buf.rename()<cr>zz')
 vim.keymap.set({ 'n', 'i' }, '<F4>', '<cmd>lua vim.lsp.buf.code_action()<cr>')
@@ -37,21 +38,24 @@ vim.keymap.set({ 'n', 'x' }, '<F3>', '<cmd>lua vim.lsp.buf.format({async = true}
 vim.keymap.set('n', '<C-p>', function()
     require('telescope.builtin').find_files({ find_command = { 'rg', '--no-config', '--files', '--hidden', '-g', '!.git', } })
 end, {})
-vim.keymap.set('n', '<leader>f', function()
-    require('telescope.builtin').find_files({ find_command = { 'rg', '--no-config', '--files', '--hidden', '--no-ignore' } })
-end, {})
-vim.keymap.set({ 'n', 'i' }, '<F37>', function() -- Ctrl Shift P, don't ask why windows terminal turns that into F37
+-- vim.keymap.set('n', '<leader>f', function()
+--     require('telescope.builtin').find_files({ find_command = { 'rg', '--no-config', '--files', '--hidden', '--no-ignore' } })
+-- end, {})
+vim.keymap.set({ 'n', 'i' }, '<F37>', function() -- Ctrl Shift P, windows terminal turns that into F37
     require('telescope.builtin').grep_string({ search = vim.fn.input("Search in files> "), additional_args = { "--no-config" } })
 end)
+vim.keymap.set('n', '<F37>', function()
+    require('telescope.builtin').live_grep({ 'rg', '--no-config', '--files', '--hidden', '--no-ignore' })
+end, {})
 vim.keymap.set('n', '<leader>b', require('telescope.builtin').buffers, {})
 -- Trouble
 vim.keymap.set('n', '<leader>t', "<cmd>Trouble diagnostics toggle filter.buf=0<cr>")
 vim.keymap.set('n', '<leader>T', "<cmd>Trouble diagnostics toggle<cr>")
 vim.keymap.set('n', '<leader>T', function()
-    for _, client in ipairs(vim.lsp.get_clients{bufnr=0}) do
+    for _, client in ipairs(vim.lsp.get_clients { bufnr = 0 }) do
         require("workspace-diagnostics").populate_workspace_diagnostics(client, 0)
     end
-    vim.cmd( "Trouble diagnostics toggle")
+    vim.cmd("Trouble diagnostics toggle")
 end)
 vim.keymap.set('n', '<leader>ls', "<cmd>Trouble symbols toggle<cr>")
 
@@ -109,6 +113,9 @@ vim.api.nvim_create_autocmd(
     })
 vim.keymap.set('n', '<F12>', [[<cmd>MaximizerToggle<cr>]])
 vim.keymap.set('n', '<leader>i', "<cmd>Inspect<cr>")
-
 --TODO read http://www.linusakesson.net/programming/tty/
 vim.keymap.set('n', 'gx', misc.gx)
+vim.keymap.set('n', '<leader>B', '<cmd>BlameToggle<cr>')
+
+
+
