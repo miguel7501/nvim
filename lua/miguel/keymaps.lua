@@ -30,9 +30,13 @@ vim.keymap.set('n', '<M-r>', '<C-w>h')
 vim.keymap.set('n', '<M-s>', '<C-w>j')
 vim.keymap.set('n', '<M-t>', '<C-w>l')
 vim.keymap.set('n', '<M-f>', '<C-w>k')
+vim.keymap.set('n', '<leader>q', function() vim.diagnostic.enable(not vim.diagnostic.is_enabled()) end)
+--
 -- formatting
 vim.keymap.set({ 'n', 'x' }, '<F3>', '<cmd>lua vim.lsp.buf.format({async = true})<cr>')
 -- this gets overriden for python in ftplugin/python.lua
+
+
 
 -- Telescope
 vim.keymap.set('n', '<C-p>', function()
@@ -116,6 +120,3 @@ vim.keymap.set('n', '<leader>i', "<cmd>Inspect<cr>")
 --TODO read http://www.linusakesson.net/programming/tty/
 vim.keymap.set('n', 'gx', misc.gx)
 vim.keymap.set('n', '<leader>B', '<cmd>BlameToggle<cr>')
-
-
-

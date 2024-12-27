@@ -25,13 +25,13 @@ return {
                 -- print("This is LspTokenUpdate. args: ")
                 -- print(vim.inspect(args))
                 if not token.type == "variable" or not token.modifiers.readonly then
-                    return
+                    return nil
                 end
                 local text_table = vim.api.nvim_buf_get_text(args.buf, token.line, token.start_col, token.line,
                     token.end_col, {})
                 local text = table.concat(text_table)
                 if text ~= string.upper(text) then
-                    return
+                    return nil
                 end
                 vim.lsp.semantic_tokens.highlight_token(token, args.buf, args.data.client_id, "Constant")
             end

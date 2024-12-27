@@ -27,7 +27,7 @@ return {
                     auto_close = false,
                     win = {
                         -- position = "bottom",
-                        position = "right",
+                        position = "right", --TODO split to the right if there's just one open buffer (ignoring dapui) and below if there are more
                         size = 0.25,
                     },
                     -- preview = {
