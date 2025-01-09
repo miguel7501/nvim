@@ -17,9 +17,7 @@ return {
         vim.api.nvim_set_hl(0, "NvimDapVirtualTextError", { fg = "#f96092" })
 
         vim.api.nvim_set_hl(0, "@lsp.type.parameter.python", {}) -- disable LSP highlighting for variables so treesitter takes over
-        -- The LSP still has other semantic tokens that will override treesitter
-        -- vim.api.nvim_set_hl(0, "@lsp.typemod.variable.readonly.python", { link = "constant" }) -- this will make constants red but also applies to @property methods like df.empty
-        vim.api.nvim_create_autocmd("LspTokenUpdate", {
+        vim.api.nvim_create_autocmd("LspTokenUpdate", { -- this is for python constants
             callback = function(args)
                 local token = args.data.token
                 -- print("This is LspTokenUpdate. args: ")
@@ -30,7 +28,7 @@ return {
                 local text_table = vim.api.nvim_buf_get_text(args.buf, token.line, token.start_col, token.line,
                     token.end_col, {})
                 local text = table.concat(text_table)
-                if text ~= string.upper(text) then
+                if text ~= string.upper(text) then -- python constants are always uppercase
                     return nil
                 end
                 vim.lsp.semantic_tokens.highlight_token(token, args.buf, args.data.client_id, "Constant")

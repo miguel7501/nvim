@@ -13,6 +13,7 @@ return {
                     analysis = {
                         typeCheckingMode = "basic",
                         -- logLevel = "Trace",
+                        diagnosticMode = "workspace",
                     }
                 }
             } }

@@ -39,19 +39,18 @@ vim.keymap.set({ 'n', 'x' }, '<F3>', '<cmd>lua vim.lsp.buf.format({async = true}
 
 
 -- Telescope
+local tsbuiltin = require('telescope.builtin')
 vim.keymap.set('n', '<C-p>', function()
-    require('telescope.builtin').find_files({ find_command = { 'rg', '--no-config', '--files', '--hidden', '-g', '!.git', } })
+    tsbuiltin.find_files({ find_command = { 'rg', '--no-config', '--files', '--hidden', '-g', '!.git', } })
 end, {})
--- vim.keymap.set('n', '<leader>f', function()
---     require('telescope.builtin').find_files({ find_command = { 'rg', '--no-config', '--files', '--hidden', '--no-ignore' } })
--- end, {})
-vim.keymap.set({ 'n', 'i' }, '<F37>', function() -- Ctrl Shift P, windows terminal turns that into F37
-    require('telescope.builtin').grep_string({ search = vim.fn.input("Search in files> "), additional_args = { "--no-config" } })
-end)
+-- vim.keymap.set({ 'n', 'i' }, '<F37>', function() -- Ctrl Shift P, windows terminal turns that into F37
+--     tsbuiltin.grep_string({ search = vim.fn.input("Search in files> "), additional_args = { "--no-config" } })
+-- end)
 vim.keymap.set('n', '<F37>', function()
-    require('telescope.builtin').live_grep({ 'rg', '--no-config', '--files', '--hidden', '--no-ignore' })
+    tsbuiltin.live_grep({ 'rg', '--no-config', '--files', '--hidden', '--no-ignore' })
 end, {})
-vim.keymap.set('n', '<leader>b', require('telescope.builtin').buffers, {})
+vim.keymap.set('n', '<leader>fp', tsbuiltin.lsp_workspace_symbols)
+
 -- Trouble
 vim.keymap.set('n', '<leader>t', "<cmd>Trouble diagnostics toggle filter.buf=0<cr>")
 vim.keymap.set('n', '<leader>T', "<cmd>Trouble diagnostics toggle<cr>")
@@ -88,7 +87,7 @@ vim.keymap.set('n', '<leader>dj', dap.goto_)
 vim.keymap.set('n', '<leader>dm', require("dap-python").test_method)
 vim.keymap.set('n', '<F20>', dap.terminate) -- F20 is obviously the same as Shift+F8
 vim.keymap.set('n', '<leader>dr', function() dapui.toggle { reset = true } end)
-vim.keymap.set('n', '<leader>dt', "<cmd>DapVirtualTextToggle<cr")
+vim.keymap.set('n', '<leader>dvt', "<cmd>DapVirtualTextToggle<cr")
 
 
 
@@ -120,3 +119,5 @@ vim.keymap.set('n', '<leader>i', "<cmd>Inspect<cr>")
 --TODO read http://www.linusakesson.net/programming/tty/
 vim.keymap.set('n', 'gx', misc.gx)
 vim.keymap.set('n', '<leader>B', '<cmd>BlameToggle<cr>')
+
+vim.keymap.set('t', '<esc><esc>', "<c-\\><c-n>")

@@ -2,8 +2,8 @@ return {
     "FabijanZulj/blame.nvim",
     lazy = false,
     config = function()
-        require('blame').setup {
-            date_format = "%d.%m.%Y",
+        require('blame').setup { --TODO make the colors of authors/dates a gradient so I can see how recent something is at a glance
+            date_format = "%d.%m.%Y", --TODO maybe also make the `git diff` a bit nicer
             virtual_style = "right_align",
             merge_consecutive = false,
             mappings = {

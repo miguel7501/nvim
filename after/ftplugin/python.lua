@@ -7,5 +7,4 @@ local function black()
     misc.preserve_cursor(vim.cmd, "Black")
 end
 
-
-vim.keymap.set({ 'n', 'x' }, '<F3>', black)
+vim.keymap.set({ 'n', 'x' }, '<F3>', black) -- yes, this is botchery. No, I don't care

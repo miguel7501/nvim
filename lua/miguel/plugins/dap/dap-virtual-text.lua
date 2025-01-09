@@ -23,10 +23,10 @@ return {
                     return ' = ' .. variable.type
                 else
                     -- return variable.type .. " " .. variable.name .. ' = ' .. string.sub(variable.value, 1, 40)
-                    if string.len(variable.value) < 45 then
+                    if string.len(variable.value) < 65 then
                         return variable.value
                     end
-                    return string.sub(variable.value, 1, 40) .. '..'
+                    return string.sub(variable.value, 1, 60) .. '..'
                 end
             end,
         }

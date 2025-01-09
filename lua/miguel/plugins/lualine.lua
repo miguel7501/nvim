@@ -53,6 +53,7 @@ return {
 
                 },
                 -- lualine_x = { 'searchcount', 'encoding', 'fileformat', 'filetype' },
+                lualine_x = { 'filetype' },
                 -- lualine_x = { lspspinner }, -- lualine says something about invalid characters and shits itself
                 lualine_y = { 'progress' },
                 lualine_z = { 'location' }
@@ -61,9 +62,9 @@ return {
                 lualine_a = {},
                 lualine_b = {},
                 lualine_c = { { 'filename', path = 1 } },
-                lualine_x = { 'location' },
-                lualine_y = {},
-                lualine_z = {}
+                lualine_x = { 'filetype' },
+                lualine_y = { 'location'},
+                lualine_z = { }
             },
             tabline = {},
             winbar = {},
