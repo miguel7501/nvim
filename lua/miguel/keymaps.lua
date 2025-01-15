@@ -117,7 +117,14 @@ vim.api.nvim_create_autocmd(
 vim.keymap.set('n', '<F12>', [[<cmd>MaximizerToggle<cr>]])
 vim.keymap.set('n', '<leader>i', "<cmd>Inspect<cr>")
 --TODO read http://www.linusakesson.net/programming/tty/
-vim.keymap.set('n', 'gx', misc.gx)
+vim.keymap.set({'n', 'v'}, 'gx', misc.gx)
 vim.keymap.set('n', '<leader>B', '<cmd>BlameToggle<cr>')
 
 vim.keymap.set('t', '<esc><esc>', "<c-\\><c-n>")
+
+
+
+
+-- this is getting out of hand. We need some categories for keymaps so I can remember them
+-- sd* for debugging
+--TODO ss for 'show' -> Undotree, blame, diagnostic virtualtext

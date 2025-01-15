@@ -7,15 +7,15 @@ return {
         dap_python.setup("python")
         dap_python.test_runner = "pytest"
         dap.configurations.python = {
+            -- {
+            --     type = 'python',
+            --     request = 'launch',
+            --     name = "Launch file",
+            --     program = "${file}",
+            --     pythonPath = vim.fn.getcwd
+            -- },
             {
-                type = 'python',
-                request = 'launch',
-                name = "Launch file",
-                program = "${file}",
-                pythonPath = vim.fn.getcwd
-            },
-            {
-                name = "Python Debugger: Current file but global config",
+                name = "Current python file",
                 type = "debugpy",
                 request = "launch",
                 program = "${file}",
@@ -26,11 +26,11 @@ return {
                 console = "integratedTerminal",
             },
             {
-                type = 'python',
-                request = 'launch',
-                name = "Pytest",
-                program = "pytest",
-                pythonPath = vim.fn.getcwd
+                name = "Pytest (all)",
+                type = "debugpy",
+                request = "launch",
+                module = "pytest",
+                console = "integratedTerminal"
             },
         }
     end

@@ -2,6 +2,7 @@ return {
     "theHamsta/nvim-dap-virtual-text",
     config = function()
         local vt = require("nvim-dap-virtual-text")
+        ---@diagnostic disable-next-line
         vt.setup {
             -- only_first_definition = false,
             -- all_references = true,

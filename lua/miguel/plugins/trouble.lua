@@ -2,6 +2,7 @@ return {
     "folke/trouble.nvim",
     config = function()
         require("trouble").setup {
+            max_items = 1000,
             modes = {
                 lsp_base = {
                     focus = true,
@@ -14,6 +15,7 @@ return {
                         relative = "win",
                         position = "right",
                         size = 0.5,
+                        scratch = false,
                     },
                     focus = true,
                     auto_close = true,
@@ -35,6 +37,7 @@ return {
                     --     -- relative = "win",
                     --     position= "below",
                     -- },
+                    preview = { scratch = false },
                     filter = {
                         any = {
                             kind = {

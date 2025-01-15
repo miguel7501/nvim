@@ -31,7 +31,7 @@ return {
                 if text ~= string.upper(text) then -- python constants are always uppercase
                     return nil
                 end
-                vim.lsp.semantic_tokens.highlight_token(token, args.buf, args.data.client_id, "Constant")
+                vim.lsp.semantic_tokens.highlight_token(token, args.buf, args.data.client_id, "Custom_highlight.Constant")
             end
         })
     end
