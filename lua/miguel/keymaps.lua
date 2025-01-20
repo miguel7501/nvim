@@ -31,6 +31,25 @@ vim.keymap.set('n', '<M-s>', '<C-w>j')
 vim.keymap.set('n', '<M-t>', '<C-w>l')
 vim.keymap.set('n', '<M-f>', '<C-w>k')
 vim.keymap.set('n', '<leader>q', function() vim.diagnostic.enable(not vim.diagnostic.is_enabled()) end)
+vim.keymap.set('n', '<leader>la', "<cmd>lua vim.lsp.buf.code_action()<cr>")
+--
+-- Trouble
+vim.keymap.set('n', '<leader>t', "<cmd>Trouble diagnostics toggle filter.buf=0<cr>")
+vim.keymap.set('n', '<leader>T', "<cmd>Trouble diagnostics toggle<cr>")
+vim.keymap.set('n', '<leader>T', function()
+    for _, client in ipairs(vim.lsp.get_clients { bufnr = 0 }) do
+        require("workspace-diagnostics").populate_workspace_diagnostics(client, 0)
+    end
+    vim.cmd("Trouble diagnostics toggle")
+end)
+vim.keymap.set('n', '<leader>ls', "<cmd>Trouble symbols toggle<cr>")
+
+
+
+
+
+
+
 --
 -- formatting
 vim.keymap.set({ 'n', 'x' }, '<F3>', '<cmd>lua vim.lsp.buf.format({async = true})<cr>')
@@ -50,19 +69,6 @@ vim.keymap.set('n', '<F37>', function()
     tsbuiltin.live_grep({ 'rg', '--no-config', '--files', '--hidden', '--no-ignore' })
 end, {})
 vim.keymap.set('n', '<leader>fp', tsbuiltin.lsp_workspace_symbols)
-
--- Trouble
-vim.keymap.set('n', '<leader>t', "<cmd>Trouble diagnostics toggle filter.buf=0<cr>")
-vim.keymap.set('n', '<leader>T', "<cmd>Trouble diagnostics toggle<cr>")
-vim.keymap.set('n', '<leader>T', function()
-    for _, client in ipairs(vim.lsp.get_clients { bufnr = 0 }) do
-        require("workspace-diagnostics").populate_workspace_diagnostics(client, 0)
-    end
-    vim.cmd("Trouble diagnostics toggle")
-end)
-vim.keymap.set('n', '<leader>ls', "<cmd>Trouble symbols toggle<cr>")
-
-
 
 -- undotree
 vim.keymap.set({ 'n', 'i' }, '<F1>', vim.cmd.UndotreeToggle)
@@ -107,7 +113,7 @@ end)
 
 
 -- Misc
-vim.keymap.set('n', '<leader>q', '<cmd>copen<cr>') --open qflist
+vim.keymap.set('n', ',', ';.') -- use comma to repeat the last movement, then the last command. Useful for things like $p
 -- close quickfix menu after selecting choice
 vim.api.nvim_create_autocmd(
     "FileType", {
