@@ -58,17 +58,17 @@ vim.keymap.set({ 'n', 'x' }, '<F3>', '<cmd>lua vim.lsp.buf.format({async = true}
 
 
 -- Telescope
-local tsbuiltin = require('telescope.builtin')
+local telbuiltin = require('telescope.builtin')
 vim.keymap.set('n', '<C-p>', function()
-    tsbuiltin.find_files({ find_command = { 'rg', '--no-config', '--files', '--hidden', '-g', '!.git', } })
+    telbuiltin.find_files({ find_command = { 'rg', '--no-config', '--files', '--hidden', '-g', '!.git', } })
 end, {})
 -- vim.keymap.set({ 'n', 'i' }, '<F37>', function() -- Ctrl Shift P, windows terminal turns that into F37
 --     tsbuiltin.grep_string({ search = vim.fn.input("Search in files> "), additional_args = { "--no-config" } })
 -- end)
-vim.keymap.set('n', '<F37>', function()
-    tsbuiltin.live_grep({ 'rg', '--no-config', '--files', '--hidden', '--no-ignore' })
-end, {})
-vim.keymap.set('n', '<leader>fp', tsbuiltin.lsp_workspace_symbols)
+vim.keymap.set('n', '<C-S-P>', function()
+    telbuiltin.live_grep({ 'rg', '--no-config', '--files', '--hidden', '--no-ignore' })
+end, {desc = "Live Grep"})
+vim.keymap.set('n', '<leader>fp', telbuiltin.lsp_workspace_symbols)
 
 -- undotree
 vim.keymap.set({ 'n', 'i' }, '<F1>', vim.cmd.UndotreeToggle)
