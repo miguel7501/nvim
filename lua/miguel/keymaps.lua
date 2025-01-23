@@ -33,6 +33,25 @@ vim.keymap.set('n', '<M-f>', '<C-w>k')
 vim.keymap.set('n', '<leader>q', function() vim.diagnostic.enable(not vim.diagnostic.is_enabled()) end)
 vim.keymap.set('n', '<leader>la', "<cmd>lua vim.lsp.buf.code_action()<cr>")
 --
+-- formatting
+vim.keymap.set({ 'n', 'x' }, '<F3>', '<cmd>lua vim.lsp.buf.format({async = true})<cr>')
+-- this gets overriden for python in ftplugin/python.lua
+
+
+
+-- Telescope
+vim.keymap.set('n', '<C-p>', function()
+    require('telescope.builtin').find_files({ find_command = { 'rg', '--no-config', '--files', '--hidden', '-g', '!.git', } })
+end, {})
+-- vim.keymap.set('n', '<leader>f', function()
+--     require('telescope.builtin').find_files({ find_command = { 'rg', '--no-config', '--files', '--hidden', '--no-ignore' } })
+-- end, {})
+-- vim.keymap.set({ 'n', 'i' }, '<F37>', function() -- Ctrl Shift P, windows terminal turns that into F37
+--     require('telescope.builtin').grep_string({ search = vim.fn.input("Search in files> "), additional_args = { "--no-config" } })
+-- end)
+vim.keymap.set('n', '<F37>', function()
+    require('telescope.builtin').live_grep({ 'rg', '--no-config', '--files', '--hidden', '--no-ignore' })
+end, {})
 -- Trouble
 vim.keymap.set('n', '<leader>t', "<cmd>Trouble diagnostics toggle filter.buf=0<cr>")
 vim.keymap.set('n', '<leader>T', "<cmd>Trouble diagnostics toggle<cr>")

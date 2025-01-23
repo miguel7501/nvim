@@ -22,7 +22,7 @@ return {
         lualine.setup {
             options = {
                 icons_enabled = true,
-                theme = 'ayu_mirage',
+                theme = 'auto',
                 component_separators = { left = '', right = '' },
                 section_separators = { left = '', right = '' },
                 disabled_filetypes = {
@@ -55,8 +55,9 @@ return {
                 -- lualine_x = { 'searchcount', 'encoding', 'fileformat', 'filetype' },
                 lualine_x = { 'filetype' },
                 -- lualine_x = { lspspinner }, -- lualine says something about invalid characters and shits itself
-                lualine_y = { 'progress' },
-                lualine_z = { 'location' }
+                lualine_x = {},
+                lualine_y = {},
+                lualine_z = { 'progress' }
             },
             inactive_sections = {
                 lualine_a = {},

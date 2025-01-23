@@ -2,7 +2,7 @@ return {
     'numToStr/Comment.nvim',
     opts = {
         -- toggler = {
-        --     line = "<C-/>"
+            -- line = "<C-/>"
         -- }
     },
     config = function()

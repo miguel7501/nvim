@@ -1,13 +1,14 @@
 return {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
-    dependencies = {
-        "hrsh7th/cmp-nvim-lsp",
-    },
+    -- dependencies = {
+    --     "hrsh7th/cmp-nvim-lsp",
+    -- },
     config = function()
         local lspconfig = require("lspconfig")
         lspconfig.basedpyright.setup {
-            capabilities = require('cmp_nvim_lsp').default_capabilities(),
+            -- capabilities = require('cmp_nvim_lsp').default_capabilities(),
+            capabilities = require('blink.cmp').get_lsp_capabilities(),
             settings = {
                 basedpyright = {
                     analysis = {
@@ -18,11 +19,10 @@ return {
                 }
             } }
         lspconfig.lua_ls.setup {
-            capabilities = require('cmp_nvim_lsp').default_capabilities(),
+            capabilities = require('blink.cmp').get_lsp_capabilities(),
             settings = {
                 Lua = {
                     diagnostics = {
-                        globals = { "vim" },
                         reportMissingTypeStubs = false
                     }
                 }
