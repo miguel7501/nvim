@@ -104,7 +104,7 @@ function M.gx(path) -- copy of vim.ui.open that can get the link under the curso
     vim.validate({
         path = { path, 'string' },
     })
-    local is_uri = path:match('%w+:')
+    local is_uri = path:match('%w+:') --TODO check if path contains a URL. If so, strip anything other than the URL
     if not is_uri then
         path = vim.fs.normalize(path)
     end
@@ -114,5 +114,11 @@ function M.gx(path) -- copy of vim.ui.open that can get the link under the curso
     print(cmd[1], cmd[2])
     return vim.system(cmd, { text = true, timeout = 10000, detach = true }), nil
 end
+
+M.dap_test_config = {
+    justMyCode = false,
+}
+
+
 
 return M

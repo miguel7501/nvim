@@ -32,6 +32,8 @@ vim.keymap.set('n', '<M-t>', '<C-w>l')
 vim.keymap.set('n', '<M-f>', '<C-w>k')
 vim.keymap.set('n', '<leader>q', function() vim.diagnostic.enable(not vim.diagnostic.is_enabled()) end)
 vim.keymap.set('n', '<leader>la', "<cmd>lua vim.lsp.buf.code_action()<cr>")
+vim.keymap.set('n', '<leader>lr', vim.lsp.buf.rename)
+
 --
 -- formatting
 vim.keymap.set({ 'n', 'x' }, '<F3>', '<cmd>lua vim.lsp.buf.format({async = true})<cr>')
@@ -53,6 +55,7 @@ vim.keymap.set('n', '<F37>', function()
     require('telescope.builtin').live_grep({ 'rg', '--no-config', '--files', '--hidden', '--no-ignore' })
 end, {})
 -- Trouble
+vim.keymap.set('n', '<leader>li', "<cmd>Trouble lsp_incoming_calls<cr>")
 vim.keymap.set('n', '<leader>t', "<cmd>Trouble diagnostics toggle filter.buf=0<cr>")
 vim.keymap.set('n', '<leader>T', "<cmd>Trouble diagnostics toggle<cr>")
 vim.keymap.set('n', '<leader>T', function()
@@ -63,17 +66,8 @@ vim.keymap.set('n', '<leader>T', function()
 end)
 vim.keymap.set('n', '<leader>ls', "<cmd>Trouble symbols toggle<cr>")
 
-
-
-
-
-
-
---
 -- formatting
 vim.keymap.set({ 'n', 'x' }, '<F3>', '<cmd>lua vim.lsp.buf.format({async = true})<cr>')
--- this gets overriden for python in ftplugin/python.lua
-
 
 
 -- Telescope
@@ -109,7 +103,7 @@ vim.keymap.set('n', '<leader>e', dapui.eval)
 vim.keymap.set('n', '<leader>dd', dap.down)
 vim.keymap.set('n', '<leader>du', dap.up)
 vim.keymap.set('n', '<leader>dj', dap.goto_)
-vim.keymap.set('n', '<leader>dm', require("dap-python").test_method)
+vim.keymap.set('n', '<leader>dm', function() require("dap-python").test_method{justMyCode=false} end)
 vim.keymap.set('n', '<F20>', dap.terminate) -- F20 is obviously the same as Shift+F8
 vim.keymap.set('n', '<leader>dr', function() dapui.toggle { reset = true } end)
 vim.keymap.set('n', '<leader>dvt', "<cmd>DapVirtualTextToggle<cr")
@@ -129,6 +123,8 @@ vim.keymap.set('n', '<leader>r', function()
     print("removed buffer from harpoon"); harpoon:list():remove()
 end)
 
+-- Oil (file browser)
+vim.keymap.set('n', '-', "<cmd>Oil<cr>")
 
 
 -- Misc
@@ -153,3 +149,4 @@ vim.keymap.set('t', '<esc><esc>', "<c-\\><c-n>")
 -- this is getting out of hand. We need some categories for keymaps so I can remember them
 -- sd* for debugging
 --TODO ss for 'show' -> Undotree, blame, diagnostic virtualtext
+--TODO sg for git stuff

@@ -1,7 +1,7 @@
 vim.g.mapleader = 's'
 vim.g.maplocalleader = 's'
-vim.keymap.set('n', 's', '<Nop>', {})
-vim.keymap.set('n', 'S', 's', {})
+vim.keymap.set({'n', 'v'}, 's', '<Nop>', {})
+vim.keymap.set({'n', 'v'}, 'S', 's', {})
 
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
