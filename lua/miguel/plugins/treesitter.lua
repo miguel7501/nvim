@@ -3,7 +3,7 @@ return {
     config = function()
         ---@diagnostic disable-next-line: missing-fields
         require("nvim-treesitter.configs").setup {
-            ensure_installed = { "lua", "python", "markdown", "yaml", "toml", "xml", "ini", "csv" },
+            ensure_installed = { "lua", "python", "markdown", "yaml", "toml", "xml", "ini", "csv", "comment"},
             auto_install = true,
             highlight = { enable = true },
             incremental_selection = {
