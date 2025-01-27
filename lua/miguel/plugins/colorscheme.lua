@@ -17,14 +17,15 @@ return {
         vim.api.nvim_set_hl(0, "NvimDapVirtualTextError", { fg = "#f96092" })
 
         vim.api.nvim_set_hl(0, "Todo", { fg = "#000000", bg = "#0db9d7" })
-        -- TODO
+        vim.api.nvim_set_hl(0, "@todo", { link = "Todo" })
+        --TODO demo of TODO highlighting
 
 
 
-        vim.api.nvim_set_hl(0, "@lsp.type.comment.lua", {}) -- luals shenanigains
+        vim.api.nvim_set_hl(0, "@lsp.type.comment.lua", {})      -- luals shenanigains
 
         vim.api.nvim_set_hl(0, "@lsp.type.parameter.python", {}) -- disable LSP highlighting for variables so treesitter takes over
-        vim.api.nvim_create_autocmd("LspTokenUpdate", { -- this is for python constants
+        vim.api.nvim_create_autocmd("LspTokenUpdate", {          -- this is for python constants
             callback = function(args)
                 local token = args.data.token
                 -- print("This is LspTokenUpdate. args: ")
