@@ -53,7 +53,7 @@ return {
 
                 },
                 -- lualine_x = { 'searchcount', 'encoding', 'fileformat', 'filetype' },
-                lualine_x = { 'filetype' },
+                -- lualine_x = { 'filetype' },
                 -- lualine_x = { lspspinner }, -- lualine says something about invalid characters and shits itself
                 lualine_x = {},
                 lualine_y = {},
@@ -63,8 +63,8 @@ return {
                 lualine_a = {},
                 lualine_b = {},
                 lualine_c = { { 'filename', path = 1 }, require'dap'.status },
-                lualine_x = { 'filetype' },
-                lualine_y = { 'location'},
+                lualine_x = { },
+                lualine_y = { 'progress'},
                 lualine_z = { }
             },
             tabline = {},
@@ -73,5 +73,11 @@ return {
             extensions = {}
             -- extensions = { 'nvim-dap-ui' }
         }
+        -- TODO do the theme thingy
+        -- local autotheme = require("lualine.themes.auto")
+        -- local f = io.open('autotheme.lua', 'w')
+        -- f:write(vim.inspect(autotheme))
+        -- f:close()
+
     end
 }

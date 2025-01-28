@@ -17,9 +17,10 @@ vim.opt.breakindent = true
 vim.opt.linebreak = true
 vim.opt.splitright = true
 vim.opt.splitbelow = true
--- vim.opt.cursorline = true -- see plugins/reticle.lua
 vim.opt.updatetime = 200
--- vim.g.netrw_liststyle = 3
+vim.opt.number = true
+vim.opt.relativenumber = true
+
 
 vim.api.nvim_create_autocmd('TextYankPost', {
     desc = 'Highlight when yoinking text',
@@ -29,6 +30,12 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     end,
 })
 
+-- tmux
+vim.opt.termguicolors = true
+
+-- :python
+vim.g.python3_host_prog = '/home/miguel/scripts/python/.venv/bin/python3'
+
 -- automatically remove trailing spaces
 local group1 = vim.api.nvim_create_augroup("group1", {})
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
@@ -36,15 +43,4 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
     pattern = "*",
     command = "%s/\\s\\+$//e",
 })
-
--- tmux
-vim.env.TERM = 'xterm-256color'
--- vim.cmd('set termguicolors')
-vim.opt.termguicolors = true
-
-vim.opt.number = true
-vim.opt.relativenumber = true
-
--- :python
-vim.g.python3_host_prog = '/home/miguel/scripts/python/.venv/bin/python3'
 
