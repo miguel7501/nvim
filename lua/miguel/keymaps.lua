@@ -106,7 +106,7 @@ vim.keymap.set('n', '<leader>dj', dap.goto_)
 vim.keymap.set('n', '<leader>dm', function() require("dap-python").test_method{justMyCode=false} end)
 vim.keymap.set('n', '<F20>', dap.terminate) -- F20 is obviously the same as Shift+F8
 vim.keymap.set('n', '<leader>dr', function() dapui.toggle { reset = true } end)
-vim.keymap.set('n', '<leader>dvt', "<cmd>DapVirtualTextToggle<cr")
+vim.keymap.set('n', '<leader>dvt', "<cmd>DapVirtualTextToggle<cr>")
 
 
 
