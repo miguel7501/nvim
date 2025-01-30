@@ -2,7 +2,8 @@ return {
     'stevearc/oil.nvim',
     dependencies = { "nvim-tree/nvim-web-devicons", { "echasnovski/mini.icons", opts = {} } },
     config = function()
-        require("oil").setup {
+        local oil = require("oil")
+        oil.setup {
             default_file_explorer = true,
             columns = {
                 "icon",
@@ -30,5 +31,17 @@ return {
                 ["g\\"] = { "actions.toggle_trash", mode = "n" },
             },
         }
+        -- Open Oil with preview enabled
+        vim.api.nvim_create_autocmd("User", {
+            pattern = "OilEnter",
+            callback = function(args)
+                local bufnr = vim.api.nvim_get_current_buf()
+                if args.data.buf == bufnr then
+                    local callback = oil.open_preview
+                    vim.api.nvim_buf_call(bufnr, callback)
+                    return true
+                end
+            end,
+        })
     end
 }

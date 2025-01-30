@@ -80,7 +80,7 @@ end, {})
 -- end)
 vim.keymap.set('n', '<C-S-P>', function()
     telbuiltin.live_grep({ 'rg', '--no-config', '--files', '--hidden', '--no-ignore' })
-end, {desc = "Live Grep"})
+end, { desc = "Live Grep" })
 vim.keymap.set('n', '<leader>fp', telbuiltin.lsp_workspace_symbols)
 
 -- undotree
@@ -103,7 +103,7 @@ vim.keymap.set('n', '<leader>e', dapui.eval)
 vim.keymap.set('n', '<leader>dd', dap.down)
 vim.keymap.set('n', '<leader>du', dap.up)
 vim.keymap.set('n', '<leader>dj', dap.goto_)
-vim.keymap.set('n', '<leader>dm', function() require("dap-python").test_method{justMyCode=false} end)
+vim.keymap.set('n', '<leader>dm', function() require("dap-python").test_method { justMyCode = false } end)
 vim.keymap.set('n', '<F20>', dap.terminate) -- F20 is obviously the same as Shift+F8
 vim.keymap.set('n', '<leader>dr', function() dapui.toggle { reset = true } end)
 vim.keymap.set('n', '<leader>dvt', "<cmd>DapVirtualTextToggle<cr>")
@@ -138,7 +138,7 @@ vim.api.nvim_create_autocmd(
 vim.keymap.set('n', '<F12>', [[<cmd>MaximizerToggle<cr>]])
 vim.keymap.set('n', '<leader>i', "<cmd>Inspect<cr>")
 --TODO read http://www.linusakesson.net/programming/tty/
-vim.keymap.set({'n', 'v'}, 'gx', misc.gx)
+vim.keymap.set({ 'n', 'v' }, 'gx', misc.gx)
 vim.keymap.set('n', '<leader>B', '<cmd>BlameToggle<cr>')
 
 vim.keymap.set('t', '<esc><esc>', "<c-\\><c-n>")
@@ -150,3 +150,7 @@ vim.keymap.set('t', '<esc><esc>', "<c-\\><c-n>")
 -- sd* for debugging
 --TODO ss for 'show' -> Undotree, blame, diagnostic virtualtext
 --TODO sg for git stuff
+local todocomments = require("todo-comments")
+vim.keymap.set("n", "]t", function() todocomments.jump_next() end, { desc = "Next todo comment" })
+
+vim.keymap.set("n", "[t", function() todocomments.jump_prev() end, { desc = "Previous todo comment" })

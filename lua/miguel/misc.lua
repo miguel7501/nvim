@@ -97,6 +97,8 @@ function M.preserve_cursor(callback, callback_args)
     end
 end
 
+-- test link https://python-poetry.org/history/
+
 function M.gx(path) -- copy of vim.ui.open that can get the link under the cursor and has a high timeout because wslview is so slow
     if not path then
         path = vim.fn.expand("<cWORD>")
