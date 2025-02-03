@@ -110,18 +110,26 @@ vim.keymap.set('n', '<leader>dvt', "<cmd>DapVirtualTextToggle<cr>")
 
 
 
--- Harpoon
-local harpoon = require("harpoon")
-vim.keymap.set("n", "<C-e>", function() misc.harpoon_toggle_telescope(harpoon:list()) end,
-    { desc = "Open harpoon window" })
-vim.keymap.set('n', '<leader>a', function()
-    print("Added buffer to harpoon"); harpoon:list():add()
-end)
-vim.keymap.set('n', '<leader>n', function() harpoon:list():next() end)
-vim.keymap.set('n', '<leader>p', function() harpoon:list():prev() end)
-vim.keymap.set('n', '<leader>r', function()
-    print("removed buffer from harpoon"); harpoon:list():remove()
-end)
+-- Harpoon -- Harboon is out for now because it has a bug I can't reproduce so I don't use it
+-- local harpoon = require("harpoon")
+-- vim.keymap.set("n", "<C-e>", function() misc.harpoon_toggle_telescope(harpoon:list()) end,
+--     { desc = "Open harpoon window" })
+-- vim.keymap.set('n', '<leader>a', function()
+--     print("Added buffer to harpoon"); harpoon:list():add()
+-- end)
+-- vim.keymap.set('n', '<leader>n', function() harpoon:list():next() end)
+-- vim.keymap.set('n', '<leader>p', function() harpoon:list():prev() end)
+-- vim.keymap.set('n', '<leader>r', function()
+--     print("removed buffer from harpoon"); harpoon:list():remove()
+-- end)
+
+-- Zettelkasten (requires zk to be installed)
+--TODO docs are at https://github.com/zk-org/zk-nvim
+-- local zk = require("zk")
+vim.keymap.set('n', '<leader>np', '<cmd>ZkNotes<cr>') -- :ZkNotes
+vim.keymap.set('n', '<leader>nn', '<cmd>ZkNew<cr>') -- :ZkNotes
+vim.keymap.set('n', '<leader>ni', '<cmd>ZkIndex<cr>') -- :ZkNotes
+
 
 -- Oil (file browser)
 vim.keymap.set('n', '-', "<cmd>Oil<cr>")
@@ -137,7 +145,7 @@ vim.api.nvim_create_autocmd(
     })
 vim.keymap.set('n', '<F12>', [[<cmd>MaximizerToggle<cr>]])
 vim.keymap.set('n', '<leader>i', "<cmd>Inspect<cr>")
---TODO read http://www.linusakesson.net/programming/tty/
+--example link: http://www.linusakesson.net/programming/tty/
 vim.keymap.set({ 'n', 'v' }, 'gx', misc.gx)
 vim.keymap.set('n', '<leader>B', '<cmd>BlameToggle<cr>')
 
@@ -150,6 +158,7 @@ vim.keymap.set('t', '<esc><esc>', "<c-\\><c-n>")
 -- sd* for debugging
 --TODO ss for 'show' -> Undotree, blame, diagnostic virtualtext
 --TODO sg for git stuff
+
 local todocomments = require("todo-comments")
 vim.keymap.set("n", "]t", function() todocomments.jump_next() end, { desc = "Next todo comment" })
 
