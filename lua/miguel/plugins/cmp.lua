@@ -34,6 +34,14 @@ return {
         version = 'v0.*',
 
         opts = {
+            enabled = function ()
+                if vim.fn.mode() == 'c' and vim.fn.getcmdline():find("!") -- no autocomplete for external commands because WSL
+                    or vim.bo.filetype == "TelescopePrompt"
+                then
+                    return false
+                end
+                return true
+            end,
             keymap = {
                 preset = 'default',
                 ["<C-u>"] = { "scroll_documentation_up", "fallback" },

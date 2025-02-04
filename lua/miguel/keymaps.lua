@@ -31,7 +31,7 @@ vim.keymap.set('n', '<M-s>', '<C-w>j')
 vim.keymap.set('n', '<M-t>', '<C-w>l')
 vim.keymap.set('n', '<M-f>', '<C-w>k')
 vim.keymap.set('n', '<leader>q', function() vim.diagnostic.enable(not vim.diagnostic.is_enabled()) end)
-vim.keymap.set('n', '<leader>la', "<cmd>lua vim.lsp.buf.code_action()<cr>")
+vim.keymap.set({'n','v'}, '<leader>la', "<cmd>lua vim.lsp.buf.code_action()<cr>")
 vim.keymap.set('n', '<leader>lr', vim.lsp.buf.rename)
 
 --
@@ -126,9 +126,10 @@ vim.keymap.set('n', '<leader>dvt', "<cmd>DapVirtualTextToggle<cr>")
 -- Zettelkasten (requires zk to be installed)
 --TODO docs are at https://github.com/zk-org/zk-nvim
 -- local zk = require("zk")
-vim.keymap.set('n', '<leader>np', '<cmd>ZkNotes<cr>') -- :ZkNotes
-vim.keymap.set('n', '<leader>nn', '<cmd>ZkNew<cr>') -- :ZkNotes
-vim.keymap.set('n', '<leader>ni', '<cmd>ZkIndex<cr>') -- :ZkNotes
+vim.keymap.set('n', '<leader>np', '<cmd>ZkNotes<cr>')
+vim.keymap.set('n', '<leader>nc', '<cmd>ZkNew<cr>')
+vim.keymap.set('n', '<leader>ni', '<cmd>ZkIndex<cr>')
+vim.keymap.set('n', '<leader>nm', '<cmd>e /home/miguel/notes/fmbj.md<cr>') -- Yes, I hardcoded that path. Go cry about it
 
 
 -- Oil (file browser)
@@ -156,6 +157,7 @@ vim.keymap.set('t', '<esc><esc>', "<c-\\><c-n>")
 
 -- this is getting out of hand. We need some categories for keymaps so I can remember them
 -- sd* for debugging
+-- sn* for notes
 --TODO ss for 'show' -> Undotree, blame, diagnostic virtualtext
 --TODO sg for git stuff
 
