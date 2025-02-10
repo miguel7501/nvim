@@ -90,6 +90,7 @@ vim.keymap.set('n', '<leader>fp', telbuiltin.lsp_workspace_symbols)
 
 -- undotree
 vim.keymap.set({ 'n', 'i' }, '<F1>', vim.cmd.UndotreeToggle)
+vim.keymap.set({ 'n', 'i' }, '<leader>u', vim.cmd.UndotreeToggle)
 
 -- debugging
 local dap = require('dap')
