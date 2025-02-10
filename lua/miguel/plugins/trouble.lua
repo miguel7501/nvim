@@ -3,6 +3,10 @@ return {
     config = function()
         require("trouble").setup {
             max_items = 1000,
+            keys = {
+                s = "fold_more",
+                S = "fold_reduce"
+            },
             modes = {
                 lsp_base = {
                     focus = true,

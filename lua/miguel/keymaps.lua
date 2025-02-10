@@ -24,14 +24,14 @@ vim.keymap.set('n', 'gr', '<cmd>Trouble lsp_references toggle<cr>zz')
 vim.keymap.set('n', 'gs', vim.lsp.buf.signature_help)
 vim.keymap.set('i', '<C-s>', vim.lsp.buf.signature_help)
 vim.keymap.set({ 'n', 'i' }, '<F2>', '<cmd>lua vim.lsp.buf.rename()<cr>zz')
-vim.keymap.set({ 'n', 'i' }, '<F4>', '<cmd>lua vim.lsp.buf.code_action()<cr>')
+vim.keymap.set({'n','i','v'}, '<F4>', '<cmd>lua vim.lsp.buf.code_action()<cr>')
 vim.keymap.set('n', '<C-K>', '<cmd>lua vim.diagnostic.open_float()<cr>')
 vim.keymap.set('n', '<M-r>', '<C-w>h')
 vim.keymap.set('n', '<M-s>', '<C-w>j')
 vim.keymap.set('n', '<M-t>', '<C-w>l')
 vim.keymap.set('n', '<M-f>', '<C-w>k')
 vim.keymap.set('n', '<leader>q', function() vim.diagnostic.enable(not vim.diagnostic.is_enabled()) end)
-vim.keymap.set({'n','v'}, '<leader>la', "<cmd>lua vim.lsp.buf.code_action()<cr>")
+vim.keymap.set({'n','i','v'}, '<leader>la', "<cmd>lua vim.lsp.buf.code_action()<cr>")
 vim.keymap.set('n', '<leader>lr', vim.lsp.buf.rename)
 
 --
@@ -54,6 +54,7 @@ end, {})
 vim.keymap.set('n', '<F37>', function()
     require('telescope.builtin').live_grep({ 'rg', '--no-config', '--files', '--hidden', '--no-ignore' })
 end, {})
+
 -- Trouble
 vim.keymap.set('n', '<leader>li', "<cmd>Trouble lsp_incoming_calls<cr>")
 vim.keymap.set('n', '<leader>t', "<cmd>Trouble diagnostics toggle filter.buf=0<cr>")
@@ -64,7 +65,11 @@ vim.keymap.set('n', '<leader>T', function()
     end
     vim.cmd("Trouble diagnostics toggle")
 end)
-vim.keymap.set('n', '<leader>ls', "<cmd>Trouble symbols toggle<cr>")
+vim.keymap.set('n', '<leader>ls', function()
+    vim.cmd("Trouble symbols toggle")
+    require("trouble").fold_more() ---@diagnostic disable-line because Trouble docs say this is ok
+end)
+-- the keymaps for within trouble views are in ./plugins/trouble.lua
 
 -- formatting
 vim.keymap.set({ 'n', 'x' }, '<F3>', '<cmd>lua vim.lsp.buf.format({async = true})<cr>')

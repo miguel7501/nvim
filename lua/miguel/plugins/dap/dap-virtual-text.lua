@@ -8,9 +8,9 @@ return {
             -- all_references = true,
             virt_text_pos = "eol",
             display_callback = function(variable, buf, stackframe, node, options)
-                print("This is dap-virtual-text callback.")
-                print("Variable:")
-                print(vim.inspect(variable)) --TODO get corresponding buf line so we can fill the rest of it with vt
+                -- print("This is dap-virtual-text callback.")
+                -- print("Variable:")
+                -- print(vim.inspect(variable)) --TODO get corresponding buf line so we can fill the rest of it with vt
                 -- print("\nbuf:")
                 -- print(vim.inspect(buf))
                 -- print("\nstackframe:")
