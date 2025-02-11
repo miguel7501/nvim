@@ -16,7 +16,7 @@ vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>')
 -- end)
 vim.keymap.set('n', 'gd', '<cmd>Trouble lsp_definitions toggle<cr>')
 vim.keymap.set('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>zz')
-vim.keymap.set('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>zz')
+-- vim.keymap.set('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>zz')
 vim.keymap.set('n', 'go', '<cmd>lua vim.lsp.buf.type_definition()<cr>zz')
 -- vim.keymap.set('n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>zz')
 vim.keymap.set('n', 'gr', '<cmd>Trouble lsp_references toggle<cr>zz')
@@ -31,7 +31,7 @@ vim.keymap.set('n', '<M-s>', '<C-w>j')
 vim.keymap.set('n', '<M-t>', '<C-w>l')
 vim.keymap.set('n', '<M-f>', '<C-w>k')
 vim.keymap.set('n', '<leader>q', function() vim.diagnostic.enable(not vim.diagnostic.is_enabled()) end)
-vim.keymap.set({'n','i','v'}, '<leader>la', "<cmd>lua vim.lsp.buf.code_action()<cr>")
+vim.keymap.set({'n','v'}, '<leader>la', "<cmd>lua vim.lsp.buf.code_action()<cr>")
 vim.keymap.set('n', '<leader>lr', vim.lsp.buf.rename)
 
 --
@@ -90,7 +90,7 @@ vim.keymap.set('n', '<leader>fp', telbuiltin.lsp_workspace_symbols)
 
 -- undotree
 vim.keymap.set({ 'n', 'i' }, '<F1>', vim.cmd.UndotreeToggle)
-vim.keymap.set({ 'n', 'i' }, '<leader>u', vim.cmd.UndotreeToggle)
+vim.keymap.set({ 'n' }, '<leader>u', vim.cmd.UndotreeToggle)
 
 -- debugging
 local dap = require('dap')
@@ -109,7 +109,7 @@ vim.keymap.set('n', '<leader>e', dapui.eval)
 vim.keymap.set('n', '<leader>dd', dap.down)
 vim.keymap.set('n', '<leader>du', dap.up)
 vim.keymap.set('n', '<leader>dj', dap.goto_)
-vim.keymap.set('n', '<leader>dm', function() require("dap-python").test_method { justMyCode = false } end)
+vim.keymap.set('n', '<leader>dm', function() require("dap-python").test_method { config = { justMyCode = false } } end)
 vim.keymap.set('n', '<F20>', dap.terminate) -- F20 is obviously the same as Shift+F8
 vim.keymap.set('n', '<leader>dr', function() dapui.toggle { reset = true } end)
 vim.keymap.set('n', '<leader>dvt', "<cmd>DapVirtualTextToggle<cr>")
@@ -130,13 +130,23 @@ vim.keymap.set('n', '<leader>dvt', "<cmd>DapVirtualTextToggle<cr>")
 -- end)
 
 -- Zettelkasten (requires zk to be installed)
---TODO docs are at https://github.com/zk-org/zk-nvim
+--NOTE docs are at https://github.com/zk-org/zk-nvim
 -- local zk = require("zk")
 vim.keymap.set('n', '<leader>np', '<cmd>ZkNotes<cr>')
 vim.keymap.set('n', '<leader>nc', '<cmd>ZkNew<cr>')
 vim.keymap.set('n', '<leader>ni', '<cmd>ZkIndex<cr>')
 vim.keymap.set('n', '<leader>nm', '<cmd>e /home/miguel/notes/fmbj.md<cr>') -- Yes, I hardcoded that path. Go cry about it
 
+
+-- Git
+-- TODO get some better signcolumn signs
+local gitsigns = require("gitsigns")
+vim.keymap.set('n', ']c', function() gitsigns.nav_hunk('next') end)
+vim.keymap.set('n', '[c', function() gitsigns.nav_hunk('prev') end)
+vim.keymap.set('n', '<leader>gd', function() gitsigns.diffthis(nil, {vertical=true, split="rightbelow"}) end) -- why do you even read my keymaps? Go make your own!
+vim.keymap.set('n', '<leader>ga', function() gitsigns.stage_hunk() end)
+vim.keymap.set('n', '<leader>gt', function() gitsigns.setqflist('all') end)
+vim.keymap.set('n', '<leader>gp', function() gitsigns.preview_hunk() end)
 
 -- Oil (file browser)
 vim.keymap.set('n', '-', "<cmd>Oil<cr>")

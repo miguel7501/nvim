@@ -14,6 +14,7 @@ dap.listeners.after['event_exited']['dapui'] = function(session, body)
     end
 end
 dap.listeners.before['event_initialized']['dapui'] = dapui.open
+dap.set_log_level("TRACE")
 -- vim.api.nvim_create_autocmd({"BufDelete", "BufWipeout"}, { --TODO close dapui when quitting vim so I don't have to do it manually
 --     pattern = '*',
 --     callback = function ()
@@ -36,4 +37,3 @@ dap.listeners.before['event_initialized']['dapui'] = dapui.open
 
 -- Stuff
 vim.cmd("SpeedDatingFormat %d.%m.%Y")
-dap.set_log_level("TRACE")

@@ -5,13 +5,15 @@ return {
     -- HACK test comment
     -- NOTE test comment
     -- BUG test comment
+    -- BROKEN
     -- PERF test comment
     -- WARNING test comment
     -- we DONE did it
     opts = {
         keywords = {
-            DONE = { icon = "", color = '#96ff8f'},
-            WIP = {icon = "🔨", color = '#ff9d00'}
+            DONE = { icon = "", color = '#96ff8f' },
+            WIP = { icon = "🔨", color = '#ff9d00' },
+            FIX = { alt = { "BUG", "BROKEN", "FIXME" } },
         },
         merge_keywords = true,
         highlight = {

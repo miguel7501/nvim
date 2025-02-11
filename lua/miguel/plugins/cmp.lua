@@ -36,7 +36,7 @@ return {
         opts = {
             enabled = function ()
                 if vim.fn.mode() == 'c' and vim.fn.getcmdline():find("!") -- no autocomplete for external commands because WSL
-                    or vim.bo.filetype == "TelescopePrompt"
+                    or vim.bo.filetype == "TelescopePrompt" -- and no autocomplete for telescope because why would there be
                 then
                     return false
                 end
@@ -52,7 +52,10 @@ return {
                 use_nvim_cmp_as_default = true,
                 nerd_font_variant = 'mono'
             },
-            signature = { enabled = true }
+            signature = { enabled = true },
+            -- sources = {
+            --     default = {'lsp', 'snippets', 'buffer'} --path is out because wsl
+            -- }
         },
     },
 }
