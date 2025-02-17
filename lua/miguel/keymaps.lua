@@ -1,3 +1,5 @@
+--TODO put the ghostty config in this repo ya dummy
+
 local misc = require("miguel.misc")
 
 -- make sure leader is also set directly in the main init.lua
