@@ -1,13 +1,23 @@
 return {
     "folke/trouble.nvim",
     config = function()
+        ---@diagnostic disable-next-line
         require("trouble").setup {
             max_items = 1000,
             keys = {
                 s = "fold_more",
-                S = "fold_reduce"
+                S = "fold_reduce",
+                ["<cr>"] = "jump_close",
             },
             modes = {
+                -- gitsigns does this: require('trouble').open('loclist')
+                loclist = { -- this is for gitsigns --TODO but it do not be working
+                    focus = true,
+                    preview = { --TODO we want main buffer preview
+                        type = "main",
+                        scratch = false,
+                    }
+                },
                 lsp_base = {
                     focus = true,
                     auto_close = true,
@@ -30,10 +40,10 @@ return {
                 symbols = {
                     mode = "lsp_document_symbols",
                     focus = true,
-                    auto_close = false,
+                    auto_close = true,
                     win = {
                         -- position = "bottom",
-                        position = "right", --TODO split to the right if there's just one open buffer (ignoring dapui) and below if there are more
+                        position = "right",
                         size = 0.25,
                     },
                     -- preview = {

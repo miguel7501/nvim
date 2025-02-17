@@ -1,4 +1,4 @@
--- debugger setup
+-- debugger setup needs to happen here because both dap and dapui need to have their setup() called before
 local dap = require('dap')
 vim.fn.sign_define('DapBreakpoint', { text = '🛑', texthl = '', linehl = '', numhl = '' })
 vim.fn.sign_define('DapStopped', { text = '→', texthl = '', linehl = 'WildMenu', numhl = '' })

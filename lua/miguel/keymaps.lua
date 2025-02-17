@@ -60,9 +60,6 @@ vim.keymap.set('n', '<leader>li', "<cmd>Trouble lsp_incoming_calls<cr>")
 vim.keymap.set('n', '<leader>t', "<cmd>Trouble diagnostics toggle filter.buf=0<cr>")
 vim.keymap.set('n', '<leader>T', "<cmd>Trouble diagnostics toggle<cr>")
 vim.keymap.set('n', '<leader>T', function()
-    for _, client in ipairs(vim.lsp.get_clients { bufnr = 0 }) do
-        require("workspace-diagnostics").populate_workspace_diagnostics(client, 0)
-    end
     vim.cmd("Trouble diagnostics toggle")
 end)
 vim.keymap.set('n', '<leader>ls', function()
@@ -101,7 +98,7 @@ vim.keymap.set({ 'n', 'i' }, '<F7>', dap.step_out)
 vim.keymap.set({ 'n', 'i' }, '<F8>', dap.continue)
 vim.keymap.set({ 'n', 'i' }, '<F32>', dap.run_last) -- Ctrl F8
 vim.keymap.set('n', '<leader>b', dap.toggle_breakpoint)
-vim.keymap.set('n', '<leader>e', dapui.eval)
+vim.keymap.set({'n', 'v'}, '<leader>e', dapui.eval)
 -- vim.keymap.set('n', '<Leader>dr', function()
 --     dap.repl.toggle({}, 'vert rightbelow split')
 --     vim.cmd("normal! <C-w>l")

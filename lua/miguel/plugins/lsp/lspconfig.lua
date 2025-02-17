@@ -18,9 +18,6 @@ return {
                     }
                 }
             },
-            -- on_attach = function (client, bufnr) --TODO check if that works without the plugin
-            --     require("workspace-diagnostics").populate_workspace_diagnostics(client, bufnr)
-            -- end
         }
         lspconfig.lua_ls.setup {
             capabilities = require('blink.cmp').get_lsp_capabilities(),
