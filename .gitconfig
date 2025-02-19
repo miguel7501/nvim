@@ -1,0 +1,36 @@
+[init]
+	defaultBranch = main
+[rerere]
+	enabled = true
+[core]
+	editor = nvim
+	safecrlf = true
+	eol = lf
+    pager = delta
+[alias]
+	lg = log --oneline --graph
+	unstage = rm --cached
+	lg = log --graph --pretty=format:'%C(yellow)%h%C(reset) %C(magenta)%ad%C(reset) %C(red)%d%C(reset) %C(brightblue)%an%C(reset) %s' --date=short --color
+[apply]
+	whitespace = fix
+[interactive]
+    diffFilter = delta --color-only --features=interactive
+
+
+[delta]
+    features = decorations
+    line-numbers = true
+
+[delta "interactive"]
+    keep-plus-minus-markers = false
+
+[delta "decorations"]
+    commit-decoration-style = blue ol
+    commit-style = raw
+    file-style = omit
+    hunk-header-decoration-style = blue box
+    hunk-header-file-style = red
+    hunk-header-line-number-style = "#067a00"
+    hunk-header-style = file line-number syntax
+[branch]
+	autoSetupMerge = false

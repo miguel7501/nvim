@@ -1,0 +1,30 @@
+#theming
+theme = shades-of-purple
+
+# Font stuff
+font-family = FontAwesome
+font-size = 14
+adjust-cell-width = -4%
+adjust-cell-height = -10%
+adjust-cursor-thickness = 2
+
+
+
+# keymaps
+# show default mappings by commenting this out and running `ghostty +list-keybinds`
+keybind = clear
+keybind=ctrl+shift+v=paste_from_clipboard
+keybind=ctrl+shift+c=copy_to_clipboard
+keybind=ctrl+shift+comma=reload_config
+keybind=ctrl+minus=decrease_font_size:1
+keybind=ctrl+plus=increase_font_size:1
+keybind=ctrl+equal=increase_font_size:1
+
+mouse-scroll-multiplier = 0.25
+
+
+
+# Ligature demo
+# ==  !=  <=  >= --> <-- <== <<= ~~ ***
+
+
