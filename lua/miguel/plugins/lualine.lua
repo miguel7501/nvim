@@ -1,6 +1,9 @@
 return {
     'nvim-lualine/lualine.nvim',
-    dependencies = { 'nvim-tree/nvim-web-devicons' },
+    dependencies = {
+        'nvim-tree/nvim-web-devicons',
+        'abccsss/nvim-gitstatus'
+    },
     config = function()
         local lualine = require('lualine')
         -- SpinnerCounter = 0
@@ -40,7 +43,17 @@ return {
             },
             sections = {
                 lualine_a = { 'mode' },
-                lualine_b = { 'diagnostics', { 'filename', path = 1 }, },
+                lualine_b = {
+                    'diagnostics',
+                    { 'filename', path = 1 },
+                    { 'gitstatus', sections = { --TODO no worky
+                        -- { "staged",    format = "{}=" },
+                        { "untracked", format = "{}+" },
+                        { "modified",  format = "{}*" },
+                        { "renamed",   format = "{}~" },
+                        { "deleted",   format = "{}-" },
+                    }, sep = " ",
+                } },
                 lualine_c = {
                     -- { 'filename', path = 1 },
                     -- { 'buffers',  show_filename_only = true, }
@@ -49,7 +62,7 @@ return {
                     --     return require'dap'.status()
                     -- end
                     -- },
-                    { require'dap'.status }
+                    { require 'dap'.status }
 
                 },
                 -- lualine_x = { 'searchcount', 'encoding', 'fileformat', 'filetype' },
@@ -62,10 +75,11 @@ return {
             inactive_sections = {
                 lualine_a = {},
                 lualine_b = {},
-                lualine_c = { { 'filename', path = 1 }, require'dap'.status },
-                lualine_x = { },
-                lualine_y = { 'progress'},
-                lualine_z = { }
+                lualine_c = { { 'filename', path = 1 } },
+                lualine_x = {},
+                lualine_y = {},
+                -- lualine_y = { 'progress' },
+                lualine_z = { 'progress' }
             },
             tabline = {},
             winbar = {},
@@ -78,6 +92,5 @@ return {
         -- local f = io.open('autotheme.lua', 'w')
         -- f:write(vim.inspect(autotheme))
         -- f:close()
-
     end
 }
