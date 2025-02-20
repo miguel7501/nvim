@@ -3,6 +3,7 @@ return {
     config = function()
         local vt = require("nvim-dap-virtual-text")
         ---@diagnostic disable-next-line
+        VTLOGFILE = ""
         vt.setup {
             -- only_first_definition = false,
             -- all_references = true,
@@ -15,8 +16,11 @@ return {
                 -- print(vim.inspect(buf))
                 -- print("\nstackframe:")
                 -- print(vim.inspect(stackframe))
-                -- print("\nnode:")
-                -- print(vim.inspect(node))
+                --
+                -- if variable then
+                --     VTLOGFILE = VTLOGFILE .. vim.inspect(node)
+                -- end
+                --
                 -- print("\noptions:")
                 -- print(vim.inspect(options))
                 -- print("\n\n\n")
