@@ -33,7 +33,7 @@ vim.keymap.set('n', '<M-s>', '<C-w>j')
 vim.keymap.set('n', '<M-t>', '<C-w>l')
 vim.keymap.set('n', '<M-f>', '<C-w>k')
 vim.keymap.set('n', '<leader>q', function() vim.diagnostic.enable(not vim.diagnostic.is_enabled()) end)
-vim.keymap.set({'n','v'}, '<leader>la', "<cmd>lua vim.lsp.buf.code_action()<cr>")
+vim.keymap.set({'n','v'}, '<leader>la', vim.lsp.buf.code_action)
 vim.keymap.set('n', '<leader>lr', vim.lsp.buf.rename)
 
 --
@@ -44,26 +44,29 @@ vim.keymap.set({ 'n', 'x' }, '<F3>', '<cmd>lua vim.lsp.buf.format({async = true}
 
 
 -- Telescope
+local telbuiltin = require('telescope.builtin')
 vim.keymap.set('n', '<C-p>', function()
-    require('telescope.builtin').find_files({ find_command = { 'rg', '--no-config', '--files', '--hidden', '-g', '!.git', } })
+    telbuiltin.find_files({ find_command = { 'rg', '--no-config', '--files', '--hidden', '-g', '!.git', } })
 end, {})
--- vim.keymap.set('n', '<leader>f', function()
---     require('telescope.builtin').find_files({ find_command = { 'rg', '--no-config', '--files', '--hidden', '--no-ignore' } })
--- end, {})
--- vim.keymap.set({ 'n', 'i' }, '<F37>', function() -- Ctrl Shift P, windows terminal turns that into F37
---     require('telescope.builtin').grep_string({ search = vim.fn.input("Search in files> "), additional_args = { "--no-config" } })
--- end)
 vim.keymap.set('n', '<F37>', function()
-    require('telescope.builtin').live_grep({ 'rg', '--no-config', '--files', '--hidden', '--no-ignore' })
+    telbuiltin.live_grep({ 'rg', '--no-config', '--files', '--hidden', '--no-ignore' })
 end, {})
+vim.keymap.set('n', '<C-p>', function()
+    telbuiltin.find_files({ find_command = { 'rg', '--no-config', '--files', '--hidden', '-g', '!.git', } })
+end, {})
+vim.keymap.set('n', '<C-S-P>', function()
+    telbuiltin.live_grep({ 'rg', '--no-config', '--files', '--hidden', '--no-ignore' })
+end, { desc = "Live Grep" })
+vim.keymap.set('n', '<leader>pp', telbuiltin.lsp_workspace_symbols)
+vim.keymap.set('n', '<leader>k', "<cmd>Telescope keymaps<cr>")
+vim.keymap.set('n', '<leader>h', "<cmd>Telescope help_tags<cr>")
+vim.keymap.set('n', '<leader>pb', "<cmd>Telescope builtin<cr>")
+
 
 -- Trouble
 vim.keymap.set('n', '<leader>li', "<cmd>Trouble lsp_incoming_calls<cr>")
 vim.keymap.set('n', '<leader>t', "<cmd>Trouble diagnostics toggle filter.buf=0<cr>")
 vim.keymap.set('n', '<leader>T', "<cmd>Trouble diagnostics toggle<cr>")
-vim.keymap.set('n', '<leader>T', function()
-    vim.cmd("Trouble diagnostics toggle")
-end)
 vim.keymap.set('n', '<leader>ls', function()
     vim.cmd("Trouble symbols toggle")
     require("trouble").fold_more() ---@diagnostic disable-line because Trouble docs say this is ok
@@ -73,19 +76,6 @@ end)
 -- formatting
 vim.keymap.set({ 'n', 'x' }, '<F3>', '<cmd>lua vim.lsp.buf.format({async = true})<cr>')
 
-
--- Telescope
-local telbuiltin = require('telescope.builtin')
-vim.keymap.set('n', '<C-p>', function()
-    telbuiltin.find_files({ find_command = { 'rg', '--no-config', '--files', '--hidden', '-g', '!.git', } })
-end, {})
--- vim.keymap.set({ 'n', 'i' }, '<F37>', function() -- Ctrl Shift P, windows terminal turns that into F37
---     tsbuiltin.grep_string({ search = vim.fn.input("Search in files> "), additional_args = { "--no-config" } })
--- end)
-vim.keymap.set('n', '<C-S-P>', function()
-    telbuiltin.live_grep({ 'rg', '--no-config', '--files', '--hidden', '--no-ignore' })
-end, { desc = "Live Grep" })
-vim.keymap.set('n', '<leader>fp', telbuiltin.lsp_workspace_symbols)
 
 -- undotree
 vim.keymap.set({ 'n', 'i' }, '<F1>', vim.cmd.UndotreeToggle)
@@ -109,10 +99,9 @@ vim.keymap.set('n', '<leader>dd', dap.down)
 vim.keymap.set('n', '<leader>du', dap.up)
 vim.keymap.set('n', '<leader>dj', dap.goto_)
 vim.keymap.set('n', '<leader>dm', function() require("dap-python").test_method { config = { justMyCode = false } } end)
-vim.keymap.set('n', '<F20>', dap.terminate) -- F20 is obviously the same as Shift+F8
+vim.keymap.set('n', '<F20>', dap.terminate) -- F20 is obviously the same as Shift+F8 (in windows terminal)
 vim.keymap.set('n', '<leader>dr', function() dapui.toggle { reset = true } end)
 vim.keymap.set('n', '<leader>dvt', "<cmd>DapVirtualTextToggle<cr>")
-
 
 
 -- Harpoon -- Harboon is out for now because it has a bug I can't reproduce so I don't use it
@@ -135,17 +124,18 @@ vim.keymap.set('n', '<leader>np', '<cmd>ZkNotes<cr>')
 vim.keymap.set('n', '<leader>nc', '<cmd>ZkNew<cr>')
 vim.keymap.set('n', '<leader>ni', '<cmd>ZkIndex<cr>')
 vim.keymap.set('n', '<leader>nm', '<cmd>e /home/miguel/notes/fmbj.md<cr>') -- Yes, I hardcoded that path. Go cry about it
+vim.keymap.set('n', '<leader>nt', '<cmd>ZkTags<cr>')
 
 
 -- Git
--- TODO get some better signcolumn signs
+-- TODO signcolumn background for git indicators
 local gitsigns = require("gitsigns")
 vim.keymap.set('n', ']c', function() gitsigns.nav_hunk('next') end)
 vim.keymap.set('n', '[c', function() gitsigns.nav_hunk('prev') end)
-vim.keymap.set('n', '<leader>gd', function() gitsigns.diffthis(nil, {vertical=true, split="rightbelow"}) end) -- why do you even read my keymaps? Go make your own!
-vim.keymap.set('n', '<leader>ga', function() gitsigns.stage_hunk() end)
-vim.keymap.set('n', '<leader>gt', function() gitsigns.setqflist('all') end)
-vim.keymap.set('n', '<leader>gp', function() gitsigns.preview_hunk() end)
+vim.keymap.set('n', '<leader>gd', function() gitsigns.diffthis(nil, {vertical=true, split="rightbelow"}) end, {desc = "git diff"})
+vim.keymap.set('n', '<leader>ga', function() gitsigns.stage_hunk() end, {desc = "git add for the current change"})
+vim.keymap.set('n', '<leader>gt', function() gitsigns.setqflist('all') end, {desc = "Open all unstaged changes in Trouble"})
+vim.keymap.set('n', '<leader>gp', function() gitsigns.preview_hunk() end, {desc = "Preview current change"})
 
 -- Oil (file browser)
 vim.keymap.set('n', '-', "<cmd>Oil<cr>")
@@ -165,7 +155,7 @@ vim.keymap.set('n', '<leader>i', "<cmd>Inspect<cr>")
 vim.keymap.set({ 'n', 'v' }, 'gx', misc.gx)
 vim.keymap.set('n', '<leader>B', '<cmd>BlameToggle<cr>')
 
-vim.keymap.set('t', '<esc><esc>', "<c-\\><c-n>")
+vim.keymap.set('t', '<Esc><Esc>', "<C-\\><C-n>") --TODO this still broken
 
 
 
