@@ -63,6 +63,13 @@ vim.keymap.set('n', '<leader>h', "<cmd>Telescope help_tags<cr>")
 vim.keymap.set('n', '<leader>pb', "<cmd>Telescope builtin<cr>")
 
 
+
+-- Refactoring
+vim.keymap.set({'n', 'v'}, '<leader>rr', function ()
+    require("telescope").extensions.refactoring.refactors()
+end)
+
+
 -- Trouble
 vim.keymap.set('n', '<leader>li', "<cmd>Trouble lsp_incoming_calls<cr>")
 vim.keymap.set('n', '<leader>t', "<cmd>Trouble diagnostics toggle filter.buf=0<cr>")

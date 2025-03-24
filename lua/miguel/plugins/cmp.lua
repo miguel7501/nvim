@@ -35,12 +35,10 @@ return {
 
         opts = {
             enabled = function ()
-                if vim.fn.mode() == 'c' and vim.fn.getcmdline():find("!") -- no autocomplete for external commands because WSL
+                local disable = vim.fn.mode() == 'c' and vim.fn.getcmdline():find("!") -- no autocomplete for external commands because WSL
                     or vim.bo.filetype == "TelescopePrompt" -- and no autocomplete for telescope because why would there be
-                then
-                    return false
-                end
-                return true
+                vim.print(string.format("blink.cmp enable callback: returning %q, mode is %q", not disable, vim.fn.mode()))
+                return not disable
             end,
             keymap = {
                 preset = 'default',
