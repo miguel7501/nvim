@@ -121,6 +121,17 @@ M.dap_test_config = {
     justMyCode = false,
 }
 
+---@param bufnr number
+---@return number
+-- Get the first window containing the given buffer
+function M.buf_get_win(bufnr)
+    for _, win in ipairs(vim.api.nvim_list_wins()) do
+        if vim.api.nvim_win_get_buf(win) == bufnr then
+            return win
+        end
+    end
+    return nil
+end
 
 
 return M

@@ -4,7 +4,7 @@ return {
         local vt = require("nvim-dap-virtual-text")
         ---@diagnostic disable-next-line
         VTLOGFILE = ""
-        vt.setup {
+        vt.setup { ---@diagnostic disable-line:missing-fields
             -- only_first_definition = false,
             -- all_references = true,
             virt_text_pos = "eol",
@@ -27,11 +27,25 @@ return {
                 if options.virt_text_pos == 'inline' then
                     return ' = ' .. variable.type
                 else
-                    -- return variable.type .. " " .. variable.name .. ' = ' .. string.sub(variable.value, 1, 40)
-                    if string.len(variable.value) < 65 then
-                        return variable.value
-                    end
-                    return string.sub(variable.value, 1, 60) .. '..'
+                    return '■ '..variable.value
+
+                    -- -- The code below cuts the virtual text so it doesn't cause line wraps. But at some point it started working without that code
+                    -- local row = node:start()
+                    -- local line = vim.api.nvim_buf_get_lines(buf, row, row+1, true)[1]
+                    -- local win = require('miguel.misc').buf_get_win(buf)
+                    -- if win == nil then
+                    --     return "Error: win "..win.." is nil for variable "..variable.name
+                    -- end
+                    -- local width = vim.api.nvim_win_get_width(win)
+                    -- local available_space = width - #line
+                    -- vim.print("dapVT callback: Available space for line "..row.." is "..available_space..", variable.value is "..#variable.value.." chars long")
+                    -- if #variable.value < available_space then
+                    --     vim.print("dapVT callback: Returning "..variable.value)
+                    --     return variable.value
+                    -- end
+                    -- local retval = string.sub(variable.value, 1, available_space-4) .. '..'
+                    -- vim.print("dapVT callback: Returning "..retval)
+                    -- return retval
                 end
             end,
         }
