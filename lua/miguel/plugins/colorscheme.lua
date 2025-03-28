@@ -16,10 +16,8 @@ return {
         vim.api.nvim_set_hl(0, "NvimDapVirtualText", { fg = "#6084f9" })
         vim.api.nvim_set_hl(0, "NvimDapVirtualTextError", { fg = "#f96092" })
 
-        vim.api.nvim_set_hl(0, "Todo", { fg = "#000000", bg = "#0db9d7" })
-        vim.api.nvim_set_hl(0, "@todo", { link = "Todo" })
-        --TODO demo of TODO highlighting
-
+        vim.api.nvim_set_hl(0, "CustomUnusedVars", { undercurl = true, })
+        vim.api.nvim_set_hl(0, "DiagnosticUnnecessary", { link = "CustomUnusedVars" })
 
 
         vim.api.nvim_set_hl(0, "@lsp.type.comment.lua", {})      -- luals shenanigains
