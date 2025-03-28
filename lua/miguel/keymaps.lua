@@ -95,7 +95,8 @@ vim.keymap.set({ 'n', 'i' }, '<F5>', dap.step_into)
 vim.keymap.set({ 'n', 'i' }, '<F6>', dap.step_over)
 vim.keymap.set({ 'n', 'i' }, '<F7>', dap.step_out)
 vim.keymap.set({ 'n', 'i' }, '<F8>', dap.continue)
-vim.keymap.set({ 'n', 'i' }, '<F32>', dap.run_last) -- Ctrl F8
+vim.keymap.set({ 'n', 'i' }, '<F32>', dap.run_last) -- Ctrl F8 in tmux
+vim.keymap.set({ 'n', 'i' }, '<C-F8>', dap.run_last)
 vim.keymap.set('n', '<leader>b', dap.toggle_breakpoint)
 vim.keymap.set({'n', 'v'}, '<leader>e', dapui.eval)
 -- vim.keymap.set('n', '<Leader>dr', function()
@@ -107,6 +108,7 @@ vim.keymap.set('n', '<leader>du', dap.up)
 vim.keymap.set('n', '<leader>dj', dap.goto_)
 vim.keymap.set('n', '<leader>dm', function() require("dap-python").test_method { config = { justMyCode = false } } end)
 vim.keymap.set('n', '<F20>', dap.terminate) -- F20 is obviously the same as Shift+F8 (in windows terminal)
+vim.keymap.set('n', '<S-F8>', dap.terminate) -- F20 is obviously the same as Shift+F8 (in windows terminal)
 vim.keymap.set('n', '<leader>dr', function() dapui.toggle { reset = true } end)
 vim.keymap.set('n', '<leader>dvt', "<cmd>DapVirtualTextToggle<cr>")
 
@@ -162,7 +164,7 @@ vim.keymap.set('n', '<leader>i', "<cmd>Inspect<cr>")
 vim.keymap.set({ 'n', 'v' }, 'gx', misc.gx)
 vim.keymap.set('n', '<leader>B', '<cmd>BlameToggle<cr>')
 
-vim.keymap.set('t', '<Esc><Esc>', "<C-\\><C-n>") --TODO this still broken
+vim.keymap.set('t', '<Esc><Esc>', [[<C-\><C-n>]], {desc="Exit insert mode in terminal"}) -- the [[]] string did the trick
 
 
 
