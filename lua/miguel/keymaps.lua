@@ -1,4 +1,3 @@
---TODO put the ghostty config in this repo ya dummy
 
 local misc = require("miguel.misc")
 

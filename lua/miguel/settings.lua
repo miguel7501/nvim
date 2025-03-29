@@ -3,6 +3,7 @@ vim.g.maplocalleader = 's'
 vim.keymap.set({'n', 'v'}, 's', '<Nop>', {})
 vim.keymap.set({'n', 'v'}, 'S', 's', {})
 
+vim.opt.timeout = false
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.clipboard = "unnamedplus"
@@ -21,6 +22,8 @@ vim.opt.updatetime = 200
 vim.opt.number = true
 vim.opt.relativenumber = true
 
+-- tmux
+vim.opt.termguicolors = true
 
 vim.api.nvim_create_autocmd('TextYankPost', {
     desc = 'Highlight when yoinking text',
@@ -29,9 +32,6 @@ vim.api.nvim_create_autocmd('TextYankPost', {
         vim.highlight.on_yank()
     end,
 })
-
--- tmux
-vim.opt.termguicolors = true
 
 -- :python
 vim.g.python3_host_prog = '/home/miguel/scripts/python/.venv/bin/python3'
