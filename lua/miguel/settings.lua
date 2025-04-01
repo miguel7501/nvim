@@ -21,6 +21,8 @@ vim.opt.splitbelow = true
 vim.opt.updatetime = 200
 vim.opt.number = true
 vim.opt.relativenumber = true
+vim.opt.formatoptions:remove("o")
+
 
 -- tmux
 vim.opt.termguicolors = true
