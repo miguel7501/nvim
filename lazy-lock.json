@@ -3,6 +3,7 @@
   "black": { "branch": "main", "commit": "2c135edf3732a8efcc89450446fcaa7589e2a1c8" },
   "blame.nvim": { "branch": "main", "commit": "39bb4cda9e658d053a43919b10ca52c0a4d738e1" },
   "blink.cmp": { "branch": "main", "commit": "485c03400608cb6534bbf84da8c1c471fc4808c0" },
+  "cellular-automaton.nvim": { "branch": "main", "commit": "1606e9d5d04ff254023c3f3c62842d065708d6d3" },
   "friendly-snippets": { "branch": "main", "commit": "efff286dd74c22f731cdec26a70b46e5b203c619" },
   "gitsigns.nvim": { "branch": "main", "commit": "3c76f7fabac723aa682365ef782f88a83ccdb4ac" },
   "harpoon": { "branch": "harpoon2", "commit": "ed1f853847ffd04b2b61c314865665e1dadf22c7" },

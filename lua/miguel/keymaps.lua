@@ -162,8 +162,9 @@ vim.keymap.set('n', '<leader>i', "<cmd>Inspect<cr>")
 --example link: http://www.linusakesson.net/programming/tty/
 vim.keymap.set({ 'n', 'v' }, 'gx', misc.gx)
 vim.keymap.set('n', '<leader>B', '<cmd>BlameToggle<cr>')
-
 vim.keymap.set('t', '<Esc><Esc>', [[<C-\><C-n>]], {desc="Exit insert mode in terminal"}) -- the [[]] string did the trick
+vim.keymap.set('n', '<leader>fml', '<cmd>CellularAutomaton make_it_rain<cr>')
+vim.keymap.set('n', '<leader>fmn', '<cmd>CellularAutomaton game_of_life<cr>')
 
 
 
