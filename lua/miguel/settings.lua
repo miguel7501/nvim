@@ -21,10 +21,10 @@ vim.opt.splitbelow = true
 vim.opt.updatetime = 200
 vim.opt.number = true
 vim.opt.relativenumber = true
-vim.opt.formatoptions:remove("o")
+vim.opt.formatoptions:remove("o") -- this should make it so `o` doesn't add comment lines
 
 
--- tmux
+-- tmux supports proper colors, now nvim knows that
 vim.opt.termguicolors = true
 
 vim.api.nvim_create_autocmd('TextYankPost', {
@@ -35,7 +35,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     end,
 })
 
--- :python
+-- :python as well as molten client
 vim.g.python3_host_prog = '/home/miguel/scripts/python/.venv/bin/python3'
 
 -- automatically remove trailing spaces
@@ -46,3 +46,5 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
     command = "%s/\\s\\+$//e",
 })
 
+-- diagnostics display
+vim.diagnostic.config{virtual_text = {current_line = true}}

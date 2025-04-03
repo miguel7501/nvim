@@ -35,6 +35,12 @@ vim.keymap.set('n', '<leader>q', function() vim.diagnostic.enable(not vim.diagno
 vim.keymap.set({'n','v'}, '<leader>la', vim.lsp.buf.code_action)
 vim.keymap.set('n', '<leader>lr', vim.lsp.buf.rename)
 
+-- TODO we need to remove some default nvim mappings so `gr` works properly but it don't seem to work
+vim.keymap.set({'n', 'x'}, 'gra', '<Nop>', {noremap=false})
+vim.keymap.set('n', 'grn', '<Nop>', {noremap=false})
+vim.keymap.set('n', 'gri', '<Nop>', {noremap=false})
+vim.keymap.set('n', 'grr', '<Nop>', {noremap=false})
+
 --
 -- formatting
 vim.keymap.set({ 'n', 'x' }, '<F3>', '<cmd>lua vim.lsp.buf.format({async = true})<cr>')
@@ -44,19 +50,17 @@ vim.keymap.set({ 'n', 'x' }, '<F3>', '<cmd>lua vim.lsp.buf.format({async = true}
 
 -- Telescope
 local telbuiltin = require('telescope.builtin')
-vim.keymap.set('n', '<C-p>', function()
+local find_files = function()
     telbuiltin.find_files({ find_command = { 'rg', '--no-config', '--files', '--hidden', '-g', '!.git', } })
-end, {})
-vim.keymap.set('n', '<F37>', function()
+end
+local live_grep = function()
     telbuiltin.live_grep({ 'rg', '--no-config', '--files', '--hidden', '--no-ignore' })
-end, {})
-vim.keymap.set('n', '<C-p>', function()
-    telbuiltin.find_files({ find_command = { 'rg', '--no-config', '--files', '--hidden', '-g', '!.git', } })
-end, {})
-vim.keymap.set('n', '<C-S-P>', function()
-    telbuiltin.live_grep({ 'rg', '--no-config', '--files', '--hidden', '--no-ignore' })
-end, { desc = "Live Grep" })
-vim.keymap.set('n', '<leader>pp', telbuiltin.lsp_workspace_symbols)
+end
+vim.keymap.set('n', '<C-p>', find_files, {})
+vim.keymap.set('n', '<F37>', live_grep, { desc = "Live Grep" }) -- for windows terminal <C-S-P>
+vim.keymap.set('n', '<C-S-P>', live_grep, { desc = "Live Grep" })
+vim.keymap.set('n', '<leader>ps', telbuiltin.lsp_workspace_symbols)
+vim.keymap.set('n', '<leader>pp', find_files)
 vim.keymap.set('n', '<leader>k', "<cmd>Telescope keymaps<cr>")
 vim.keymap.set('n', '<leader>h', "<cmd>Telescope help_tags<cr>")
 vim.keymap.set('n', '<leader>pb', "<cmd>Telescope builtin<cr>")
