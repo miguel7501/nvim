@@ -115,9 +115,7 @@ function M.gx(path) -- copy of vim.ui.open that can get the link under the curso
     if not path then
         path = vim.fn.expand("<cWORD>")
     end
-    vim.validate({
-        path = { path, 'string' },
-    })
+    vim.validate({ path = { path, 'string' }, })
     if path == "" then
         return nil
     end

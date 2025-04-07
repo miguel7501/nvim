@@ -41,17 +41,15 @@ vim.keymap.set('n', '<leader>Q',function () print("vim.diagnostic.is_enabled() -
 vim.keymap.set({'n','v'}, '<leader>la', vim.lsp.buf.code_action)
 vim.keymap.set('n', '<leader>lr', vim.lsp.buf.rename)
 
--- TODO we need to remove some default nvim mappings so `gr` works properly but it don't seem to work
-vim.keymap.set({'n', 'x'}, 'gra', '<Nop>', {noremap=false})
-vim.keymap.set('n', 'grn', '<Nop>', {noremap=false})
-vim.keymap.set('n', 'gri', '<Nop>', {noremap=false})
-vim.keymap.set('n', 'grr', '<Nop>', {noremap=false})
+-- remove some default nvim mappings so `gr` works like I'm used to
+vim.keymap.del({'n', 'x'}, 'gra')
+vim.keymap.del('n', 'grn' )
+vim.keymap.del('n', 'gri' )
+vim.keymap.del('n', 'grr' )
 
---
--- formatting
+
+-- formatting (via null-ls)
 vim.keymap.set({ 'n', 'x' }, '<F3>', '<cmd>lua vim.lsp.buf.format({async = true})<cr>')
--- this gets overriden for python in ftplugin/python.lua
-
 
 
 -- Telescope
@@ -169,7 +167,7 @@ vim.api.nvim_create_autocmd(
     })
 vim.keymap.set('n', '<F12>', [[<cmd>MaximizerToggle<cr>]])
 vim.keymap.set('n', '<leader>i', "<cmd>Inspect<cr>")
---example link: http://www.linusakesson.net/programming/tty/
+--example link: http://www.linusakesson.net/programming/tty
 vim.keymap.set({ 'n', 'v' }, 'gx', misc.gx)
 vim.keymap.set('n', '<leader>B', '<cmd>BlameToggle<cr>')
 vim.keymap.set('t', '<Esc><Esc>', [[<C-\><C-n>]], {desc="Exit insert mode in terminal"}) -- the [[]] string did the trick
@@ -190,7 +188,7 @@ vim.keymap.set("n", "[t", function() todocomments.jump_prev() end, { desc = "Pre
 -- Molten
 vim.keymap.set("n", "<leader>me", ":MoltenEvaluateOperator<CR>", { silent = true, desc = "run operator selection" })
 vim.keymap.set("n", "<leader>mo", ":noautocmd MoltenEnterOutput<CR>", { silent = true, desc = "Enter Molten Output window" })
-vim.keymap.set("n", "<leader>mr", ":MoltenReevaluateCell<CR>", { silent = true, desc = "re-evaluate cell" })
+vim.keymap.set("n", "<leader>mc", ":MoltenReevaluateCell<CR>", { silent = true, desc = "re-evaluate defined cell" })
 vim.keymap.set("v", "<leader>me", ":<C-u>MoltenEvaluateVisual<CR>", { silent = true, desc = "evaluate visual selection" })
 vim.keymap.set("n", "]m", ":MoltenNext<cr>", { silent = true})
 vim.keymap.set("n", "]m", ":MoltenPrev<cr>", { silent = true})
