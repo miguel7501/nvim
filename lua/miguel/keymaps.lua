@@ -1,3 +1,8 @@
+-- this is getting out of hand. We need some categories for keymaps so I can remember them
+-- sd* for debugging
+-- sn* for notes
+-- sg for git stuff
+
 
 local misc = require("miguel.misc")
 
@@ -31,7 +36,8 @@ vim.keymap.set('n', '<M-r>', '<C-w>h')
 vim.keymap.set('n', '<M-s>', '<C-w>j')
 vim.keymap.set('n', '<M-t>', '<C-w>l')
 vim.keymap.set('n', '<M-f>', '<C-w>k')
-vim.keymap.set('n', '<leader>q', function() vim.diagnostic.enable(not vim.diagnostic.is_enabled()) end)
+vim.keymap.set('n', '<leader>q', function() vim.diagnostic.enable(not vim.diagnostic.is_enabled()) end, {desc = 'Toggle diagnostics using vim.diagnostic.enable()'})
+vim.keymap.set('n', '<leader>Q',function () print("vim.diagnostic.is_enabled() -> "..tostring(vim.diagnostic.is_enabled()))end, {desc = 'Check if diagnostics are enabled'})
 vim.keymap.set({'n','v'}, '<leader>la', vim.lsp.buf.code_action)
 vim.keymap.set('n', '<leader>lr', vim.lsp.buf.rename)
 
@@ -174,15 +180,17 @@ end)
 vim.keymap.set('n', '<leader>fmn', '<cmd>CellularAutomaton game_of_life<cr>')
 
 
-
-
--- this is getting out of hand. We need some categories for keymaps so I can remember them
--- sd* for debugging
--- sn* for notes
---TODO ss for 'show' -> Undotree, blame, diagnostic virtualtext
---TODO sg for git stuff
-
+-- todocomments
 local todocomments = require("todo-comments")
 vim.keymap.set("n", "]t", function() todocomments.jump_next() end, { desc = "Next todo comment" })
 
 vim.keymap.set("n", "[t", function() todocomments.jump_prev() end, { desc = "Previous todo comment" })
+
+
+-- Molten
+vim.keymap.set("n", "<leader>me", ":MoltenEvaluateOperator<CR>", { silent = true, desc = "run operator selection" })
+vim.keymap.set("n", "<leader>mo", ":noautocmd MoltenEnterOutput<CR>", { silent = true, desc = "Enter Molten Output window" })
+vim.keymap.set("n", "<leader>mr", ":MoltenReevaluateCell<CR>", { silent = true, desc = "re-evaluate cell" })
+vim.keymap.set("v", "<leader>me", ":<C-u>MoltenEvaluateVisual<CR>", { silent = true, desc = "evaluate visual selection" })
+vim.keymap.set("n", "]m", ":MoltenNext<cr>", { silent = true})
+vim.keymap.set("n", "]m", ":MoltenPrev<cr>", { silent = true})

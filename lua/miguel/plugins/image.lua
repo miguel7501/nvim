@@ -3,20 +3,21 @@ return {
     config = function()
         require("image").setup {
             backend = "kitty",
+            -- kitty_method = "unicode-placeholders",
             kitty_method = "normal",
             processor = "magick_cli",
             integrations = {
                 markdown = {
                     enabled = true,
                     only_render_image_at_cursor = true,
-                    floating_windows = false,
+                    floating_windows = true,
                     clear_in_insert_mode = true,
                 }
             },
             max_width = 100,
-            max_height = 50,
-            max_width_window_percentage = math.huge, -- molten.nvim docs say I need this
-            max_height_window_percentage = math.huge, -- molten.nvim docs say I need this
+            max_height = 30,
+            max_width_window_percentage = math.huge, ---@diagnostic disable-line -- molten.nvim docs say I need this, math.huge works in nvim
+            max_height_window_percentage = math.huge, ---@diagnostic disable-line -- molten.nvim docs say I need this, math.huge works in nvim
             window_overlap_clear_enabled = false,                                     -- toggles images when windows are overlapped
             window_overlap_clear_ft_ignore = { "cmp_menu", "cmp_docs", "snacks_notif", "scrollview", "scrollview_sign" },
             editor_only_render_when_focused = false,                                  -- auto show/hide images when the editor gains/looses focus
