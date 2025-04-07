@@ -15,23 +15,24 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 vim.keymap.set('n', '<C-c>', '<cmd>nohlsearch<CR>')
 
 -- LSP Stuff
-vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>')
+vim.keymap.set('n', 'K', function() vim.lsp.buf.hover() end)
+vim.keymap.set('n', 'K', function () vim.lsp.buf.hover({border="solid"}) end)
 -- vim.keymap.set('n', 'gd', function()
 --     vim.lsp.buf.definition()
 --     vim.cmd('normal! zz')
 -- end)
 vim.keymap.set('n', 'gd', '<cmd>Trouble lsp_definitions toggle<cr>')
-vim.keymap.set('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>zz')
--- vim.keymap.set('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>zz')
-vim.keymap.set('n', 'go', '<cmd>lua vim.lsp.buf.type_definition()<cr>zz')
--- vim.keymap.set('n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>zz')
+vim.keymap.set('n', 'gD', function() vim.lsp.buf.declaration() end)
+-- vim.keymap.set('n', 'gi', function() vim.lsp.buf.implementation() end)
+vim.keymap.set('n', 'go', function() vim.lsp.buf.type_definition() end)
+-- vim.keymap.set('n', 'gr', function() vim.lsp.buf.references() end)
 vim.keymap.set('n', 'gr', '<cmd>Trouble lsp_references toggle<cr>zz')
--- vim.keymap.set('n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<cr>zz')
+-- vim.keymap.set('n', 'gs', function() vim.lsp.buf.signature_help() end)
 vim.keymap.set('n', 'gs', vim.lsp.buf.signature_help)
 vim.keymap.set('i', '<C-s>', vim.lsp.buf.signature_help)
-vim.keymap.set({ 'n', 'i' }, '<F2>', '<cmd>lua vim.lsp.buf.rename()<cr>zz')
-vim.keymap.set({'n','i','v'}, '<F4>', '<cmd>lua vim.lsp.buf.code_action()<cr>')
-vim.keymap.set('n', '<C-K>', '<cmd>lua vim.diagnostic.open_float()<cr>')
+vim.keymap.set({ 'n', 'i' }, '<F2>', function() vim.lsp.buf.rename() end)
+vim.keymap.set({'n','i','v'}, '<F4>', function() vim.lsp.buf.code_action() end)
+vim.keymap.set('n', '<C-K>',function() vim.diagnostic.open_float({border="solid"}) end)
 vim.keymap.set('n', '<M-r>', '<C-w>h')
 vim.keymap.set('n', '<M-s>', '<C-w>j')
 vim.keymap.set('n', '<M-t>', '<C-w>l')
@@ -49,7 +50,7 @@ vim.keymap.del('n', 'grr' )
 
 
 -- formatting (via null-ls)
-vim.keymap.set({ 'n', 'x' }, '<F3>', '<cmd>lua vim.lsp.buf.format({async = true})<cr>')
+vim.keymap.set({ 'n', 'x' }, '<F3>', function() vim.lsp.buf.format({async = true}) end)
 
 
 -- Telescope
@@ -86,9 +87,6 @@ vim.keymap.set('n', '<leader>ls', function()
     require("trouble").fold_more() ---@diagnostic disable-line because Trouble docs say this is ok
 end)
 -- the keymaps for within trouble views are in ./plugins/trouble.lua
-
--- formatting
-vim.keymap.set({ 'n', 'x' }, '<F3>', '<cmd>lua vim.lsp.buf.format({async = true})<cr>')
 
 
 -- undotree
