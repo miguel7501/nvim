@@ -64,6 +64,7 @@ end
 vim.keymap.set('n', '<C-p>', find_files, {})
 vim.keymap.set('n', '<F37>', live_grep, { desc = "Live Grep" }) -- for windows terminal <C-S-P>
 vim.keymap.set('n', '<C-S-P>', live_grep, { desc = "Live Grep" })
+vim.keymap.set('n', '<leader>pg', live_grep, { desc = "Live Grep" })
 vim.keymap.set('n', '<leader>ps', telbuiltin.lsp_workspace_symbols)
 vim.keymap.set('n', '<leader>pp', find_files)
 vim.keymap.set('n', '<leader>k', "<cmd>Telescope keymaps<cr>")
@@ -189,4 +190,4 @@ vim.keymap.set("n", "<leader>mo", ":noautocmd MoltenEnterOutput<CR>", { silent =
 vim.keymap.set("n", "<leader>mc", ":MoltenReevaluateCell<CR>", { silent = true, desc = "re-evaluate defined cell" })
 vim.keymap.set("v", "<leader>me", ":<C-u>MoltenEvaluateVisual<CR>", { silent = true, desc = "evaluate visual selection" })
 vim.keymap.set("n", "]m", ":MoltenNext<cr>", { silent = true})
-vim.keymap.set("n", "]m", ":MoltenPrev<cr>", { silent = true})
+vim.keymap.set("n", "[m", ":MoltenPrev<cr>", { silent = true})
