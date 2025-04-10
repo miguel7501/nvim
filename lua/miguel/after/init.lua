@@ -15,24 +15,25 @@ dap.listeners.after['event_exited']['dapui'] = function(session, body)
 end
 dap.listeners.before['event_initialized']['dapui'] = dapui.open
 dap.set_log_level("TRACE")
--- vim.api.nvim_create_autocmd({"BufDelete", "BufWipeout"}, { --TODO close dapui when quitting vim so I don't have to do it manually
---     pattern = '*',
---     callback = function ()
---         local bufinfo =  vim.fn.getbufinfo({bufloaded=1})
---         local n_buffers = 0
---         for buf in bufinfo do
---             print("Buf:")
---             print(vim.inspect(buf))
---             if buf["hidden"] == 0 then
---                 n_buffers = n_buffers + 1
---             end
---         end
---         if n_buffers == 0 then
---             dapui.close()
---         end
---
---     end
--- })
+
+
+-- 0.11 made floats weird, this attempts to fix them. The docs say specifically not to do this, but this is neovim and they can't stop me.
+vim.api.nvim_create_autocmd({'OptionSet'},
+{
+    pattern={"conceallevel", "concealcursor"},
+    command = [[
+        set conceallevel=1
+        set concealcursor=
+    ]]
+    -- callback = function (args)
+    --     vim.print("Stupid fucking Callback here. Args:",args)
+    --     vim.print("v.option_type: ", vim.v.option_type)
+    --     vim.print("v.option_command: ", vim.v.option_command)
+    --     vim.print("v.option_new: ", vim.v.option_new)
+    --     vim.print("v.option_oldlocal: ", vim.v.option_oldlocal)
+    --     vim.print("v.option_oldglobal: ", vim.v.option_oldlocal)
+    -- end
+})
 
 
 -- Stuff
