@@ -9,5 +9,7 @@ return {
     -- }
     init = function ()
         vim.g.db_ui_save_location = "~/credentials/db_ui" -- if you copy this, make sure to `chmod 700 -r ~/credentials`
+        vim.g.db_ui_winwidth = "80"
+        vim.g.db_ui_use_nerd_fonts = 1
     end
 }

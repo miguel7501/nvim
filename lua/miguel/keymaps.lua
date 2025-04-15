@@ -198,3 +198,7 @@ vim.keymap.set("n", "<leader>mc", ":MoltenReevaluateCell<CR>", { silent = true, 
 vim.keymap.set("v", "<leader>me", ":<C-u>MoltenEvaluateVisual<CR>", { silent = true, desc = "evaluate visual selection" })
 vim.keymap.set("n", "]m", ":MoltenNext<cr>", { silent = true})
 vim.keymap.set("n", "[m", ":MoltenPrev<cr>", { silent = true})
+
+
+-- vim-dadbod-ui
+vim.keymap.set("n", "<leader>od", "<cmd>tab DBUI<cr>")
