@@ -1,5 +1,6 @@
 return {
     "3rd/image.nvim",
+    lazy=true,
     config = function()
         require("image").setup { --TODO this bitch sometimes takes 5 seconds to start and only works sometimes, sometimes it takes 3 seconds to hide an image
             backend = "kitty",

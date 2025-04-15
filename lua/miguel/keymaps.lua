@@ -2,6 +2,9 @@
 -- sd* for debugging
 -- sn* for notes
 -- sg for git stuff
+-- sl for LSP functions
+-- g* also does LSP stuff but shhh
+-- sp for telescope
 
 
 local misc = require("miguel.misc")
@@ -16,11 +19,13 @@ vim.keymap.set('n', '<C-c>', '<cmd>nohlsearch<CR>')
 
 -- LSP Stuff
 vim.keymap.set('n', 'K', function() vim.lsp.buf.hover() end)
-vim.keymap.set('n', 'K', function () vim.lsp.buf.hover({border="solid"}) end)
+-- vim.keymap.set('n', 'K', function () vim.lsp.buf.hover({border="solid"}) end)
+
 -- vim.keymap.set('n', 'gd', function()
 --     vim.lsp.buf.definition()
 --     vim.cmd('normal! zz')
 -- end)
+
 vim.keymap.set('n', 'gd', '<cmd>Trouble lsp_definitions toggle<cr>')
 vim.keymap.set('n', 'gD', function() vim.lsp.buf.declaration() end)
 -- vim.keymap.set('n', 'gi', function() vim.lsp.buf.implementation() end)
@@ -49,8 +54,10 @@ vim.keymap.del('n', 'gri' )
 vim.keymap.del('n', 'grr' )
 
 
--- formatting (via null-ls)
-vim.keymap.set({ 'n', 'x' }, '<F3>', function() vim.lsp.buf.format({async = true}) end)
+-- vim.keymap.set({ 'n', 'x' }, '<F3>', function() vim.lsp.buf.format({async = true}) end)
+vim.keymap.set({ 'n', 'v' }, '<F3>', function() require("conform").format() end)
+vim.keymap.set({ 'n', 'v' }, '<F3>', function() require("conform").format() end)
+vim.keymap.set({ 'n', 'v' }, 'gq', function() require("conform").format { bufnr = 0 } end)
 
 
 -- Telescope

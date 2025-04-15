@@ -1,5 +1,6 @@
 return {
     "benlubas/molten-nvim",
+    lazy=true,
     dependencies = "3rd/image.nvim",
     build = ":UpdateRemotePlugins",
     init = function()
