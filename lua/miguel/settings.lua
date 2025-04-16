@@ -54,3 +54,16 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 
 -- diagnostics display
 vim.diagnostic.config{virtual_text = {current_line = true}}
+
+
+-- tabline (vibe coded with gippity)
+vim.o.tabline = "%!v:lua.TabLine()"
+function TabLine()
+  local s = ''
+  for i = 1, vim.fn.tabpagenr('$') do
+    local hl = (i == vim.fn.tabpagenr()) and '%#TabLineSel#' or '%#TabLine#'
+    local name = (i == 1 and 'Main') or (i == 2 and 'DB') or ('Tab ' .. i)
+    s = s .. hl .. '%' .. i .. 'T ' .. name .. ' '
+  end
+  return s .. '%#TabLineFill#'
+end
