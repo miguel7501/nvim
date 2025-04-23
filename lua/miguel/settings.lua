@@ -21,6 +21,7 @@ vim.opt.splitbelow = true
 vim.opt.updatetime = 200
 vim.opt.number = true
 vim.opt.relativenumber = true
+vim.opt.showtabline = 0 -- I have tabs in lualine
 vim.opt.formatoptions:remove("o") -- this should make it so `o` doesn't add comment lines
 
 vim.opt.conceallevel = 0 -- concealed lines displayed as empty --TODO set those two opts for floating windows

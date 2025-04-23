@@ -187,7 +187,6 @@ vim.keymap.set('n', '<leader>fmn', '<cmd>CellularAutomaton game_of_life<cr>')
 -- todocomments
 local todocomments = require("todo-comments")
 vim.keymap.set("n", "]t", function() todocomments.jump_next() end, { desc = "Next todo comment" })
-
 vim.keymap.set("n", "[t", function() todocomments.jump_prev() end, { desc = "Previous todo comment" })
 
 
