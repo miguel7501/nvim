@@ -55,11 +55,9 @@ vim.keymap.del('n', 'grr' )
 
 
 local conform_callback = function(err, did_edit)
-    vim.print("this is conform callback. Err:")
-    vim.print(err)
-    vim.print("did_edit:")
-    vim.print(did_edit)
-    vim.print("\n")
+    if err then
+        vim.print("Conform callback here. We got an error: ", err)
+    end
 end
 
 -- vim.keymap.set({ 'n', 'x' }, '<F3>', function() vim.lsp.buf.format({async = true}) end)
