@@ -57,7 +57,8 @@ vim.keymap.del('n', 'grr' )
 -- vim.keymap.set({ 'n', 'x' }, '<F3>', function() vim.lsp.buf.format({async = true}) end)
 vim.keymap.set({ 'n', 'v' }, '<F3>', function() require("conform").format() end)
 vim.keymap.set({ 'n', 'v' }, '<F3>', function() require("conform").format() end)
-vim.keymap.set({ 'n', 'v' }, 'gq', function() require("conform").format { bufnr = 0 } end)
+vim.keymap.set({ 'v' }, 'gq', function() require("conform").format{ bufnr = 0, timeout_ms = 5000 } end)
+-- require("conform").format_lines -- might be the thing I need instead
 
 
 -- Telescope
