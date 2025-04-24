@@ -54,10 +54,21 @@ vim.keymap.del('n', 'gri' )
 vim.keymap.del('n', 'grr' )
 
 
+local conform_callback = function(err, did_edit)
+    vim.print("this is conform callback. Err:")
+    vim.print(err)
+    vim.print("did_edit:")
+    vim.print(did_edit)
+    vim.print("\n")
+end
+
 -- vim.keymap.set({ 'n', 'x' }, '<F3>', function() vim.lsp.buf.format({async = true}) end)
 vim.keymap.set({ 'n', 'v' }, '<F3>', function() require("conform").format() end)
 vim.keymap.set({ 'n', 'v' }, '<F3>', function() require("conform").format() end)
-vim.keymap.set({ 'v' }, 'gq', function() require("conform").format{ bufnr = 0, timeout_ms = 5000 } end)
+pcall(vim.keymap.del, 'o', 'gq')
+vim.keymap.set({ 'v', 'o' }, 'gq',
+    function() require("conform").format({ bufnr = 0, timeout_ms = 5000 }, conform_callback) end,
+    { desc = "Format using conform.nvim", callback = function() vim.print("gq called") end }) --TODO the operator pending mapping doesn't trigger the callback and does weird formatting. If provide a callback to vim.keymap.set, it isn't triggered. So there's some other mapping screwing with me. vim.keymap.del above seems to not help. Is this a but in nvim?
 -- require("conform").format_lines -- might be the thing I need instead
 
 

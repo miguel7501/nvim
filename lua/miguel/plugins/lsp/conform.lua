@@ -13,7 +13,7 @@ return {
         }
         require("conform").formatters.ruff_format = { prepend_args = { [[--config]], [[line-length=100]] }}
         require("conform").formatters.sqruff = {
-            prepend_args = { "--config", vim.fn.stdpath("config").."tool_configs/sqruff.sqruff" },
+            prepend_args = { "--config", vim.fn.stdpath("config").."/tool_configs/sqruff.sqruff" },
             require_cwd = false,
         }
     end

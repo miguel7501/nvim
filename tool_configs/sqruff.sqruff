@@ -1,7 +1,13 @@
 [sqruff]
 dialect = mysql
+large_file_skip_char_limit = 0
+processes = -2
+templater = placeholder
 
 [sqruff:indentation]
 indent_unit = space
 tab_space_size = 2
 indented_joins = True
+
+[sqruff:templater:placeholder]
+param_style = colon
