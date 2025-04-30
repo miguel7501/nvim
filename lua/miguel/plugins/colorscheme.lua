@@ -19,8 +19,12 @@ return {
         vim.api.nvim_set_hl(0, "CustomUnusedVars", { undercurl = true, })
         vim.api.nvim_set_hl(0, "DiagnosticUnnecessary", { link = "CustomUnusedVars" })
 
+        vim.api.nvim_set_hl(0, "DiffAdd", {bg="#384d3c"})
+        vim.api.nvim_set_hl(0, "DiffChange", {bg="#37346a"})
+        vim.api.nvim_set_hl(0, "diffText", {bg="#37346a", underline = true, sp="#FF9D00"})
+        vim.api.nvim_set_hl(0, "DiffDelete", {bg="#5a3d3d"})
 
-        vim.api.nvim_set_hl(0, "@lsp.type.comment.lua", {})      -- luals shenanigains
+        vim.api.nvim_set_hl(0,  "@lsp.type.comment.lua", {})      -- luals shenanigains
 
         vim.api.nvim_set_hl(0, "@lsp.type.parameter.python", {}) -- disable LSP highlighting for variables so treesitter takes over
         vim.api.nvim_create_autocmd("LspTokenUpdate", {          -- this is for python constants
