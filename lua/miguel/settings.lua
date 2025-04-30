@@ -58,7 +58,6 @@ vim.diagnostic.config{virtual_text = {current_line = true}}
 
 
 -- tabline (vibe coded with gippity)
-vim.o.tabline = "%!v:lua.TabLine()"
 function TabLine()
   local s = ''
   for i = 1, vim.fn.tabpagenr('$') do
@@ -68,3 +67,4 @@ function TabLine()
   end
   return s .. '%#TabLineFill#'
 end
+vim.o.tabline = "%!v:lua.TabLine()"
