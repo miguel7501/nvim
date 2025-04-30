@@ -168,6 +168,7 @@ vim.keymap.set('n', '<leader>gd', function() gitsigns.diffthis(nil, {vertical=tr
 vim.keymap.set('n', '<leader>ga', function() gitsigns.stage_hunk() end, {desc = "git add for the current change"})
 vim.keymap.set('n', '<leader>gt', function() gitsigns.setqflist('all') end, {desc = "Open all unstaged changes in Trouble"})
 vim.keymap.set('n', '<leader>gp', function() gitsigns.preview_hunk() end, {desc = "Preview current change"})
+--TODO map sgD to diff but with prompt for branch/commit instead of always doing HEAD
 
 -- Oil (file browser)
 vim.keymap.set('n', '-', "<cmd>Oil<cr>")
