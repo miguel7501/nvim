@@ -16,6 +16,7 @@ vim.keymap.set('n', 'S', 's', {})
 
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 vim.keymap.set('n', '<C-c>', '<cmd>nohlsearch<CR>')
+vim.keymap.set('i', '<C-c>', '<Esc>') -- without this, diagnostics sometimes stay hidden after exiting insert mode
 
 -- LSP Stuff
 vim.keymap.set('n', 'K', function() vim.lsp.buf.hover() end)
@@ -168,6 +169,8 @@ vim.keymap.set('n', '<leader>gd', function() gitsigns.diffthis(nil, {vertical=tr
 vim.keymap.set('n', '<leader>ga', function() gitsigns.stage_hunk() end, {desc = "git add for the current change"})
 vim.keymap.set('n', '<leader>gt', function() gitsigns.setqflist('all') end, {desc = "Open all unstaged changes in Trouble"})
 vim.keymap.set('n', '<leader>gp', function() gitsigns.preview_hunk() end, {desc = "Preview current change"})
+vim.keymap.set('n', '<leader>B', '<cmd>BlameToggle<cr>', {desc = "Blame (from old plugin)"})
+vim.keymap.set('n', '<leader>gb', function() gitsigns.blame() end, {desc = "blame"})
 --TODO map sgD to diff but with prompt for branch/commit instead of always doing HEAD
 
 -- Oil (file browser)
@@ -186,7 +189,6 @@ vim.keymap.set('n', '<F12>', [[<cmd>MaximizerToggle<cr>]])
 vim.keymap.set('n', '<leader>i', "<cmd>Inspect<cr>")
 --example link: http://www.linusakesson.net/programming/tty
 vim.keymap.set({ 'n', 'v' }, 'gx', misc.gx)
-vim.keymap.set('n', '<leader>B', '<cmd>BlameToggle<cr>')
 vim.keymap.set('t', '<Esc><Esc>', [[<C-\><C-n>]], {desc="Exit insert mode in terminal"}) -- the [[]] string did the trick
 vim.keymap.set('n', '<leader>fml', function()
     vim.cmd('CellularAutomaton make_it_rain')
