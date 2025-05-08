@@ -158,6 +158,10 @@ vim.keymap.set('n', '<leader>nc', '<cmd>ZkNew<cr>')
 vim.keymap.set('n', '<leader>ni', '<cmd>ZkIndex<cr>')
 vim.keymap.set('n', '<leader>nm', '<cmd>e /home/miguel/notes/fmbj.md<cr>') -- Yes, I hardcoded that path. Go cry about it
 vim.keymap.set('n', '<leader>nt', '<cmd>ZkTags<cr>')
+vim.api.nvim_set_keymap("n", "<leader>ng",
+    "<Cmd>ZkNotes { sort = { 'modified' }, match = { vim.fn.input('Search: ') } }<CR>",
+    { noremap = true, silent = false })
+
 
 
 -- Git
