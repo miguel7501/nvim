@@ -15,6 +15,7 @@ return {
 
         vim.api.nvim_set_hl(0, "NvimDapVirtualText", { fg = "#6084f9" })
         vim.api.nvim_set_hl(0, "NvimDapVirtualTextError", { fg = "#f96092" })
+        vim.api.nvim_set_hl(0, 'CustomDapBg', {bg="#4C3D4E"}) -- this is used in ../after/init.lua:4
 
         vim.api.nvim_set_hl(0, "CustomUnusedVars", { undercurl = true, })
         vim.api.nvim_set_hl(0, "DiagnosticUnnecessary", { link = "CustomUnusedVars" })
