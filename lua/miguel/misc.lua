@@ -150,5 +150,28 @@ function M.buf_get_win(bufnr)
     return nil
 end
 
+function M.open_file_in_text_buffer()
+    local filepath = vim.fn.expand('<cfile>')
+
+    -- Iterate through all windows in the current tabpage
+    for _, winid in ipairs(vim.api.nvim_list_wins()) do
+        local bufnr = vim.api.nvim_win_get_buf(winid)
+        local buftype = vim.api.nvim_get_option_value('buftype', {buf=bufnr})
+        local is_floating = vim.api.nvim_win_get_config(winid).relative ~= ''
+
+        -- Check if the window has a normal text buffer and is not floating
+        if buftype == '' and not is_floating then
+            -- Open the file in this window without switching to it
+            vim.api.nvim_win_call(winid, function()
+                vim.cmd('edit ' .. filepath)
+            end)
+            return -- Exit after opening the file
+        end
+    end
+
+    -- No suitable text buffer window found, create a new vertical split
+    vim.cmd('vsplit ' .. filepath)
+end
+
 
 return M

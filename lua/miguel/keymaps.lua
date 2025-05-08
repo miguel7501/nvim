@@ -181,6 +181,24 @@ vim.keymap.set('n', '<leader>gb', function() gitsigns.blame() end, {desc = "blam
 vim.keymap.set('n', '-', "<cmd>Oil<cr>")
 
 
+-- todocomments
+local todocomments = require("todo-comments")
+vim.keymap.set("n", "]t", function() todocomments.jump_next() end, { desc = "Next todo comment" })
+vim.keymap.set("n", "[t", function() todocomments.jump_prev() end, { desc = "Previous todo comment" })
+
+
+-- Molten
+vim.keymap.set("n", "<leader>me", ":MoltenEvaluateOperator<CR>", { silent = true, desc = "run operator selection" })
+vim.keymap.set("n", "<leader>mo", ":noautocmd MoltenEnterOutput<CR>", { silent = true, desc = "Enter Molten Output window" })
+vim.keymap.set("n", "<leader>mc", ":MoltenReevaluateCell<CR>", { silent = true, desc = "re-evaluate defined cell" })
+vim.keymap.set("v", "<leader>me", ":<C-u>MoltenEvaluateVisual<CR>", { silent = true, desc = "evaluate visual selection" })
+vim.keymap.set("n", "]m", ":MoltenNext<cr>", { silent = true})
+vim.keymap.set("n", "[m", ":MoltenPrev<cr>", { silent = true})
+
+
+-- vim-dadbod-ui
+vim.keymap.set("n", "<leader>od", "<cmd>tab DBUI<cr>")
+
 -- Misc
 vim.keymap.set('n', ',', ';.') -- use comma to repeat the last movement, then the last command. Useful for things like $p
 -- close quickfix menu after selecting choice
@@ -200,21 +218,9 @@ vim.keymap.set('n', '<leader>fml', function()
 end)
 vim.keymap.set('n', '<leader>fmn', '<cmd>CellularAutomaton game_of_life<cr>')
 
+vim.api.nvim_create_autocmd('TermOpen', {
+    callback = function()
+        vim.keymap.set('n', 'gF', misc.open_file_in_text_buffer, { buffer = 0, noremap = true })
+    end
+})
 
--- todocomments
-local todocomments = require("todo-comments")
-vim.keymap.set("n", "]t", function() todocomments.jump_next() end, { desc = "Next todo comment" })
-vim.keymap.set("n", "[t", function() todocomments.jump_prev() end, { desc = "Previous todo comment" })
-
-
--- Molten
-vim.keymap.set("n", "<leader>me", ":MoltenEvaluateOperator<CR>", { silent = true, desc = "run operator selection" })
-vim.keymap.set("n", "<leader>mo", ":noautocmd MoltenEnterOutput<CR>", { silent = true, desc = "Enter Molten Output window" })
-vim.keymap.set("n", "<leader>mc", ":MoltenReevaluateCell<CR>", { silent = true, desc = "re-evaluate defined cell" })
-vim.keymap.set("v", "<leader>me", ":<C-u>MoltenEvaluateVisual<CR>", { silent = true, desc = "evaluate visual selection" })
-vim.keymap.set("n", "]m", ":MoltenNext<cr>", { silent = true})
-vim.keymap.set("n", "[m", ":MoltenPrev<cr>", { silent = true})
-
-
--- vim-dadbod-ui
-vim.keymap.set("n", "<leader>od", "<cmd>tab DBUI<cr>")
