@@ -7,7 +7,7 @@ return {
             multiwindow = true,
             multiline_threshold = 1,
             min_window_height = 15,
-            mode = 'cursor',
+            mode = 'topline',
         }
     end
 }

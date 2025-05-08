@@ -35,8 +35,7 @@ return {
                 if not token.type == "variable" or not token.modifiers.readonly then
                     return nil
                 end
-                local text_table = vim.api.nvim_buf_get_text(args.buf, token.line, token.start_col, token.line,
-                    token.end_col, {})
+                local text_table = vim.api.nvim_buf_get_text(args.buf, token.line, token.start_col, token.line, token.end_col, {})
                 local text = table.concat(text_table)
                 if text ~= string.upper(text) then -- python constants are always uppercase
                     return nil
