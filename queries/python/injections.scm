@@ -10,6 +10,6 @@
     [
         (string_content)
     ] @injection.content
-    (#match? @injection.content "(SELECT|INSERT|UPDATE|DELETE).+(FROM|INTO|VALUES|SET).*(WHERE|GROUP BY)?")
+    (#match? @injection.content "((SELECT|INSERT|UPDATE|DELETE).+(FROM|INTO|VALUES|SET).*(WHERE|GROUP BY)?)|(ALTER TABLE|DROP).+")
     (#set! injection.language "sql")
 )

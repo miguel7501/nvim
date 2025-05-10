@@ -97,30 +97,81 @@ function M.preserve_cursor(callback, callback_args)
     end
 end
 
+function M.get_visual_selection()
+    local mode = vim.fn.mode(1)
+    if not mode:match("[vV]") and not mode:match("CTRL-V") then
+        return nil
+    end
+    local start = vim.fn.getpos("v")
+    local stop = vim.fn.getpos(".")
+    local text = vim.fn.getregion(start, stop)
+    return table.concat(text, "\n")
+end
+
 -- test link https://python-poetry.org/history/
 
 function M.gx(path) -- copy of vim.ui.open that can get the link under the cursor and has a high timeout because wslview is so slow
+    path = M.get_visual_selection()
     if not path then
         path = vim.fn.expand("<cWORD>")
     end
-    vim.validate({
-        path = { path, 'string' },
-    })
+    vim.validate({ path = { path, 'string' }, })
+    if path == "" then
+        return nil
+    end
+
     local is_uri = path:match('%w+:') --TODO check if path contains a URL. If so, strip anything other than the URL
     if not is_uri then
         path = vim.fs.normalize(path)
     end
 
     local cmd = { 'wslview', path } --- @type string[]
-
     print(cmd[1], cmd[2])
-    return vim.system(cmd, { text = true, timeout = 10000, detach = true }), nil
+    return vim.system(
+        cmd,
+        { text = true, timeout = 10000, detach = true },
+        function() vim.print("We back from wslview") end
+    ), nil
 end
 
 M.dap_test_config = {
     justMyCode = false,
 }
 
+---@param bufnr number
+---@return number | nil
+-- Get the first window containing the given buffer
+function M.buf_get_win(bufnr)
+    for _, win in ipairs(vim.api.nvim_list_wins()) do
+        if vim.api.nvim_win_get_buf(win) == bufnr then
+            return win
+        end
+    end
+    return nil
+end
+
+function M.open_file_in_text_buffer()
+    local filepath = vim.fn.expand('<cfile>')
+
+    -- Iterate through all windows in the current tabpage
+    for _, winid in ipairs(vim.api.nvim_list_wins()) do
+        local bufnr = vim.api.nvim_win_get_buf(winid)
+        local buftype = vim.api.nvim_get_option_value('buftype', {buf=bufnr})
+        local is_floating = vim.api.nvim_win_get_config(winid).relative ~= ''
+
+        -- Check if the window has a normal text buffer and is not floating
+        if buftype == '' and not is_floating then
+            -- Open the file in this window without switching to it
+            vim.api.nvim_win_call(winid, function()
+                vim.cmd('edit ' .. filepath)
+            end)
+            return -- Exit after opening the file
+        end
+    end
+
+    -- No suitable text buffer window found, create a new vertical split
+    vim.cmd('vsplit ' .. filepath)
+end
 
 
 return M

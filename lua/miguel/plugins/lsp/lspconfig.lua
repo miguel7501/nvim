@@ -29,5 +29,8 @@ return {
                 }
             }
         }
+        -- lspconfig.sqls.setup{
+        --     capabilities = require('blink.cmp').get_lsp_capabilities(),
+        -- }
     end
 }

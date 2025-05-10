@@ -19,7 +19,6 @@ return {
                 type = "debugpy",
                 request = "launch",
                 program = "${file}",
-                -- cwd = "/home/miguel/py/quality/labconnect",
                 cwd = ".",
                 justMyCode = false,
                 debugOptions = { "RedirectOutput" },

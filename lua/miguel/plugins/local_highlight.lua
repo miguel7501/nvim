@@ -4,6 +4,8 @@ return {
         require('local-highlight').setup{
             file_types = {'python', 'lua'},
             hlgroup = "LocalHighlight2",
+            animate = false,
+
         }
     end
 }
