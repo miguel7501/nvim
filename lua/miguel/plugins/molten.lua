@@ -24,6 +24,9 @@ return {
                             end
                             percent_cell_start = line
                         elseif string.sub(content, 1, 3) == "# %%" then -- this means it's a markdown cell
+                            if percent_cell_start then
+                                vim.fn.MoltenDefineCell(percent_cell_start + 1, line - 1) -- excludes cell marker
+                            end
                             percent_cell_start = nil
                         end
                     end
@@ -54,7 +57,3 @@ return {
         })
     end
 }
-
--- -- testing
--- local molten = require("molten.status")
--- vim.print(molten.all_kernels())

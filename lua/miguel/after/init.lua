@@ -25,14 +25,6 @@ vim.api.nvim_create_autocmd({'OptionSet'},
         set conceallevel=1
         set concealcursor=
     ]]
-    -- callback = function (args)
-    --     vim.print("Stupid fucking Callback here. Args:",args)
-    --     vim.print("v.option_type: ", vim.v.option_type)
-    --     vim.print("v.option_command: ", vim.v.option_command)
-    --     vim.print("v.option_new: ", vim.v.option_new)
-    --     vim.print("v.option_oldlocal: ", vim.v.option_oldlocal)
-    --     vim.print("v.option_oldglobal: ", vim.v.option_oldlocal)
-    -- end
 })
 
 
