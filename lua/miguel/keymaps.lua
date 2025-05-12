@@ -225,3 +225,12 @@ vim.api.nvim_create_autocmd('TermOpen', {
     end
 })
 
+-- Windows stopped supporting MSKLC so I have to do this BS to type Umlauts. Fuck you, Microsoft
+vim.keymap.set('i', '<M-o>', "ö")
+vim.keymap.set('i', '<M-a>', "ä")
+vim.keymap.set('i', '<M-u>', "ü")
+vim.keymap.set('i', '<M-s>', "ß")
+vim.keymap.set('i', '<M-O>', "Ö")
+vim.keymap.set('i', '<M-A>', "Ä")
+vim.keymap.set('i', '<M-U>', "Ü")
+vim.keymap.set('i', '<M-S>', "ẞ")
