@@ -68,3 +68,6 @@ function TabLine()
   return s .. '%#TabLineFill#'
 end
 vim.o.tabline = "%!v:lua.TabLine()"
+
+-- env
+vim.env.PAGER = 'cat'
