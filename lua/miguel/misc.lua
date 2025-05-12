@@ -151,12 +151,19 @@ function M.buf_get_win(bufnr)
 end
 
 function M.open_file_in_text_buffer()
-    local filepath = vim.fn.expand('<cfile>')
-
+    local cWORD = vim.fn.expand("<cWORD>")
+    local filepath, line = string.match(cWORD, "([^:]+):(%d+)")
+    if not (filepath and line) then
+        filepath = vim.fn.expand('<cfile>')
+    end
+    if not filepath then
+        return nil
+    end
+    vim.print("gF called. cWORD: " .. cWORD .. "  Filepath: " .. filepath .. "  Line: " .. tostring(line))
     -- Iterate through all windows in the current tabpage
     for _, winid in ipairs(vim.api.nvim_list_wins()) do
         local bufnr = vim.api.nvim_win_get_buf(winid)
-        local buftype = vim.api.nvim_get_option_value('buftype', {buf=bufnr})
+        local buftype = vim.api.nvim_get_option_value('buftype', { buf = bufnr })
         local is_floating = vim.api.nvim_win_get_config(winid).relative ~= ''
 
         -- Check if the window has a normal text buffer and is not floating
@@ -165,13 +172,23 @@ function M.open_file_in_text_buffer()
             vim.api.nvim_win_call(winid, function()
                 vim.cmd('edit ' .. filepath)
             end)
-            return -- Exit after opening the file
+            if line then
+                local pos = { tonumber(line), 0 }
+                vim.print(pos)
+                vim.api.nvim_win_set_cursor(0, pos)
+            end
+            return nil
         end
     end
 
     -- No suitable text buffer window found, create a new vertical split
     vim.cmd('vsplit ' .. filepath)
+    if line then
+        local pos = { tonumber(line), 0 }
+        vim.print(pos)
+        vim.api.nvim_win_set_cursor(0, pos)
+    end
+    return nil
 end
-
 
 return M

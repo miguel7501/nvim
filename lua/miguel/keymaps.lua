@@ -221,6 +221,7 @@ vim.keymap.set('n', '<leader>fmn', '<cmd>CellularAutomaton game_of_life<cr>')
 vim.api.nvim_create_autocmd('TermOpen', {
     callback = function()
         vim.keymap.set('n', 'gF', misc.open_file_in_text_buffer, { buffer = 0, noremap = true })
+        vim.keymap.set('n', 'gf', misc.open_file_in_text_buffer, { buffer = 0, noremap = true })
     end
 })
 
