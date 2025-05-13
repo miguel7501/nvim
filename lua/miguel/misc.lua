@@ -175,7 +175,7 @@ function M.open_file_in_text_buffer()
             if line then
                 local pos = { tonumber(line), 0 }
                 vim.print(pos)
-                vim.api.nvim_win_set_cursor(0, pos)
+                vim.api.nvim_win_set_cursor(winid, pos)
             end
             return nil
         end

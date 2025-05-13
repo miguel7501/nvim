@@ -55,7 +55,7 @@ vim.keymap.del('n', 'gri' )
 vim.keymap.del('n', 'grr' )
 
 
-local conform_callback = function(err, did_edit)
+local conform_callback = function(err, did_edit) ---@diagnostic disable-line unused-local
     if err then
         vim.print("Conform callback here. We got an error: ", err)
     end
