@@ -159,7 +159,7 @@ function M.open_file_in_text_buffer()
     if not filepath then
         return nil
     end
-    vim.print("gF called. cWORD: " .. cWORD .. "  Filepath: " .. filepath .. "  Line: " .. tostring(line))
+    vim.print("gf called. cWORD: " .. cWORD .. "  Filepath: " .. filepath .. "  Line: " .. tostring(line))
     -- Iterate through all windows in the current tabpage
     for _, winid in ipairs(vim.api.nvim_list_wins()) do
         local bufnr = vim.api.nvim_win_get_buf(winid)
@@ -171,12 +171,16 @@ function M.open_file_in_text_buffer()
             -- Open the file in this window without switching to it
             vim.api.nvim_win_call(winid, function()
                 vim.cmd('edit ' .. filepath)
+                if line then
+                    local pos = { tonumber(line), 0 }
+                    vim.print(pos)
+                    local ok = pcall(vim.api.nvim_win_set_cursor, 0, pos)
+                    if not ok then
+                        vim.print("gf: Cursor position outside buffer")
+                        vim.cmd[[:norm G]]
+                    end
+                end
             end)
-            if line then
-                local pos = { tonumber(line), 0 }
-                vim.print(pos)
-                vim.api.nvim_win_set_cursor(winid, pos)
-            end
             return nil
         end
     end
@@ -185,8 +189,11 @@ function M.open_file_in_text_buffer()
     vim.cmd('vsplit ' .. filepath)
     if line then
         local pos = { tonumber(line), 0 }
-        vim.print(pos)
-        vim.api.nvim_win_set_cursor(0, pos)
+        local ok = pcall(vim.api.nvim_win_set_cursor, 0, pos)
+        if not ok then
+            vim.print("gf: Cursor position outside buffer")
+            vim.cmd[[:norm G]]
+        end
     end
     return nil
 end
