@@ -211,19 +211,21 @@ vim.keymap.set('n', '<F12>', [[<cmd>MaximizerToggle<cr>]])
 vim.keymap.set('n', '<leader>i', "<cmd>Inspect<cr>")
 --example link: http://www.linusakesson.net/programming/tty
 vim.keymap.set({ 'n', 'v' }, 'gx', misc.gx)
-vim.keymap.set('t', '<Esc><Esc>', [[<C-\><C-n>]], {desc="Exit insert mode in terminal"}) -- the [[]] string did the trick
 vim.keymap.set('n', '<leader>fml', function()
     vim.cmd('CellularAutomaton make_it_rain')
     vim.cmd[[set nowrap]]
 end)
 vim.keymap.set('n', '<leader>fmn', '<cmd>CellularAutomaton game_of_life<cr>')
 
+-- Terminal stuff
 vim.api.nvim_create_autocmd('TermOpen', {
     callback = function()
-        vim.keymap.set('n', 'gF', misc.open_file_in_text_buffer, { buffer = 0, noremap = true })
-        vim.keymap.set('n', 'gf', misc.open_file_in_text_buffer, { buffer = 0, noremap = true })
+        vim.keymap.set('n', 'gF', misc.gf, { buffer = 0, noremap = true })
+        vim.keymap.set('n', 'gf', misc.gf, { buffer = 0, noremap = true })
     end
 })
+vim.keymap.set('t', '<Esc><Esc>', [[<C-\><C-n>]], {desc="Exit insert mode in terminal"})
+vim.api.nvim_create_user_command('VT', ':vert :term', {})
 
 -- Windows stopped supporting MSKLC so I have to do this BS to type Umlauts. Fuck you, Microsoft
 vim.keymap.set('i', '<M-o>', "ö")

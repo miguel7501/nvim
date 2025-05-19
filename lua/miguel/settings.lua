@@ -27,6 +27,7 @@ vim.opt.formatoptions:remove("o") -- this should make it so `o` doesn't add comm
 vim.opt.conceallevel = 0 -- concealed lines displayed as empty --TODO set those two opts for floating windows
 vim.opt.concealcursor = {} -- list of modes where lines will stay concealed even if the cursor is on them
 
+vim.opt.guicursor = "n-v-c:block,i-ci-ve-t:ver25,r-cr:hor20,o:hor50" -- because I want line cursor in terminal insert mode
 
 vim.g.omni_sql_no_default_maps = 1 -- sql files have Ctrl+C mappings by default
 

@@ -16,6 +16,7 @@ return {
             WIP = { icon = "🔨", color = '#ff9d00' },
             FIX = { alt = { "BUG", "BROKEN", "FIXME" } },
             TEST = { icon = " ", color = '#ff9d00' },
+            IMPORTANT = { icon = " ", color = '#ff0000' },
         },
         merge_keywords = true,
         highlight = {

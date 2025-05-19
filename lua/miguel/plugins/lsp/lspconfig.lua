@@ -59,6 +59,7 @@ return {
       --     }
       --   }
       -- }
+      -- vim.lsp.enable('luals')
 
     end
 }

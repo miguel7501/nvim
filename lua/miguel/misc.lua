@@ -150,7 +150,10 @@ function M.buf_get_win(bufnr)
     return nil
 end
 
-function M.open_file_in_text_buffer()
+-- like standard `gF` but opens the file in another buffer.
+-- If there's a text buffer on screen, it uses that.
+-- If not, it opens a vertical split.
+function M.gf()
     local cWORD = vim.fn.expand("<cWORD>")
     local filepath, line = string.match(cWORD, "([^:]+):(%d+)")
     if not (filepath and line) then
