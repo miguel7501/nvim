@@ -95,6 +95,11 @@ vim.keymap.set('n', '<leader>pb', "<cmd>Telescope builtin<cr>")
 vim.keymap.set({'n', 'v'}, '<leader>rr', function ()
     require("telescope").extensions.refactoring.refactors()
 end)
+vim.keymap.set({'n','v'}, '<leader>re', ':Refactor extract ')
+vim.keymap.set({'n','v'}, '<leader>rf', ':Refactor extract_to_file ')
+vim.keymap.set({'n','v'}, '<leader>rif', ':Refactor inline_func')
+vim.keymap.set({'n','v'}, '<leader>riv', ':Refactor inline_var')
+vim.keymap.set({'n','v'}, '<leader>rb', ':Refactor extract_block')
 
 
 -- Trouble
