@@ -1,14 +1,17 @@
 return {
-  {
-    "folke/lazydev.nvim",
-    ft = "lua", -- only load on lua files
-    opts = {
-      library = {
-        "nvim-dap-ui"
-      },
+    {
+        "folke/lazydev.nvim",
+        ft = "lua", -- only load on lua files
+        config = function()
+            require('lazydev').setup {
+                library = {
+                    "nvim-dap-ui"
+                },
+                integrations = {
+                    lspconfig = true
+                },
+                -- debug = true,
+            }
+        end,
     },
-  },
-  -- {
-  --     "kikito/inspect.lua", -- this lets us print tables
-  -- }
 }

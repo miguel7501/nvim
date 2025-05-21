@@ -4,6 +4,7 @@ if not vim.g.vscode then
     -- vim.keymap.set('n', 'S', 's', {})
     require("miguel.settings")
     require("miguel.lazy")
+    require("miguel.lsp")
     require("miguel.keymaps")
     require("miguel.after")
 else
