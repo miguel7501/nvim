@@ -17,15 +17,16 @@ dap.listeners.before['event_initialized']['dapui'] = dapui.open
 dap.set_log_level("TRACE")
 
 
--- 0.11 made floats weird, this attempts to fix them. The docs say specifically not to do this, but this is neovim and they can't stop me.
-vim.api.nvim_create_autocmd({'OptionSet'},
-{
-    pattern={"conceallevel", "concealcursor"},
-    command = [[
-        set conceallevel=1
-        set concealcursor=
-    ]]
-})
+-- TODO this stupid
+-- -- 0.11 made floats weird, this attempts to fix them. The docs say specifically not to do this, but this is neovim and they can't stop me.
+-- vim.api.nvim_create_autocmd({'OptionSet'},
+-- {
+--     pattern={"conceallevel", "concealcursor"},
+--     command = [[
+--         set conceallevel=1
+--         set concealcursor=
+--     ]]
+-- })
 
 
 -- Stuff
