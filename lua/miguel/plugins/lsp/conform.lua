@@ -8,7 +8,7 @@ return {
                 lua = { lsp_format = "fallback" },
                 sql = { "sqruff" },
                 mysql = { "sqruff" },
-
+                json = { "jq" },
             },
         }
         require("conform").formatters.ruff_format = { prepend_args = { [[--config]], [[line-length=100]] }}
