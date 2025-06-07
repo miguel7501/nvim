@@ -159,6 +159,7 @@ vim.keymap.set('n', '<leader>dvt', "<cmd>DapVirtualTextToggle<cr>", {desc='Debug
 --NOTE docs are at https://github.com/zk-org/zk-nvim
 -- local zk = require("zk")
 vim.keymap.set('n', '<leader>np', '<cmd>ZkNotes<cr>')
+vim.keymap.set('n', '<leader>pn', '<cmd>ZkNotes<cr>')
 vim.keymap.set('n', '<leader>nc', '<cmd>ZkNew<cr>')
 vim.keymap.set('n', '<leader>ni', '<cmd>ZkIndex<cr>')
 vim.keymap.set('n', '<leader>nm', '<cmd>e /home/miguel/notes/fmbj.md<cr>') -- Yes, I hardcoded that path. Go cry about it

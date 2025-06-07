@@ -25,7 +25,7 @@ return {
         vim.api.nvim_set_hl(0, "diffText", {bg="#37346a", underline = true, sp="#FF9D00"})
         vim.api.nvim_set_hl(0, "DiffDelete", {bg="#5a3d3d"})
 
-        vim.api.nvim_set_hl(0,  "@lsp.type.comment.lua", {})      -- luals shenanigains
+        vim.api.nvim_set_hl(0,  "@lsp.type.comment.lua", {})      -- required for proper coloring of luadoc
 
         vim.api.nvim_set_hl(0, "@lsp.type.parameter.python", {}) -- disable LSP highlighting for variables so treesitter takes over
         vim.api.nvim_set_hl(0, "@lsp.type.variable.python", {}) -- TODO do we even need the other one?
