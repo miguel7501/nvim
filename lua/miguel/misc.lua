@@ -207,15 +207,15 @@ function M.vt()
         local bufname = vim.api.nvim_buf_get_name(buf)
         if string.match(bufname, "^term://") then
             local bufinfo = vim.fn.getbufinfo(buf)[1]
-            vim.print("Bufinfo:")
-            vim.print(bufinfo)
+            -- vim.print("Bufinfo:")
+            -- vim.print(bufinfo)
             if bufinfo.hidden == 1 then
                 vim.cmd[[:vsplit]]
                 vim.cmd(":buf "..tostring(buf))
             return nil
             else
                 local win = bufinfo.windows[1]
-                vim.print("Switching to window "..tostring(win))
+                -- vim.print("Switching to window "..tostring(win))
                 vim.api.nvim_set_current_win(win)
                 return nil
             end
