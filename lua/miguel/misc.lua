@@ -201,4 +201,29 @@ function M.gf()
     return nil
 end
 
+function M.vt()
+    local bufs = vim.api.nvim_list_bufs()
+    for _, buf in ipairs(bufs) do
+        local bufname = vim.api.nvim_buf_get_name(buf)
+        if string.match(bufname, "^term://") then
+            local bufinfo = vim.fn.getbufinfo(buf)[1]
+            vim.print("Bufinfo:")
+            vim.print(bufinfo)
+            if bufinfo.hidden == 1 then
+                vim.cmd[[:vsplit]]
+                vim.cmd(":buf "..tostring(buf))
+            return nil
+            else
+                local win = bufinfo.windows[1]
+                vim.print("Switching to window "..tostring(win))
+                vim.api.nvim_set_current_win(win)
+                return nil
+            end
+        end
+    end
+    vim.cmd[[:vert :term]]
+    return nil
+end
+
+
 return M

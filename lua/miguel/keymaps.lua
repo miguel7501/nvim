@@ -87,8 +87,8 @@ vim.keymap.set('n', '<leader>ps', telbuiltin.lsp_workspace_symbols)
 vim.keymap.set('n', '<leader>pp', find_files)
 vim.keymap.set('n', '<leader>k', "<cmd>Telescope keymaps<cr>")
 vim.keymap.set('n', '<leader>h', "<cmd>Telescope help_tags<cr>")
-vim.keymap.set('n', '<leader>pb', "<cmd>Telescope builtin<cr>")
-
+vim.keymap.set('n', '<leader>pB', "<cmd>Telescope builtin<cr>")
+vim.keymap.set('n', '<leader>pb', '<cmd>Telescope buffers<cr>')
 
 
 -- Refactoring
@@ -231,7 +231,8 @@ vim.api.nvim_create_autocmd('TermOpen', {
     end
 })
 vim.keymap.set('t', '<Esc><Esc>', [[<C-\><C-n>]], {desc="Exit insert mode in terminal"})
-vim.api.nvim_create_user_command('VT', ':vert :term', {})
+
+vim.api.nvim_create_user_command('VT', misc.vt, {})
 
 -- Windows stopped supporting MSKLC so I have to do this BS to type Umlauts. Fuck you, Microsoft
 vim.keymap.set('i', '<M-o>', "ö")
