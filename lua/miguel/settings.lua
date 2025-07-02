@@ -23,6 +23,7 @@ vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.showtabline = 0 -- I have tabs in lualine
 vim.opt.formatoptions:remove("o") -- this should make it so `o` doesn't add comment lines
+vim.opt.scrollback = 100000
 
 vim.opt.conceallevel = 0 -- concealed lines displayed as empty --TODO set those two opts for floating windows
 vim.opt.concealcursor = {} -- list of modes where lines will stay concealed even if the cursor is on them

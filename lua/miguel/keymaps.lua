@@ -47,6 +47,9 @@ vim.keymap.set('n', '<leader>q', function() vim.diagnostic.enable(not vim.diagno
 vim.keymap.set('n', '<leader>Q',function () print("vim.diagnostic.is_enabled() -> "..tostring(vim.diagnostic.is_enabled()))end, {desc = 'Check if diagnostics are enabled'})
 vim.keymap.set({'n','v'}, '<leader>la', vim.lsp.buf.code_action)
 vim.keymap.set('n', '<leader>lr', vim.lsp.buf.rename)
+vim.keymap.set('n', '<leader>li', function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end, {desc="Toggle inlay hints"})
+vim.keymap.set('n', '<leader>lI', misc.apply_inlay_hint, { desc = "Toggle inlay hints" })
+
 
 -- remove some default nvim mappings so `gr` works like I'm used to
 vim.keymap.del({'n', 'x'}, 'gra')
@@ -103,7 +106,6 @@ vim.keymap.set({'n','v'}, '<leader>rb', ':Refactor extract_block')
 
 
 -- Trouble
-vim.keymap.set('n', '<leader>li', "<cmd>Trouble lsp_incoming_calls<cr>")
 vim.keymap.set('n', '<leader>t', "<cmd>Trouble diagnostics toggle filter.buf=0<cr>")
 vim.keymap.set('n', '<leader>T', "<cmd>Trouble diagnostics toggle<cr>")
 vim.keymap.set('n', '<leader>ls', function()
