@@ -209,6 +209,9 @@ function M.vt()
             local bufinfo = vim.fn.getbufinfo(buf)[1]
             -- vim.print("Bufinfo:")
             -- vim.print(bufinfo)
+            if bufinfo.loaded == 0 then
+                goto continue
+            end
             if bufinfo.hidden == 1 then
                 vim.cmd[[:vsplit]]
                 vim.cmd(":buf "..tostring(buf))
@@ -225,6 +228,7 @@ function M.vt()
                 return nil
             end
         end
+        ::continue::
     end
     vim.cmd[[:vert :term]]
     return nil

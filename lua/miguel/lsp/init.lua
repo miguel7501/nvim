@@ -5,7 +5,7 @@ vim.lsp.config('*', {
 
 
 vim.lsp.config['basedpyright'] = {
-    cmd = { 'basedpyright-langserver', '--stdio'},
+    cmd = { 'basedpyright-langserver', '--stdio', '--threads', '16'},
     filetypes = {'python'},
     capabilities = require('blink.cmp').get_lsp_capabilities(),
     settings = {
@@ -40,5 +40,4 @@ vim.lsp.config['luals'] = {
 vim.lsp.enable('luals')
 
 vim.lsp.enable('bashls')
-
-vim.lsp.enable('svelte')
+vim.lsp.enable{ 'svelte' , "ts_ls"} -- ts_ls = typescript

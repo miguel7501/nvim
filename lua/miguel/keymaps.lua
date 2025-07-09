@@ -29,7 +29,7 @@ vim.keymap.set('n', 'K', function() vim.lsp.buf.hover() end)
 
 vim.keymap.set('n', 'gd', '<cmd>Trouble lsp_definitions toggle<cr>')
 vim.keymap.set('n', 'gD', function() vim.lsp.buf.declaration() end)
--- vim.keymap.set('n', 'gi', function() vim.lsp.buf.implementation() end)
+vim.keymap.set('n', 'gi', function() vim.lsp.buf.implementation() end)
 vim.keymap.set('n', 'go', function() vim.lsp.buf.type_definition() end)
 -- vim.keymap.set('n', 'gr', function() vim.lsp.buf.references() end)
 vim.keymap.set('n', 'gr', '<cmd>Trouble lsp_references toggle<cr>zz')

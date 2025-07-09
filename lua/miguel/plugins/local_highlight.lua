@@ -5,7 +5,7 @@ return {
             file_types = { 'python', 'lua' },
             hlgroup = "LocalHighlight2",
             animate = false,
-            debounce_timeout = 200,
+            debounce_timeout = 1,
         }
     end
 }
