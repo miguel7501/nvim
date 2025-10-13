@@ -5,6 +5,7 @@
 -- sl for LSP functions
 -- g* also does LSP stuff but shhh
 -- sp for telescope
+-- sa for AI stuff
 
 
 local misc = require("miguel.misc")
@@ -20,20 +21,12 @@ vim.keymap.set('i', '<C-c>', '<Esc>') -- without this, diagnostics sometimes sta
 
 -- LSP Stuff
 vim.keymap.set('n', 'K', function() vim.lsp.buf.hover() end)
--- vim.keymap.set('n', 'K', function () vim.lsp.buf.hover({border="solid"}) end)
-
--- vim.keymap.set('n', 'gd', function()
---     vim.lsp.buf.definition()
---     vim.cmd('normal! zz')
--- end)
 
 vim.keymap.set('n', 'gd', '<cmd>Trouble lsp_definitions toggle<cr>')
 vim.keymap.set('n', 'gD', function() vim.lsp.buf.declaration() end)
 vim.keymap.set('n', 'gi', function() vim.lsp.buf.implementation() end)
 vim.keymap.set('n', 'go', function() vim.lsp.buf.type_definition() end)
--- vim.keymap.set('n', 'gr', function() vim.lsp.buf.references() end)
 vim.keymap.set('n', 'gr', '<cmd>Trouble lsp_references toggle<cr>zz')
--- vim.keymap.set('n', 'gs', function() vim.lsp.buf.signature_help() end)
 vim.keymap.set('n', 'gs', vim.lsp.buf.signature_help)
 vim.keymap.set('i', '<C-s>', vim.lsp.buf.signature_help)
 vim.keymap.set({ 'n', 'i' }, '<F2>', function() vim.lsp.buf.rename() end)
@@ -47,9 +40,9 @@ vim.keymap.set('n', '<leader>q', function() vim.diagnostic.enable(not vim.diagno
 vim.keymap.set('n', '<leader>Q',function () print("vim.diagnostic.is_enabled() -> "..tostring(vim.diagnostic.is_enabled()))end, {desc = 'Check if diagnostics are enabled'})
 vim.keymap.set({'n','v'}, '<leader>la', vim.lsp.buf.code_action)
 vim.keymap.set('n', '<leader>lr', vim.lsp.buf.rename)
-vim.keymap.set('n', '<leader>li', function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end, {desc="Toggle inlay hints"})
-vim.keymap.set('n', '<leader>lI', misc.apply_inlay_hint, { desc = "Toggle inlay hints" })
-
+vim.keymap.set('n', '<leader>lR', ":LspRestart<CR>")
+vim.keymap.set('n', '<leader>lI', function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end, {desc="Toggle inlay hints"})
+vim.keymap.set('n', '<leader>li', misc.apply_inlay_hint, { desc = "Apply inlay hint after cursor" })
 
 -- remove some default nvim mappings so `gr` works like I'm used to
 vim.keymap.del({'n', 'x'}, 'gra')
@@ -233,8 +226,8 @@ vim.api.nvim_create_autocmd('TermOpen', {
     end
 })
 vim.keymap.set('t', '<Esc><Esc>', [[<C-\><C-n>]], {desc="Exit insert mode in terminal"})
-
 vim.api.nvim_create_user_command('VT', misc.vt, {})
+vim.api.nvim_create_user_command('Vt', misc.vt, {})
 
 -- Windows stopped supporting MSKLC so I have to do this BS to type Umlauts. Fuck you, Microsoft
 vim.keymap.set('i', '<M-o>', "ö")
@@ -245,3 +238,15 @@ vim.keymap.set('i', '<M-O>', "Ö")
 vim.keymap.set('i', '<M-A>', "Ä")
 vim.keymap.set('i', '<M-U>', "Ü")
 vim.keymap.set('i', '<M-S>', "ẞ")
+
+
+-- AI Stuff
+vim.keymap.set('n', '<leader>at', '<cmd>CodeCompanionChat Toggle<cr>')
+vim.keymap.set('n', '<leader>ac', '<cmd>CodeCompanionChat<cr>')
+vim.keymap.set('n', '<leader>ap', '<cmd>CodeCompanionActions<cr>')
+vim.keymap.set('n', '<leader>pa', '<cmd>CodeCompanionActions<cr>')
+vim.keymap.set('v', '<leader>ae', '<cmd>CodeCompanion /explain<cr>')
+
+
+-- blink.cmp does something with <C-K> despite me telling it not to, so...
+pcall(vim.keymap.del, 'i', '<C-K>', {buffer=true}) -- pcall because blink keeps changing

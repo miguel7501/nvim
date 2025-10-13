@@ -12,6 +12,8 @@ vim.opt.scrolloff = 5
 vim.opt.signcolumn = "yes"
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
+vim.g.pyindent_open_paren = 'shiftwidth()'
+vim.g.pyindent_continue = 'shiftwidth()'
 vim.opt.expandtab = true
 vim.opt.wrap = true
 vim.opt.breakindent = true
@@ -24,6 +26,7 @@ vim.opt.relativenumber = true
 vim.opt.showtabline = 0 -- I have tabs in lualine
 vim.opt.formatoptions:remove("o") -- this should make it so `o` doesn't add comment lines
 vim.opt.scrollback = 100000
+-- vim.opt.foldmethod = "indent" --TODO 
 
 vim.opt.conceallevel = 0 -- concealed lines displayed as empty --TODO set those two opts for floating windows
 vim.opt.concealcursor = {} -- list of modes where lines will stay concealed even if the cursor is on them
@@ -58,18 +61,6 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 -- diagnostics display
 vim.diagnostic.config{virtual_text = {current_line = true}}
 
-
--- tabline (vibe coded with gippity)
-function TabLine()
-  local s = ''
-  for i = 1, vim.fn.tabpagenr('$') do
-    local hl = (i == vim.fn.tabpagenr()) and '%#TabLineSel#' or '%#TabLine#'
-    local name = (i == 1 and 'Main') or (i == 2 and 'DB') or ('Tab ' .. i)
-    s = s .. hl .. '%' .. i .. 'T ' .. name .. ' '
-  end
-  return s .. '%#TabLineFill#'
-end
-vim.o.tabline = "%!v:lua.TabLine()"
 
 -- env
 vim.env.PAGER = 'cat'

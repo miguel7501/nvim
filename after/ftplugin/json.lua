@@ -1,1 +1,1 @@
-vim.cmd[[set equalprg=jq]]
+vim.bo.equalprg = 'jq'

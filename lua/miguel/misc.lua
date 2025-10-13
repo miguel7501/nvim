@@ -171,6 +171,7 @@ function M.gf()
 
         -- Check if the window has a normal text buffer and is not floating
         if buftype == '' and not is_floating then
+            --TODO check if buffer is in another tab and if so, ignore it
             -- Open the file in this window without switching to it
             vim.api.nvim_win_call(winid, function()
                 vim.cmd('edit ' .. filepath)
@@ -180,7 +181,7 @@ function M.gf()
                     local ok = pcall(vim.api.nvim_win_set_cursor, 0, pos)
                     if not ok then
                         vim.print("gf: Cursor position outside buffer")
-                        vim.cmd[[:norm G]]
+                        vim.cmd [[:norm G]]
                     end
                 end
             end)
@@ -195,7 +196,7 @@ function M.gf()
         local ok = pcall(vim.api.nvim_win_set_cursor, 0, pos)
         if not ok then
             vim.print("gf: Cursor position outside buffer")
-            vim.cmd[[:norm G]]
+            vim.cmd [[:norm G]]
         end
     end
     return nil
@@ -205,32 +206,34 @@ function M.vt()
     local bufs = vim.api.nvim_list_bufs()
     for _, buf in ipairs(bufs) do
         local bufname = vim.api.nvim_buf_get_name(buf)
-        if string.match(bufname, "^term://") then
-            local bufinfo = vim.fn.getbufinfo(buf)[1]
-            -- vim.print("Bufinfo:")
-            -- vim.print(bufinfo)
-            if bufinfo.loaded == 0 then
-                goto continue
-            end
-            if bufinfo.hidden == 1 then
-                vim.cmd[[:vsplit]]
-                vim.cmd(":buf "..tostring(buf))
+        if not string.match(bufname, "^term://") then
+            goto continue
+        end
+        local bufinfo = vim.fn.getbufinfo(buf)[1]
+        vim.print("Bufinfo:")
+        vim.print(bufinfo)
+        if bufinfo.loaded == 0 then
+            goto continue
+        end
+        if bufinfo.hidden == 1 then
+            vim.cmd [[:vsplit]]
+            vim.cmd(":buf " .. tostring(buf))
             return nil
-            else
-                local win = bufinfo.windows[1]
-                if type(win) ~= "number" then
-                    vim.print("VT error: bufinfo.windows[1] is not a number. Type, value:  ",type(win), win) -- appears to happen when dapui is open. Maybe it finds the terminal from that and gets confused 
-                    vim.print("Bufinfo: ", bufinfo)
-                    return nil
-                end
-                -- vim.print("Switching to window "..tostring(win))
-                vim.api.nvim_set_current_win(win)
+        else
+            local win = bufinfo.windows[1]
+            if type(win) ~= "number" then
+                vim.print("VT error: bufinfo.windows[1] is not a number. Type, value:  ", type(win), win) -- appears to happen when dapui is open. Maybe it finds the terminal from that and gets confused
+                vim.print("Bufinfo: ", bufinfo)
                 return nil
             end
+            -- vim.print("Switching to window "..tostring(win))
+            vim.api.nvim_set_current_win(win)
+            return nil
         end
         ::continue::
     end
-    vim.cmd[[:vert :term]]
+
+    vim.cmd [[:vert :term]]
     return nil
 end
 
@@ -238,22 +241,20 @@ end
 -- see `:h lsp-inlay_hint` for details (I also stole half the code from there)
 function M.apply_inlay_hint()
     local cursor_pos = vim.api.nvim_win_get_cursor(0)
-    local inlay_filter =
-        {
-            bufnr = 0,
-            range = {
-                start = { line = cursor_pos[1]-1, character = cursor_pos[2] },
-                ["end"] = { line = cursor_pos[1]-1, character = math.huge },
-            }
+    local inlay_filter = {
+        bufnr = 0,
+        range = {
+            start = { line = cursor_pos[1] - 1, character = cursor_pos[2] },
+            ["end"] = { line = cursor_pos[1] - 1, character = math.huge },
         }
+    }
     local inlay_hints = vim.lsp.inlay_hint.get(inlay_filter)
     if inlay_hints[1] == nil then
-        vim.print("No inlay hints found")
+        vim.print("No inlay hints found after cursor")
         return nil
     end
     local lsp_client = vim.lsp.get_client_by_id(inlay_hints[1].client_id)
     vim.lsp.util.apply_text_edits(inlay_hints[1].inlay_hint.textEdits, inlay_hints[1].bufnr, "utf-8")
-
 end
 
 return M

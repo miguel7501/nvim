@@ -1,6 +1,6 @@
 return {
     "benlubas/molten-nvim",
-    lazy=true,
+    lazy = true,
     dependencies = "3rd/image.nvim",
     build = ":UpdateRemotePlugins",
     init = function()
@@ -10,28 +10,26 @@ return {
         vim.g.molten_output_win_style = "minimal"
         vim.g.molten_output_win_cover_gutter = false
 
-        vim.api.nvim_create_autocmd(
-            "User",
-            {
-                pattern = "MoltenKernelReady",
-                callback = function()
-                    local text = vim.api.nvim_buf_get_text(0, 0, 0, -1, -1, {})
-                    local percent_cell_start = nil
-                    for line, content in ipairs(text) do
-                        if content == "# %%" then
-                            if percent_cell_start then
-                                vim.fn.MoltenDefineCell(percent_cell_start + 1, line - 1) -- excludes cell marker
-                            end
-                            percent_cell_start = line
-                        elseif string.sub(content, 1, 3) == "# %%" then -- this means it's a markdown cell
-                            if percent_cell_start then
-                                vim.fn.MoltenDefineCell(percent_cell_start + 1, line - 1) -- excludes cell marker
-                            end
-                            percent_cell_start = nil
+        vim.api.nvim_create_autocmd("User", {
+            pattern = "MoltenKernelReady",
+            callback = function()
+                local text = vim.api.nvim_buf_get_text(0, 0, 0, -1, -1, {})
+                local percent_cell_start = nil
+                for line, content in ipairs(text) do
+                    if content == "# %%" then
+                        if percent_cell_start then
+                            vim.fn.MoltenDefineCell(percent_cell_start + 1, line - 1) -- excludes cell marker
                         end
+                        percent_cell_start = line
+                    elseif string.sub(content, 1, 3) == "# %%" then                   -- this means it's a markdown cell
+                        if percent_cell_start then
+                            vim.fn.MoltenDefineCell(percent_cell_start + 1, line - 1) -- excludes cell marker
+                        end
+                        percent_cell_start = nil
                     end
                 end
-            })
+            end
+        })
         vim.api.nvim_create_autocmd("BufEnter", {
             pattern = "*.ipynb",
             callback = function()

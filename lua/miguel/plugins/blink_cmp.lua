@@ -10,6 +10,7 @@ return {
                 preset = "default",
                 ["<C-u>"] = { "scroll_documentation_up", "fallback" },
                 ["<C-d>"] = { "scroll_documentation_down", "fallback" },
+                ["C-K"] = {},
             },
 
             appearance = {
@@ -28,7 +29,8 @@ return {
                 providers = {
                     cmdline = {
                         enabled = function()
-                            return vim.fn.getcmdtype() ~= ":" or not vim.fn.getcmdline():find("!")
+                            local cmdline = vim.fn.getcmdline()
+                            return vim.fn.getcmdtype() ~= ":" or ( not cmdline:find("!") and not cmdline:find("%%") )
                         end
                     },
                     dadbod = { name = "dadbod", module = "vim_dadbod_completion.blink" }

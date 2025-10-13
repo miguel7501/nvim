@@ -29,6 +29,7 @@ return {
                 type = "debugpy",
                 request = "launch",
                 module = "pytest",
+                justMyCode = false,
                 console = "integratedTerminal"
             },
         }
