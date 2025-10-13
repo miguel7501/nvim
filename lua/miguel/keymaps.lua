@@ -250,3 +250,9 @@ vim.keymap.set('v', '<leader>ae', '<cmd>CodeCompanion /explain<cr>')
 
 -- blink.cmp does something with <C-K> despite me telling it not to, so...
 pcall(vim.keymap.del, 'i', '<C-K>', {buffer=true}) -- pcall because blink keeps changing
+
+
+-- Colortheme
+current_colorscheme = "shades_of_purple"
+vim.keymap.set('n', '<leader>cs', Shadesofpurple)
+vim.keymap.set('n', '<leader>cb', ':colorscheme bamboo<cr>')

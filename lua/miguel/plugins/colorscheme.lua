@@ -1,6 +1,4 @@
-return {
-    "Rigellute/shades-of-purple.vim",
-    config = function()
+function Shadesofpurple()
         vim.cmd("syntax enable")
         vim.g.shades_of_purple_airline = 1
         vim.cmd.colorscheme("shades_of_purple")
@@ -45,5 +43,13 @@ return {
                 vim.lsp.semantic_tokens.highlight_token(token, args.buf, args.data.client_id, "Constant")
             end
         })
+
+end
+
+return {
+    "Rigellute/shades-of-purple.vim",
+    dependencies = {"ribru17/bamboo.nvim"},
+    config = function()
+        Shadesofpurple()
     end
 }

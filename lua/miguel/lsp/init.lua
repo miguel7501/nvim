@@ -37,7 +37,7 @@ vim.lsp.config['luals'] = {
         }
     },
 }
-vim.lsp.enable('luals')
+vim.lsp.enable('lua_ls')
 
 vim.lsp.enable('bashls')
 vim.lsp.enable{ 'svelte' , "ts_ls"} -- ts_ls = typescript
