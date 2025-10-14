@@ -246,7 +246,7 @@ vim.keymap.set('n', '<leader>ac', '<cmd>CodeCompanionChat<cr>')
 vim.keymap.set('n', '<leader>ap', '<cmd>CodeCompanionActions<cr>')
 vim.keymap.set('n', '<leader>pa', '<cmd>CodeCompanionActions<cr>')
 vim.keymap.set('v', '<leader>ae', '<cmd>CodeCompanion /explain<cr>')
-
+vim.keymap.set('i', '<C-E>', '<Plug>(copilot-suggest)')
 
 -- blink.cmp does something with <C-K> despite me telling it not to, so...
 pcall(vim.keymap.del, 'i', '<C-K>', {buffer=true}) -- pcall because blink keeps changing
