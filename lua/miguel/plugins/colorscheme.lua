@@ -23,10 +23,11 @@ function Shadesofpurple()
         vim.api.nvim_set_hl(0, "diffText", {bg="#37346a", underline = true, sp="#FF9D00"})
         vim.api.nvim_set_hl(0, "DiffDelete", {bg="#5a3d3d"})
 
-        vim.api.nvim_set_hl(0,  "@lsp.type.comment.lua", {})      -- required for proper coloring of luadoc
-
-        vim.api.nvim_set_hl(0, "@lsp.type.parameter.python", {}) -- disable LSP highlighting for variables so treesitter takes over
-        vim.api.nvim_set_hl(0, "@lsp.type.variable.python", {}) -- TODO do we even need the other one?
+        -- disable LSP highlighting for some stuff so treesitter takes over
+        vim.api.nvim_set_hl(0,  "@lsp.type.comment.lua", {}) -- required for proper coloring of luadoc
+        vim.api.nvim_set_hl(0, "@lsp.type.parameter.python", {})
+        vim.api.nvim_set_hl(0, "@lsp.type.variable.python", {})
+        vim.api.nvim_set_hl(0, "@lsp.type.function.lua", {}) --TODO this one seems to get overriden by something
         vim.api.nvim_create_autocmd("LspTokenUpdate", {          -- this is for python constants
             callback = function(args)
                 local token = args.data.token
@@ -48,7 +49,7 @@ end
 
 return {
     "Rigellute/shades-of-purple.vim",
-    dependencies = {"ribru17/bamboo.nvim"},
+    dependencies = {"ribru17/bamboo.nvim", "ellisonleao/gruvbox.nvim"},
     config = function()
         Shadesofpurple()
     end

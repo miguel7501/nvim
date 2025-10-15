@@ -255,3 +255,4 @@ pcall(vim.keymap.del, 'i', '<C-K>', {buffer=true}) -- pcall because blink keeps 
 -- Colortheme
 vim.keymap.set('n', '<leader>cs', Shadesofpurple)
 vim.keymap.set('n', '<leader>cb', ':colorscheme bamboo<cr>')
+vim.keymap.set('n', '<leader>cg', ':colorscheme gruvbox<cr>')
