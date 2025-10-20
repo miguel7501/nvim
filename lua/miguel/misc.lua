@@ -210,8 +210,8 @@ function M.vt()
             goto continue
         end
         local bufinfo = vim.fn.getbufinfo(buf)[1]
-        vim.print("Bufinfo:")
-        vim.print(bufinfo)
+        -- vim.print("Bufinfo:")
+        -- vim.print(bufinfo)
         if bufinfo.loaded == 0 then
             goto continue
         end
@@ -222,7 +222,7 @@ function M.vt()
         else
             local win = bufinfo.windows[1]
             if type(win) ~= "number" then
-                vim.print("VT error: bufinfo.windows[1] is not a number. Type, value:  ", type(win), win) -- appears to happen when dapui is open. Maybe it finds the terminal from that and gets confused
+                vim.print("VT error: bufinfo.windows[1] is not a number. Type, value:  ", type(win), win) -- appears to happen when dapui is open
                 vim.print("Bufinfo: ", bufinfo)
                 return nil
             end

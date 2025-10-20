@@ -256,3 +256,9 @@ pcall(vim.keymap.del, 'i', '<C-K>', {buffer=true}) -- pcall because blink keeps 
 vim.keymap.set('n', '<leader>cs', Shadesofpurple)
 vim.keymap.set('n', '<leader>cb', ':colorscheme bamboo<cr>')
 vim.keymap.set('n', '<leader>cg', ':colorscheme gruvbox<cr>')
+
+
+
+-- Letting go of shift in time is hard
+vim.api.nvim_create_user_command("W", 'write', {})
+vim.api.nvim_create_user_command("Q", 'quit', {})
