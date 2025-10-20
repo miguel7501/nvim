@@ -1,3 +1,6 @@
+fish_vi_key_bindings
+
+
 # set -x PATH $PATH ~/gitahead/GitAhead
 # set -x PATH $PATH ~/.local/bin
 set -x PATH $PATH ~/scripts/path
