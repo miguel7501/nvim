@@ -69,14 +69,14 @@ vim.keymap.set({ 'v', 'o' }, 'gq',
 
 -- Telescope
 local telbuiltin = require('telescope.builtin')
+local live_grep = function()
+    telbuiltin.live_grep(
+        { 'rg', '--no-config', '--files', '--hidden', '--no-ignore' })
+end
 local find_files = function()
     telbuiltin.find_files({ find_command = { 'rg', '--no-config', '--files', '--hidden', '-g', '!.git', } })
 end
-local live_grep = function()
-    telbuiltin.live_grep({ 'rg', '--no-config', '--files', '--hidden', '--no-ignore' })
-end
 vim.keymap.set('n', '<C-p>', find_files, {})
-vim.keymap.set('n', '<F37>', live_grep, { desc = "Live Grep" }) -- for windows terminal <C-S-P>
 vim.keymap.set('n', '<C-S-P>', live_grep, { desc = "Live Grep" })
 vim.keymap.set('n', '<leader>pg', live_grep, { desc = "Live Grep" })
 vim.keymap.set('n', '<leader>ps', telbuiltin.lsp_workspace_symbols)
@@ -131,8 +131,6 @@ vim.keymap.set('n', '<leader>dd', dap.down, {desc = 'Debugger: down in stack'})
 vim.keymap.set('n', '<leader>du', dap.up, {desc = 'Debugger: up in stack'})
 vim.keymap.set('n', '<leader>dj', dap.goto_, {desc = 'Debugger: jump to cursor'})
 vim.keymap.set('n', '<leader>dm', function() require("dap-python").test_method { config = { justMyCode = false } } end, {desc = 'Debug test under cursor'})
-vim.keymap.set('n', '<F20>', dap.terminate, {desc = 'Debugger: Terminate'}) -- F20 is obviously the same as Shift+F8 (in windows terminal)
-vim.keymap.set('n', '<S-F8>', dap.terminate, {desc = 'Debugger: Terminate'}) -- F20 is obviously the same as Shift+F8 (in windows terminal)
 vim.keymap.set('n', '<leader>dr', function() dapui.toggle { reset = true } end, {desc='Debugger: show/hide'})
 vim.keymap.set('n', '<leader>dvt', "<cmd>DapVirtualTextToggle<cr>", {desc='Debugger: Toggle virtual text'})
 
@@ -210,11 +208,21 @@ vim.api.nvim_create_autocmd(
     })
 vim.keymap.set('n', '<F12>', [[<cmd>MaximizerToggle<cr>]])
 vim.keymap.set('n', '<leader>i', "<cmd>Inspect<cr>")
---example link: http://www.linusakesson.net/programming/tty
-vim.keymap.set({ 'n', 'v' }, 'gx', misc.gx)
+if Sad then
+    vim.keymap.set({ 'n', 'v' }, 'gx', misc.sad_gx)
+    -- Windows stopped supporting MSKLC so I have to do this BS to type Umlauts. Fuck you, Microsoft
+    vim.keymap.set('i', '<M-o>', "ö")
+    vim.keymap.set('i', '<M-a>', "ä")
+    vim.keymap.set('i', '<M-u>', "ü")
+    vim.keymap.set('i', '<M-s>', "ß")
+    vim.keymap.set('i', '<M-O>', "Ö")
+    vim.keymap.set('i', '<M-A>', "Ä")
+    vim.keymap.set('i', '<M-U>', "Ü")
+    vim.keymap.set('i', '<M-S>', "ẞ")
+end
 vim.keymap.set('n', '<leader>fml', function()
     vim.cmd('CellularAutomaton make_it_rain')
-    vim.cmd[[set nowrap]]
+    vim.cmd [[set nowrap]]
 end)
 vim.keymap.set('n', '<leader>fmn', '<cmd>CellularAutomaton game_of_life<cr>')
 
@@ -228,17 +236,6 @@ vim.api.nvim_create_autocmd('TermOpen', {
 vim.keymap.set('t', '<Esc><Esc>', [[<C-\><C-n>]], {desc="Exit insert mode in terminal"})
 vim.api.nvim_create_user_command('VT', misc.vt, {})
 vim.api.nvim_create_user_command('Vt', misc.vt, {})
-
--- Windows stopped supporting MSKLC so I have to do this BS to type Umlauts. Fuck you, Microsoft
-vim.keymap.set('i', '<M-o>', "ö")
-vim.keymap.set('i', '<M-a>', "ä")
-vim.keymap.set('i', '<M-u>', "ü")
-vim.keymap.set('i', '<M-s>', "ß")
-vim.keymap.set('i', '<M-O>', "Ö")
-vim.keymap.set('i', '<M-A>', "Ä")
-vim.keymap.set('i', '<M-U>', "Ü")
-vim.keymap.set('i', '<M-S>', "ẞ")
-
 
 -- AI Stuff
 vim.keymap.set('n', '<leader>at', '<cmd>CodeCompanionChat Toggle<cr>')

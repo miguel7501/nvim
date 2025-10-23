@@ -110,7 +110,7 @@ end
 
 -- test link https://python-poetry.org/history/
 
-function M.gx(path) -- copy of vim.ui.open that can get the link under the cursor and has a high timeout because wslview is so slow
+function M.sad_gx(path) -- copy of vim.ui.open that can get the link under the cursor and has a high timeout because wslview is so slow
     path = M.get_visual_selection()
     if not path then
         path = vim.fn.expand("<cWORD>")

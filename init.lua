@@ -1,7 +1,8 @@
 if not vim.g.vscode then
     vim.g.mapleader = 's'
     vim.g.maplocalleader = 's'
-    -- vim.keymap.set('n', 'S', 's', {})
+    ---@type boolean
+    Sad = vim.system({"which", "wslview"}):wait().code == 0
     require("miguel.settings")
     require("miguel.lazy")
     require("miguel.lsp")
