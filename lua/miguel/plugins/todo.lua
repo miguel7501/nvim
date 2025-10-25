@@ -12,7 +12,7 @@ return {
     -- we DONE did it
     opts = {
         keywords = {
-            TODO = { icon = "T", color = '#8cf8f7' },
+            TODO = { icon = "T", color = "#88F2F0"},
             DONE = { icon = "", color = '#96ff8f' },
             WIP = { icon = "🔨", color = '#ff9d00' },
             FIX = { alt = { "BUG", "BROKEN", "FIXME" } },
