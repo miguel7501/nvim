@@ -12,11 +12,13 @@ return {
     -- we DONE did it
     opts = {
         keywords = {
+            TODO = { icon = "T", color = '#8cf8f7' },
             DONE = { icon = "", color = '#96ff8f' },
             WIP = { icon = "🔨", color = '#ff9d00' },
             FIX = { alt = { "BUG", "BROKEN", "FIXME" } },
             TEST = { icon = " ", color = '#ff9d00' },
             IMPORTANT = { icon = " ", color = '#ff0000' },
+            TJA = {icon = "🤷", color="#fce094"},
         },
         merge_keywords = true,
         highlight = {
@@ -30,3 +32,5 @@ return {
 
     }
 }
+
+

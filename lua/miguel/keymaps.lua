@@ -119,7 +119,6 @@ vim.keymap.set({ 'n', 'i' }, '<F5>', dap.step_into)
 vim.keymap.set({ 'n', 'i' }, '<F6>', dap.step_over)
 vim.keymap.set({ 'n', 'i' }, '<F7>', dap.step_out)
 vim.keymap.set({ 'n', 'i' }, '<F8>', dap.continue)
-vim.keymap.set({ 'n', 'i' }, '<F32>', dap.run_last) -- Ctrl F8 in tmux
 vim.keymap.set({ 'n', 'i' }, '<C-F8>', dap.run_last)
 vim.keymap.set('n', '<leader>b', dap.toggle_breakpoint)
 vim.keymap.set({'n', 'v'}, '<leader>e', dapui.eval)
@@ -209,6 +208,8 @@ vim.api.nvim_create_autocmd(
 vim.keymap.set('n', '<F12>', [[<cmd>MaximizerToggle<cr>]])
 vim.keymap.set('n', '<leader>i', "<cmd>Inspect<cr>")
 if Sad then
+    vim.keymap.set({ 'n', 'i' }, '<F32>', dap.run_last) -- Ctrl F8 in wsl tmux
+    vim.keymap.set({ 'n', 'i' }, '<F20>', dap.terminate) -- Ctrl F8 in wsl tmux
     vim.keymap.set({ 'n', 'v' }, 'gx', misc.sad_gx)
     -- Windows stopped supporting MSKLC so I have to do this BS to type Umlauts. Fuck you, Microsoft
     vim.keymap.set('i', '<M-o>', "ö")
