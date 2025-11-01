@@ -21,26 +21,26 @@ return {
         }
         require("conform").formatters.prettier = { prepend_args = { [[--tabWidth=2]], [[--printWidth=200]] } }
 
-        vim.api.nvim_create_autocmd(
-            { "BufWritePre" },
-            {
-                pattern = {"*.svelte"},
-                callback = function(args)
-                    -- vim.print("BufWritePre called with ", args)
-                    vim.lsp.buf.format()
-                end
-            }
-        )
-        vim.api.nvim_create_autocmd(
-            { "BufWritePre" },
-            {
-                pattern = {"*.ts"},
-                callback = function(args)
-                    -- vim.print("BufWritePost called with ", args)
-                    vim.cmd[[%!prettier --stdin-filepath %]]
-                end
-            }
-        )
+        -- vim.api.nvim_create_autocmd(
+        --     { "BufWritePre" },
+        --     {
+        --         pattern = {"*.svelte"},
+        --         callback = function(args)
+        --             -- vim.print("BufWritePre called with ", args)
+        --             vim.lsp.buf.format()
+        --         end
+        --     }
+        -- )
+        -- vim.api.nvim_create_autocmd(
+        --     { "BufWritePre" },
+        --     {
+        --         pattern = {"*.ts"},
+        --         callback = function(args)
+        --             -- vim.print("BufWritePost called with ", args)
+        --             vim.cmd[[%!prettier --stdin-filepath % --]]
+        --         end
+        --     }
+        -- )
 
 
     end
