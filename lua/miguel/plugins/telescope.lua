@@ -10,9 +10,13 @@ return {
                 vim.wo.wrap = true
             end
         })
-        require("telescope").setup{
+        require("telescope").setup {
             defaults = {
-                layout_config = { height = 0.99, width = 0.99, preview_width = 0.5},
+                layout_config = { height = 0.99,
+                    width = 0.99,
+                    preview_width = 0.5,
+                    mirror = true,
+                },
                 layout_strategy = "horizontal",
             }
         }
