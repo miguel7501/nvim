@@ -24,11 +24,13 @@ function Shadesofpurple()
         vim.api.nvim_set_hl(0, "DiffDelete", {bg="#5a3d3d"})
 
         -- disable LSP highlighting for some stuff so treesitter takes over
+
+        vim.api.nvim_set_hl(0,  "@function.builtin.lua", {link="Function"}) -- this is too obvious to be the default
+        vim.api.nvim_set_hl(0, "@lsp.type.property.lua", {})
         vim.api.nvim_set_hl(0,  "@lsp.type.comment.lua", {}) -- required for proper coloring of luadoc
+        vim.api.nvim_set_hl(0, "@lsp.type.function.lua", {}) --TODO this one seems to get overriden by something
         vim.api.nvim_set_hl(0, "@lsp.type.parameter.python", {})
         vim.api.nvim_set_hl(0, "@lsp.type.variable.python", {})
-        vim.api.nvim_set_hl(0, "@lsp.type.function.lua", {}) --TODO this one seems to get overriden by something
-        vim.api.nvim_set_hl(0, "@lsp.type.property.lua", {})
         vim.api.nvim_create_autocmd("LspTokenUpdate", {          -- this is for python constants
             callback = function(args)
                 local token = args.data.token
