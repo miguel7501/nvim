@@ -31,7 +31,9 @@ function Shadesofpurple()
         vim.api.nvim_set_hl(0, "@lsp.type.function.lua", {}) --TODO this one seems to get overriden by something
         vim.api.nvim_set_hl(0, "@lsp.type.parameter.python", {})
         vim.api.nvim_set_hl(0, "@lsp.type.variable.python", {})
-        vim.api.nvim_create_autocmd("LspTokenUpdate", {          -- this is for python constants
+        vim.api.nvim_set_hl(0, "@lsp.type.property.python", {}) -- TODO find better color for this, it's keyword colored by default
+        vim.api.nvim_set_hl(0, "@lsp.type.function.lua", {}) --TODO this one seems to get overriden by something
+        vim.api.nvim_create_autocmd("LspTokenUpdate", {          -- this is for python constants 
             callback = function(args)
                 local token = args.data.token
                 -- print("This is LspTokenUpdate. args: ")

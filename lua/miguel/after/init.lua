@@ -31,3 +31,15 @@ dap.set_log_level("TRACE")
 
 -- Stuff
 vim.cmd("SpeedDatingFormat %d.%m.%Y")
+
+
+-- -- move statusline one up only if I use the command line
+-- vim.api.nvim_create_autocmd("CmdLineEnter",
+--     { callback = function() vim.opt.cmdheight = 1 end })
+-- vim.api.nvim_create_autocmd("CmdLineLeave",
+--     { callback = function() 
+--         vim.opt.cmdheight = 0
+--     end })
+-- TODO this hides macro recording
+-- TODO this makes it so a :w causes "hit enter" prompt
+-- so we need more conditions to handle it properly
