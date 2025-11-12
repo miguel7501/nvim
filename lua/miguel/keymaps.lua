@@ -49,6 +49,7 @@ vim.keymap.del({'n', 'x'}, 'gra')
 vim.keymap.del('n', 'grn' )
 vim.keymap.del('n', 'gri' )
 vim.keymap.del('n', 'grr' )
+vim.keymap.del('n', 'grt' )
 
 
 local conform_callback = function(err, did_edit) ---@diagnostic disable-line unused-local
