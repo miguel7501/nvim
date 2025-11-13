@@ -32,7 +32,6 @@ dap.set_log_level("TRACE")
 -- Stuff
 vim.cmd("SpeedDatingFormat %d.%m.%Y")
 
-
 -- -- move statusline one up only if I use the command line
 -- vim.api.nvim_create_autocmd("CmdLineEnter",
 --     { callback = function() vim.opt.cmdheight = 1 end })
