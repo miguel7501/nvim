@@ -10,6 +10,8 @@ return {
             ["javascript"] = true,
             ["typescript"] = true,
             ["svelte"] = true,
+            ["mysql"] = true,
+            ["sql"] = true,
         }
     end
 }
