@@ -127,10 +127,15 @@ function M.sad_gx(path) -- copy of vim.ui.open that can get the link under the c
 
     local cmd = { 'wslview', path } --- @type string[]
     print(cmd[1], cmd[2])
+    local time_before_ns = vim.uv.hrtime() ---@diagnostic disable-line[undefined-field]
     return vim.system(
         cmd,
         { text = true, timeout = 10000, detach = true },
-        function() vim.print("We back from wslview") end
+        function()
+            local time_after_ns = vim.uv.hrtime() ---@diagnostic disable-line[undefined-field]
+            local time_taken_ms = math.floor((time_after_ns - time_before_ns) / 1000000)
+            vim.print("We back from wslview after "..tostring(time_taken_ms).."ms")
+        end
     ), nil
 end
 
