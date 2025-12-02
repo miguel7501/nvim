@@ -25,15 +25,13 @@ vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.showtabline = 0 -- I have tabs in lualine
 vim.opt.scrollback = 100000
-vim.opt.cmdheight = 0
+vim.opt.cmdheight = 1
 vim.opt.formatoptions:remove("o") -- this get overriden per ft and idk why so
 vim.api.nvim_create_autocmd("BufEnter", {
     callback = function()
         vim.opt_local.formatoptions:remove("o") -- this get overriden per ft and idk what does it
     end
 })
-
-
 
 vim.opt.conceallevel = 0 -- concealed lines displayed as empty --TODO set those two opts for floating windows
 vim.opt.concealcursor = {} -- list of modes where lines will stay concealed even if the cursor is on them
