@@ -1,0 +1,9 @@
+{
+  "SQLAlchemy History Check": {
+    "prefix": "sahist",
+    "body": [
+      "from sqlalchemy import inspect; {k:v.history.has_changes() for (k,v) in inspect(${1:target_data}).attrs.items()}"
+    ],
+    "description": "SQLAlchemy inspect attributes history check comprehension with import"
+  }
+}
