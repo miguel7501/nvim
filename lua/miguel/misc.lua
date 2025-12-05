@@ -226,6 +226,7 @@ function M.vt()
             return nil
         else
             local win = bufinfo.windows[1]
+            --TODO only consider windows in the current tab
             if type(win) ~= "number" then
                 vim.print("VT error: bufinfo.windows[1] is not a number. Type, value:  ", type(win), win) -- appears to happen when dapui is open
                 vim.print("Bufinfo: ", bufinfo)
@@ -238,7 +239,7 @@ function M.vt()
         ::continue::
     end
 
-    vim.cmd [[:vert :term]]
+    vim.cmd [[:vert :term]] ---@diagnostic disable-line[unreachable-code]
     return nil
 end
 
