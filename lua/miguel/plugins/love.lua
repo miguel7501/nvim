@@ -4,7 +4,7 @@ return {
     opts = {},
     keys = {
         { "<leader>v",  desc = "LÖVE" },
-        { "<leader>vv", "<cmd>LoveRun<cr>",  desc = "Run LÖVE" },
+        { "<leader>vv", "<cmd>LoveRun /home/miguel/projects/love2d_min/<cr>",  desc = "Run LÖVE" }, -- yes, it's a hack. No, I won't fix it.
         { "<leader>vs", "<cmd>LoveStop<cr>", desc = "Stop LÖVE" },
     },
 }
