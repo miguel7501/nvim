@@ -180,12 +180,6 @@ vim.keymap.set('n', '<leader>gb', function() gitsigns.blame() end, {desc = "blam
 vim.keymap.set('n', '-', "<cmd>Oil<cr>")
 
 
--- todocomments
-local todocomments = require("todo-comments")
-vim.keymap.set("n", "]t", function() todocomments.jump_next() end, { desc = "Next todo comment" })
-vim.keymap.set("n", "[t", function() todocomments.jump_prev() end, { desc = "Previous todo comment" })
-
-
 -- Molten
 vim.keymap.set("n", "<leader>me", ":MoltenEvaluateOperator<CR>", { silent = true, desc = "run operator selection" })
 vim.keymap.set("n", "<leader>mo", ":noautocmd MoltenEnterOutput<CR>", { silent = true, desc = "Enter Molten Output window" })
@@ -261,3 +255,9 @@ vim.keymap.set('n', '<leader>cg', ':colorscheme gruvbox<cr>')
 -- Letting go of shift in time is hard
 vim.api.nvim_create_user_command("W", 'write', {})
 vim.api.nvim_create_user_command("Q", 'quit', {})
+
+
+-- -- todocomments -> commented out because plugin is bugged
+-- local todocomments = require("todo-comments")
+-- vim.keymap.set("n", "]t", function() todocomments.jump_next() end, { desc = "Next todo comment" })
+-- vim.keymap.set("n", "[t", function() todocomments.jump_prev() end, { desc = "Previous todo comment" })
