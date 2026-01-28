@@ -152,7 +152,6 @@ vim.api.nvim_set_keymap("n", "<leader>ng",
 
 
 -- Git
--- TODO signcolumn background for git indicators
 local gitsigns = require("gitsigns")
 vim.keymap.set('n', ']c', function() gitsigns.nav_hunk('next') end)
 vim.keymap.set('n', '[c', function() gitsigns.nav_hunk('prev') end)
@@ -162,6 +161,10 @@ vim.keymap.set('n', '<leader>gt', function() gitsigns.setqflist('all') end, {des
 vim.keymap.set('n', '<leader>gp', function() gitsigns.preview_hunk() end, {desc = "Preview current change"})
 vim.keymap.set('n', '<leader>B', '<cmd>BlameToggle<cr>', {desc = "Blame (from old plugin)"})
 vim.keymap.set('n', '<leader>gb', function() gitsigns.blame() end, {desc = "blame"})
+vim.keymap.set('n', '<leader>go', function()
+    vim.cmd[[terminal lazygit]]
+    vim.cmd[[startinsert]]
+end, {desc = "open lazygit"})
 --TODO map sgD to diff but with prompt for branch/commit instead of always doing HEAD
 
 -- Oil (file browser)
