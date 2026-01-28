@@ -30,7 +30,7 @@ return {
                     cmdline = {
                         enabled = function()
                             local cmdline = vim.fn.getcmdline()
-                            return vim.fn.getcmdtype() ~= ":" or ( not cmdline:find("!") and not cmdline:find("%%") )
+                            return vim.fn.getcmdtype() ~= ":" or ( not cmdline:find("!") and not cmdline:find("%%") and not cmdline:find("term "))
                         end
                     },
                     dadbod = { name = "dadbod", module = "vim_dadbod_completion.blink" }
