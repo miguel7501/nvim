@@ -135,18 +135,6 @@ vim.keymap.set('n', '<leader>dr', function() dapui.toggle { reset = true } end, 
 vim.keymap.set('n', '<leader>dvt', "<cmd>DapVirtualTextToggle<cr>", {desc='Debugger: Toggle virtual text'})
 
 
--- Harpoon -- Harboon is out for now because it has a bug I can't reproduce so I don't use it
--- local harpoon = require("harpoon")
--- vim.keymap.set("n", "<C-e>", function() misc.harpoon_toggle_telescope(harpoon:list()) end,
---     { desc = "Open harpoon window" })
--- vim.keymap.set('n', '<leader>a', function()
---     print("Added buffer to harpoon"); harpoon:list():add()
--- end)
--- vim.keymap.set('n', '<leader>n', function() harpoon:list():next() end)
--- vim.keymap.set('n', '<leader>p', function() harpoon:list():prev() end)
--- vim.keymap.set('n', '<leader>r', function()
---     print("removed buffer from harpoon"); harpoon:list():remove()
--- end)
 
 -- Zettelkasten (requires zk to be installed)
 --NOTE docs are at https://github.com/zk-org/zk-nvim
@@ -233,13 +221,6 @@ vim.keymap.set('t', '<Esc><Esc>', [[<C-\><C-n>]], {desc="Exit insert mode in ter
 vim.api.nvim_create_user_command('VT', misc.vt, {})
 vim.api.nvim_create_user_command('Vt', misc.vt, {})
 
--- AI Stuff
-vim.keymap.set('n', '<leader>at', '<cmd>CodeCompanionChat Toggle<cr>')
-vim.keymap.set('n', '<leader>ac', '<cmd>CodeCompanionChat<cr>')
-vim.keymap.set('n', '<leader>ap', '<cmd>CodeCompanionActions<cr>')
-vim.keymap.set('n', '<leader>pa', '<cmd>CodeCompanionActions<cr>')
-vim.keymap.set('v', '<leader>ae', '<cmd>CodeCompanion /explain<cr>')
-vim.keymap.set('i', '<C-E>', '<Plug>(copilot-suggest)')
 
 -- blink.cmp does something with <C-K> despite me telling it not to, so...
 pcall(vim.keymap.del, 'i', '<C-K>', {buffer=true}) -- pcall because blink keeps changing
@@ -257,7 +238,12 @@ vim.api.nvim_create_user_command("W", 'write', {})
 vim.api.nvim_create_user_command("Q", 'quit', {})
 
 
--- -- todocomments -> commented out because plugin is bugged
+-- -- todocomments -> commented out because plugin is bugged ( fix not merged yet, see https://github.com/folke/todo-comments.nvim/pull/381 )
 -- local todocomments = require("todo-comments")
 -- vim.keymap.set("n", "]t", function() todocomments.jump_next() end, { desc = "Next todo comment" })
 -- vim.keymap.set("n", "[t", function() todocomments.jump_prev() end, { desc = "Previous todo comment" })
+
+
+-- AI
+vim.keymap.set("i", "<C-P>", "<cmd>Copilot panel<cr>", { desc = "Open Copilot panel" })
+

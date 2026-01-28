@@ -23,9 +23,15 @@ function Shadesofpurple()
         vim.api.nvim_set_hl(0, "diffText", {bg="#37346a", underline = true, sp="#FF9D00"})
         vim.api.nvim_set_hl(0, "DiffDelete", {bg="#5a3d3d"})
 
-        -- disable LSP highlighting for some stuff so treesitter takes over
+        -- copilot. By default, both of those link to Comment
+        -- CopilotSuggestion xxx links to Comment
+        -- CopilotAnnotation xxx links to Comment
+        vim.api.nvim_set_hl(0, "CopilotSuggestion", { fg = "#5555FF", italic = true })
+        vim.api.nvim_set_hl(0, "CopilotAnnotation", { fg = "", italic = true })
+
 
         vim.api.nvim_set_hl(0,  "@function.builtin.lua", {link="Function"}) -- this is too obvious to be the default
+        -- disable LSP highlighting for some stuff so treesitter takes over
         vim.api.nvim_set_hl(0, "@lsp.type.property.lua", {})
         vim.api.nvim_set_hl(0,  "@lsp.type.comment.lua", {}) -- required for proper coloring of luadoc
         vim.api.nvim_set_hl(0, "@lsp.type.parameter.python", {})

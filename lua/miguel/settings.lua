@@ -66,4 +66,4 @@ vim.diagnostic.config{virtual_text = {current_line = true}}
 
 
 -- env
-vim.env.PAGER = 'cat'
+-- vim.env.PAGER = 'cat'
