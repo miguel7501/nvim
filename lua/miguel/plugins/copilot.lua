@@ -1,7 +1,20 @@
 return {
     "zbirenbaum/copilot.lua",
+    -- requires = { -- not working yet
+    --     "copilot-lsp/copilot-lsp",
+    --     init = function()
+    --         vim.g.copilot_nes_debounce = 300
+    --     end,
+    -- },
     config = function()
         require('copilot').setup({
+            server_opts_overrides = {
+                settings = {
+                    telemetry = {
+                        telemetryLevel = "off",
+                    },
+                },
+            },
             panel = {
                 enabled = true,
                 auto_refresh = false,
@@ -26,12 +39,12 @@ return {
                 debounce = 15,
                 trigger_on_accept = true,
                 keymap = {
-                    accept = "<S-Tab>",
+                    accept = false,
                     accept_word = "<Tab>",
-                    accept_line = false,
+                    accept_line = "<S-Tab>",
                     next = "<C-E>",
                     -- prev = "<C-S-E>",
-                    -- dismiss = "<C-J>",
+                    dismiss = "<C-]>",
                     toggle_auto_trigger = false,
                 },
             },
@@ -40,7 +53,7 @@ return {
                 auto_trigger = false,
                 keymap = {
                     accept_and_goto = false,
-                    accept = false,
+                    accept = "<leader>i",
                     dismiss = false,
                 },
             },
@@ -60,7 +73,7 @@ return {
             root_dir = function()
                 return vim.fs.dirname(vim.fs.find(".git", { upward = true })[1])
             end,
-            should_attach = function(bufnr, path)
+            should_attach = function(bufnr, path) -- TODO prevent this from attaching to nvim-dap-ui stuff
                 if not vim.bo.buflisted then
                     return false
                 end
@@ -79,7 +92,7 @@ return {
                 type = "nodejs", -- "nodejs" | "binary"
                 custom_server_filepath = nil,
             },
-            server_opts_overrides = {},
         })
+        vim.keymap.set("i", "<C-P>", "<cmd>Copilot panel<cr>", { desc = "Open Copilot panel" })
     end
 }

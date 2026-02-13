@@ -6,6 +6,11 @@ return {
         },
         version = "v0.*",
         opts = {
+            completion = {
+                menu = {
+                    auto_show = true,
+                },
+            },
             keymap = {
                 preset = "default",
                 ["<C-u>"] = { "scroll_documentation_up", "fallback" },

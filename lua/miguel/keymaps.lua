@@ -192,7 +192,6 @@ vim.api.nvim_create_autocmd(
         command = [[nnoremap <buffer> <CR> <CR>:cclose<CR>]]
     })
 vim.keymap.set('n', '<F12>', [[<cmd>MaximizerToggle<cr>]])
-vim.keymap.set('n', '<leader>i', "<cmd>Inspect<cr>")
 if Sad then
     vim.keymap.set({ 'n', 'i' }, '<F32>', dap.run_last) -- Ctrl F8 in wsl tmux
     vim.keymap.set({ 'n', 'i' }, '<F20>', dap.terminate) -- Ctrl F8 in wsl tmux
@@ -246,7 +245,4 @@ vim.api.nvim_create_user_command("Q", 'quit', {})
 -- vim.keymap.set("n", "]t", function() todocomments.jump_next() end, { desc = "Next todo comment" })
 -- vim.keymap.set("n", "[t", function() todocomments.jump_prev() end, { desc = "Previous todo comment" })
 
-
--- AI
-vim.keymap.set("i", "<C-P>", "<cmd>Copilot panel<cr>", { desc = "Open Copilot panel" })
 

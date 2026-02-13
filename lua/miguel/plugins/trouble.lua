@@ -1,7 +1,6 @@
 return {
     "folke/trouble.nvim",
     config = function()
-        ---@diagnostic disable-next-line
         require("trouble").setup {
             max_items = 1000,
             keys = {

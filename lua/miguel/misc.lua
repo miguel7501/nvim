@@ -158,7 +158,7 @@ end
 -- like standard `gF` but opens the file in another buffer.
 -- If there's a text buffer on screen, it uses that.
 -- If not, it opens a vertical split.
-function M.gf()
+function M.gf() --TODO :term may break filenames into multiple lines and that breaks this function
     local cWORD = vim.fn.expand("<cWORD>")
     local filepath, line = string.match(cWORD, "([^:]+):(%d+)")
     if not (filepath and line) then
@@ -168,15 +168,13 @@ function M.gf()
         return nil
     end
     -- vim.print("gf called. cWORD: " .. cWORD .. "  Filepath: " .. filepath .. "  Line: " .. tostring(line))
-    -- Iterate through all windows in the current tabpage
     for _, winid in ipairs(vim.api.nvim_list_wins()) do
         local bufnr = vim.api.nvim_win_get_buf(winid)
         local buftype = vim.api.nvim_get_option_value('buftype', { buf = bufnr })
         local is_floating = vim.api.nvim_win_get_config(winid).relative ~= ''
 
-        -- Check if the window has a normal text buffer and is not floating
         if buftype == '' and not is_floating then
-            --TODO check if buffer is in another tab and if so, ignore it
+            --TODO check if buffer is in another tab and if so, ignore it (for dadbod-ui tabs)
             -- Open the file in this window without switching to it
             vim.api.nvim_win_call(winid, function()
                 vim.cmd('edit ' .. filepath)
@@ -186,7 +184,7 @@ function M.gf()
                     local ok = pcall(vim.api.nvim_win_set_cursor, 0, pos)
                     if not ok then
                         vim.print("gf: Cursor position outside buffer")
-                        vim.cmd [[:norm G]]
+                        vim.cmd[[:norm G]]
                     end
                 end
             end)

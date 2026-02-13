@@ -26,8 +26,8 @@ function Shadesofpurple()
         -- copilot. By default, both of those link to Comment
         -- CopilotSuggestion xxx links to Comment
         -- CopilotAnnotation xxx links to Comment
-        vim.api.nvim_set_hl(0, "CopilotSuggestion", { fg = "#5555FF", italic = true })
-        vim.api.nvim_set_hl(0, "CopilotAnnotation", { fg = "", italic = true })
+        vim.api.nvim_set_hl(0, "CopilotSuggestion", { fg = "#f542dd", italic = true })
+        -- vim.api.nvim_set_hl(0, "CopilotAnnotation", { fg = "", italic = true })
 
 
         vim.api.nvim_set_hl(0,  "@function.builtin.lua", {link="Function"}) -- this is too obvious to be the default
