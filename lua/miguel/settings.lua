@@ -7,6 +7,9 @@ vim.opt.timeout = false
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.clipboard = "unnamedplus"
+if Sad then
+    vim.g.clipboard = "osc52"
+end
 vim.opt.hlsearch = true
 vim.opt.scrolloff = 5
 vim.opt.signcolumn = "yes"
