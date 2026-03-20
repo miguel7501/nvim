@@ -7,8 +7,8 @@ vim.opt.timeout = false
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.clipboard = "unnamedplus"
-if Sad then
-    vim.g.clipboard = "osc52"
+if Sad then -- WSL clipboard detection takes an entire second so we do it manually. Thanks, Microsoft.
+    vim.g.clipboard = "xsel"
 end
 vim.opt.hlsearch = true
 vim.opt.scrolloff = 5
