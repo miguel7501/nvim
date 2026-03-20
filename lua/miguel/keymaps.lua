@@ -236,8 +236,10 @@ vim.keymap.set('n', '<leader>cg', ':colorscheme gruvbox<cr>')
 
 
 -- Letting go of shift in time is hard
-vim.api.nvim_create_user_command("W", 'write', {})
-vim.api.nvim_create_user_command("Q", 'quit', {})
+vim.api.nvim_create_user_command("W", 'w', { bang = true})
+vim.api.nvim_create_user_command("Q", 'q', { bang = true})
+vim.api.nvim_create_user_command("WQ", 'wq', { bang = true})
+vim.api.nvim_create_user_command("Wq", 'wq', { bang = true})
 
 
 -- -- todocomments -> commented out because plugin is bugged ( fix not merged yet, see https://github.com/folke/todo-comments.nvim/pull/381 )
