@@ -1,9 +1,16 @@
 local M = {}
 
+
 local conf = require("telescope.config").values
-function M.harpoon_toggle_telescope(harpoon_files)
+function M.harpoon_toggle_telescope()
+    local harpoon_list = require("harpoon"):list()
     local file_paths = {}
-    for _, item in ipairs(harpoon_files.items) do
+    if harpoon_list == nil or harpoon_list.items == nil then
+        vim.print("Harpoon list is empty")
+        return nil
+    end
+
+    for _, item in ipairs(harpoon_list.items) do
         table.insert(file_paths, item.value)
     end
 
