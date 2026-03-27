@@ -45,6 +45,7 @@ function Colorscheme.on_shadesofpurple()
         vim.api.nvim_set_hl(0, "MatchParen", { bg = "#856e00" })
         vim.api.nvim_set_hl(0, "CursorLine", { bg = "#232344" })
         vim.api.nvim_set_hl(0, "ColorColumn", { bg = "#292949" })
+        vim.api.nvim_set_hl(0, "Identifier", { fg = "NvimLightGrey2" }) -- same as variables
 
         vim.api.nvim_set_hl(0, "LocalHighlight2", { bg = "#3a376f" })
 
