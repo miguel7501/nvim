@@ -29,6 +29,7 @@ vim.keymap.set('n', '<leader>lr', vim.lsp.buf.rename)
 vim.keymap.set('n', '<leader>lR', ":LspRestart<CR>")
 vim.keymap.set('n', '<leader>lI', function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end, {desc="Toggle inlay hints"})
 vim.keymap.set('n', '<leader>li', functions.apply_inlay_hint, { desc = "Apply inlay hint after cursor" })
+
 -- more LSP stuff in ./plugins/trouble.lua
 
 -- debug keymaps are in ./plugins/dap.lua
@@ -45,8 +46,9 @@ vim.api.nvim_create_autocmd('TermOpen', {
     end
 })
 vim.keymap.set('t', '<Esc><Esc>', [[<C-\><C-n>]], {desc="Exit insert mode in terminal"})
-vim.api.nvim_create_user_command('VT', functions.vt, {})
-vim.api.nvim_create_user_command('Vt', functions.vt, {})
+vim.api.nvim_create_user_command('VT', functions.vt, {desc="Open a terminal in a vertical split, reusing an existing one if possible"})
+vim.api.nvim_create_user_command('Vt', functions.vt, {desc="Open a terminal in a vertical split, reusing an existing one if possible"})
+vim.api.nvim_create_user_command('Term', functions.term, {desc="Open a terminal, reusing an existing one if possible"})
 
 
 -- Letting go of shift is hard

@@ -1,40 +1,54 @@
 local M = {}
+local function get_visual_selection()
+    local mode = vim.fn.mode(1)
+    if not mode:match("[vV]") and not mode:match("CTRL-V") then
+        return nil
+    end
+    local start = vim.fn.getpos("v")
+    local stop = vim.fn.getpos(".")
+    local text = vim.fn.getregion(start, stop)
+    return table.concat(text, "\n")
+end
+local function is_hidden_terminal(bufnr)
+    local bufname = vim.api.nvim_buf_get_name(bufnr)
+    if not string.match(bufname, "^term://") then
+        return false
+    end
+    local bufinfo = vim.fn.getbufinfo(bufnr)[1]
+    if bufinfo.loaded == 0 then
+        return false
+    end
+    if bufinfo.hidden == 0 then
+        return false
+    end
+    return true
+end
 
 -- opens a terminal in a vertical split, reusing an existing terminal buffer if possible
 function M.vt()
     local bufs = vim.api.nvim_list_bufs()
     for _, buf in ipairs(bufs) do
-        local bufname = vim.api.nvim_buf_get_name(buf)
-        if not string.match(bufname, "^term://") then
-            goto continue
-        end
-        local bufinfo = vim.fn.getbufinfo(buf)[1]
-        -- vim.print("Bufinfo:")
-        -- vim.print(bufinfo)
-        if bufinfo.loaded == 0 then
-            goto continue
-        end
-        if bufinfo.hidden == 1 then
+        if is_hidden_terminal(buf) then
             vim.cmd [[:vsplit]]
             vim.cmd(":buf " .. tostring(buf))
             return nil
-        else
-            local win = bufinfo.windows[1]
-            --TODO only consider windows in the current tab
-            if type(win) ~= "number" then
-                vim.print("VT error: bufinfo.windows[1] is not a number. Type, value:  ", type(win), win) -- appears to happen when dapui is open
-                vim.print("Bufinfo: ", bufinfo)
-                return nil
-            end
-            -- vim.print("Switching to window "..tostring(win))
-            vim.api.nvim_set_current_win(win)
-            return nil
         end
-        ::continue::
     end
-
     vim.cmd [[:vert :term]] ---@diagnostic disable-line[unreachable-code]
     return nil
+end
+
+-- :term but reuses existing hidden terminals
+function M.term()
+    local bufs = vim.api.nvim_list_bufs()
+    for _, buf in ipairs(bufs) do
+        if is_hidden_terminal(buf) then
+            vim.cmd(":buffer " .. tostring(buf))
+            return nil
+        end
+    end
+    vim.cmd[[:term]]
+
 end
 
 
@@ -81,7 +95,7 @@ function M.apply_inlay_hint()
 end
 
 function M.sad_gx(path) -- copy of vim.ui.open that can get the link under the cursor and has a high timeout because wslview literally takes 10 seconds to return even though it's async
-    path = M.get_visual_selection()
+    path = get_visual_selection()
     if not path then
         path = vim.fn.expand("<cWORD>")
     end
