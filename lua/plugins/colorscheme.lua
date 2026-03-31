@@ -1,7 +1,7 @@
 Colorscheme = {}
 
 function Colorscheme.init()
-        vim.api.nvim_set_hl(0, "CustomUnusedVars", { undercurl = true, })
+        vim.api.nvim_set_hl(0, "CustomUnusedVars", { underline = true, sp = "#B362FF", })
         vim.api.nvim_set_hl(0, "DiagnosticUnnecessary", { link = "CustomUnusedVars" })
         vim.api.nvim_set_hl(0,  "@function.builtin.lua", {link="Function"}) -- this is too obvious to be the default
 
@@ -67,10 +67,12 @@ return {
     "Rigellute/shades-of-purple.vim",
     dependencies = {"ribru17/bamboo.nvim", "ellisonleao/gruvbox.nvim"},
     config = function()
-        Colorscheme.init()
         vim.api.nvim_create_autocmd("ColorScheme", {
             pattern = "shades_of_purple",
-            callback = Colorscheme.on_shadesofpurple
+            callback = function()
+                Colorscheme.init()
+                Colorscheme.on_shadesofpurple()
+            end
         })
 
     end

@@ -172,5 +172,30 @@ function M.gf() --TODO :term may break filenames into multiple lines and that br
     return nil
 end
 
+-- gets pyright diagnostics on the current line and appends a comment to ignore them
+function M.pyright_ignore()
+    local cpos = vim.api.nvim_win_get_cursor(0)
+    local lnum = cpos[1]
+    local diagnostics = vim.diagnostic.get(0, { lnum = lnum - 1 })
+    local codes = ""
+    for _, diag in ipairs(diagnostics) do
+        if diag.source == "basedpyright"
+        and string.match(diag.code, "^report")
+        and diag.code ~= "reportUnnecessaryTypeIgnoreComment"
+        then
+            -- TODO add handling for reportUnnecessaryTypeIgnoreComment
+            codes = codes..diag.code..","
+        end
+    end
+    if codes == "" then return nil end
+    local comment = " # pyright: ignore[" .. codes .. "]"
+    -- always append end of line
+    local text = vim.api.nvim_buf_get_lines(0, lnum - 1, lnum, false)
+    vim.print(text[1])
+    if text == {} then return nil end
+    text[1] = text[1] .. comment
+    vim.api.nvim_buf_set_lines(0, lnum - 1, lnum, false, text)
+end
 
 return M
+

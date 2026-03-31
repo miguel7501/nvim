@@ -27,8 +27,6 @@ vim.keymap.set('n', '<leader>Q',function () print("vim.diagnostic.is_enabled() -
 vim.keymap.set({'n','v'}, '<leader>la', vim.lsp.buf.code_action)
 vim.keymap.set('n', '<leader>lr', vim.lsp.buf.rename)
 vim.keymap.set('n', '<leader>lR', ":LspRestart<CR>")
-vim.keymap.set('n', '<leader>lI', function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end, {desc="Toggle inlay hints"})
-vim.keymap.set('n', '<leader>li', functions.apply_inlay_hint, { desc = "Apply inlay hint after cursor" })
 
 -- more LSP stuff in ./plugins/trouble.lua
 
@@ -56,4 +54,10 @@ vim.api.nvim_create_user_command("W", 'w', { bang = true})
 vim.api.nvim_create_user_command("Q", 'q', { bang = true})
 vim.api.nvim_create_user_command("WQ", 'wq', { bang = true})
 vim.api.nvim_create_user_command("Wq", 'wq', { bang = true})
+
+-- python specials
+vim.keymap.set("n", "<leader>i", functions.pyright_ignore, {desc="Insert '#pyright: ignore' comment with diagnostic code" })
+vim.keymap.set('n', '<leader>lI', function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end, {desc="Toggle inlay hints"})
+vim.keymap.set('n', '<leader>li', functions.apply_inlay_hint, { desc = "Apply inlay hint after cursor" })
+
 

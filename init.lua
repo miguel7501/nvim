@@ -9,4 +9,5 @@ if Sad then
     require("wsl")
 end
 
+Colorscheme.init()
 vim.cmd[[colorscheme shades_of_purple]]
