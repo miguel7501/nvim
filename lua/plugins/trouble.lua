@@ -69,7 +69,7 @@ return {
             warn_no_results = false,
         }
         vim.keymap.set('n', 'gd', '<cmd>Trouble lsp_definitions toggle<cr>')
-        -- vim.keymap.set('n', 'gr', '<cmd>Trouble lsp_references toggle<cr>zz')
+        vim.keymap.set('n', 'grt', '<cmd>Trouble lsp_references toggle<cr>zz')
         vim.keymap.set('n', '<leader>t', "<cmd>Trouble diagnostics toggle filter.buf=0<cr>")
         vim.keymap.set('n', '<leader>T', "<cmd>Trouble diagnostics toggle<cr>")
         vim.keymap.set('n', '<leader>ls', function()
