@@ -56,7 +56,6 @@ vim.api.nvim_create_user_command("WQ", 'wq', { bang = true})
 vim.api.nvim_create_user_command("Wq", 'wq', { bang = true})
 
 -- python specials
-vim.keymap.set("n", "<leader>i", functions.pyright_ignore, {desc="Insert '#pyright: ignore' comment with diagnostic code" })
 vim.keymap.set('n', '<leader>lI', function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end, {desc="Toggle inlay hints"})
 vim.keymap.set('n', '<leader>li', functions.apply_inlay_hint, { desc = "Apply inlay hint after cursor" })
 
