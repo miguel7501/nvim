@@ -24,12 +24,13 @@ return {
         vim.keymap.set('n', '<C-p>', find_files, {})
         vim.keymap.set('n', '<C-S-P>', live_grep, { desc = "Live Grep" })
         vim.keymap.set('n', '<leader>pg', live_grep, { desc = "Live Grep" })
-        vim.keymap.set('n', '<leader>ps', telbuiltin.lsp_workspace_symbols)
+        vim.keymap.set('n', '<leader>ps', telbuiltin.lsp_document_symbols)
         vim.keymap.set('n', '<leader>pp', find_files)
         vim.keymap.set('n', '<leader>pk', "<cmd>Telescope keymaps<cr>")
         vim.keymap.set('n', '<leader>ph', "<cmd>Telescope help_tags<cr>")
         vim.keymap.set('n', '<leader>pB', "<cmd>Telescope builtin<cr>")
         vim.keymap.set('n', '<leader>pb', '<cmd>Telescope buffers<cr>')
+        vim.keymap.set('n', '<leader>pe', '<cmd>Telescope diagnostics<cr>')
         vim.keymap.set('n', '<leader>hh', require("functions").harpoon_toggle_telescope)
 
     end,

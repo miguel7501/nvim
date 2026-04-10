@@ -75,7 +75,8 @@ return {
         vim.keymap.set('n', '<leader>ls', function()
             vim.cmd("Trouble symbols toggle")
             -- this folds by one layer initially
-            require("trouble").fold_more() ---@diagnostic disable-line:missing-parameter Trouble docs say this is ok
+            require("trouble").fold_more()
+            require("trouble").fold_more()
         end)
     end
 }
