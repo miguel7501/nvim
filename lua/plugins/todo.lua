@@ -1,12 +1,12 @@
 return {
-    "folke/todo-comments.nvim",
+    "folke/todo-comments.nvim", -- BUG when a todocomment is the last thing on a line, the plugin errors out with extmark_out_of_range
     -- TODO test comment
     -- todo don't write lowercase todo comments
     -- HACK test comment
     -- NOTE test comment
     -- BUG test comment
-    -- BROKEN
-    -- TEST
+    -- BROKEN af
+    -- TEST ...
     -- PERF test comment
     -- WARNING test comment
     -- we DONE did it

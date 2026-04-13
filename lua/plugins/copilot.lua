@@ -85,9 +85,11 @@ return {
                     print("Notes folder detected, disabling Copilot")
                     return false
                 end
-                -- get filetype
+
                 local ft = vim.bo.filetype
-                if ft == "mysql" or ft == "sql" then return false end
+                if ft == "mysql" or ft == "sql" or ft == "dap-repl" or string.match(ft, "^dapui") then
+                    return false
+                end
 
                 return true
             end,

@@ -2,7 +2,10 @@ return {
     "zk-org/zk-nvim",
     config = function()
         require("zk").setup({
-            picker = "telescope"
+            picker = "telescope",
+            config = {
+                root_dir = vim.fn.expand("~/notes")
+            }
         })
         --NOTE docs are at https://github.com/zk-org/zk-nvim
         vim.keymap.set('n', '<leader>np', '<cmd>ZkNotes<cr>')
