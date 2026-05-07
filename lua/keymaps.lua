@@ -59,4 +59,6 @@ vim.api.nvim_create_user_command("Wq", 'wq', { bang = true})
 vim.keymap.set('n', '<leader>lI', function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end, {desc="Toggle inlay hints"})
 vim.keymap.set('n', '<leader>li', functions.apply_inlay_hint, { desc = "Apply inlay hint after cursor" })
 
+-- vibe coding specials: Enable voice transcription by running `whisperin start` in the terminal.
+vim.keymap.set('n', '<leader>v', function() vim.cmd("!whisperin toggle") end, {desc="Toggle voice transcription"})
 

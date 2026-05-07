@@ -19,6 +19,15 @@ M.dap_launch_configs = {
         justMyCode = false,
         console = "integratedTerminal"
     },
+    {
+        name = "Pytest (last failed)",
+        type = "debugpy",
+        request = "launch",
+        module = "pytest",
+        args = { "--last-failed" },
+        justMyCode = false,
+        console = "integratedTerminal"
+    },
 }
 
 M.dap_virtual_text = {

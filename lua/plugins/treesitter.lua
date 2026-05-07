@@ -9,9 +9,9 @@ return {
             ensure_installed = { "lua", "python", "markdown", "yaml", "toml", "xml", "ini", "csv", "comment", "sql", },
             auto_install = true,
             highlight = { enable = true },
-            injections = {
-                enable = true
-            },
+            -- injections = {
+            --     enable = true
+            -- },
             incremental_selection = {
                 enable = true,
                 keymaps = {

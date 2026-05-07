@@ -13,8 +13,8 @@ if Sad then -- WSL clipboard detection takes an entire second so we do it manual
 end
 vim.opt.hlsearch = true
 vim.opt.scrolloff = 5
-vim.opt.signcolumn = "yes"
-vim.opt.colorcolumn = "100"
+vim.opt.signcolumn = "yes:1"
+vim.opt.colorcolumn = "80"
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.g.pyindent_open_paren = 'shiftwidth()'
@@ -33,8 +33,8 @@ vim.opt.scrollback = 100000
 vim.opt.cmdheight = 1
 vim.opt.formatoptions:remove("o") -- this get overriden per ft and idk why so
 
-vim.opt.conceallevel = 0 -- concealed lines displayed as empty --TODO set those two opts for floating windows
-vim.opt.concealcursor = {} -- list of modes where lines will stay concealed even if the cursor is on them
+-- vim.opt.conceallevel = 0 -- concealed lines displayed as empty --TODO set those two opts for floating windows
+-- vim.opt.concealcursor = {} -- list of modes where lines will stay concealed even if the cursor is on them
 
 vim.opt.foldlevel = 99 -- all folds start open
 

@@ -1,4 +1,5 @@
 local M = {}
+
 local function get_visual_selection()
     local mode = vim.fn.mode(1)
     if not mode:match("[vV]") and not mode:match("CTRL-V") then
@@ -9,6 +10,7 @@ local function get_visual_selection()
     local text = vim.fn.getregion(start, stop)
     return table.concat(text, "\n")
 end
+
 local function is_hidden_terminal(bufnr)
     local bufname = vim.api.nvim_buf_get_name(bufnr)
     if not string.match(bufname, "^term://") then

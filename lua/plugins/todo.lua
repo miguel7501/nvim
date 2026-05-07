@@ -1,5 +1,6 @@
 return {
-    "folke/todo-comments.nvim", -- BUG when a todocomment is the last thing on a line, the plugin errors out with extmark_out_of_range
+    -- "folke/todo-comments.nvim", -- BUG when a todocomment is the last thing on a line, the plugin errors out with extmark_out_of_range
+    "belltoy/todo-comments.nvim", -- this is an unmerged PR fixing it
     -- TODO test comment
     -- todo don't write lowercase todo comments
     -- HACK test comment
@@ -18,7 +19,8 @@ return {
             FIX = { alt = { "BUG", "BROKEN", "FIXME" } },
             TEST = { icon = " ", color = '#ff9d00' },
             IMPORTANT = { icon = " ", color = '#ff0000' },
-            TJA = {icon = "🤷", color="#fce094"},
+            QUESTION = {icon = "?", color="#fb94ff"},
+            WAITING = { icon = " ", color = 'warning' },
         },
         merge_keywords = true,
         highlight = {

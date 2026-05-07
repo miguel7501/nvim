@@ -22,6 +22,13 @@ vim.lsp.config['basedpyright'] = {
 vim.lsp.enable('basedpyright')
 vim.lsp.enable('ruff', false) -- ruff LSP is annoying, I just use it as formatter
 
+
+local lua_libs = { "?.lua", "?/init.lua", vim.env.VIMRUNTIME, }
+local cwd = vim.fn.getcwd()
+if cwd == vim.fn.expand("~/.config/nvim") then -- we are configuring nvim
+    table.insert(lua_libs, vim.fn.stdpath("data") .. "/lazy")
+end
+
 vim.lsp.config['luals'] = {
     cmd = { 'lua-language-server' },
     filetypes = { 'lua' },
@@ -29,15 +36,16 @@ vim.lsp.config['luals'] = {
         Lua = {
             runtime = {
                 version = 'LuaJIT',
+                path = lua_libs,
             },
             workspace = {
-                library = {
-                    vim.env.VIMRUNTIME
-                }
+                library = lua_libs,
             }
         }
     },
 }
+
+
 vim.lsp.enable('luals')
 
 if not Sad then
