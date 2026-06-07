@@ -9,6 +9,10 @@ M.dap_launch_configs = {
         cwd = ".",
         justMyCode = false,
         debugOptions = { "RedirectOutput" },
+        env = {
+            PYTHONPATH = ".",
+            PYDEVD_CONTAINER_RANDOM_ACCESS_MAX_ITEMS = "50000"
+        },
         console = "integratedTerminal",
     },
     {
@@ -17,6 +21,10 @@ M.dap_launch_configs = {
         request = "launch",
         module = "pytest",
         justMyCode = false,
+        env = {
+            PYTHONPATH = ".",
+            PYDEVD_CONTAINER_RANDOM_ACCESS_MAX_ITEMS = "50000"
+        },
         console = "integratedTerminal"
     },
     {
@@ -26,6 +34,10 @@ M.dap_launch_configs = {
         module = "pytest",
         args = { "--last-failed" },
         justMyCode = false,
+        env = {
+            PYTHONPATH = ".",
+            PYDEVD_CONTAINER_RANDOM_ACCESS_MAX_ITEMS = "50000"
+        },
         console = "integratedTerminal"
     },
 }

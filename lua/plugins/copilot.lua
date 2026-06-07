@@ -82,7 +82,9 @@ return {
                     return false
                 end
                 if path:match(".*notes.*") then
-                    print("Notes folder detected, disabling Copilot")
+                    return false
+                end
+                if path:match(".*env") then
                     return false
                 end
 

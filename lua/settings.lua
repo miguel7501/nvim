@@ -50,3 +50,5 @@ vim.g.python3_host_prog = '/home/miguel/scripts/python/.venv/bin/python3'
 
 vim.diagnostic.config{virtual_text = {current_line = true}}
 
+-- dockerfiles have weird names so
+vim.filetype.add{pattern={[".*dockerfile.*"] = "dockerfile"}}

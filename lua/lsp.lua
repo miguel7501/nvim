@@ -1,4 +1,3 @@
-
 vim.lsp.config('*', {
     capabilities = require('blink.cmp').get_lsp_capabilities(),
     root_markers = { '.git' },
@@ -6,8 +5,8 @@ vim.lsp.config('*', {
 
 
 vim.lsp.config['basedpyright'] = {
-    cmd = { 'basedpyright-langserver', '--stdio', '--threads', '16'},
-    filetypes = {'python'},
+    cmd = { 'basedpyright-langserver', '--stdio', '--threads', '16' },
+    filetypes = { 'python' },
     capabilities = require('blink.cmp').get_lsp_capabilities(),
     settings = {
         basedpyright = {
@@ -44,8 +43,6 @@ vim.lsp.config['luals'] = {
         }
     },
 }
-
-
 vim.lsp.enable('luals')
 
 if not Sad then
@@ -53,24 +50,69 @@ if not Sad then
 end
 
 vim.lsp.enable('bashls')
-vim.lsp.enable{ 'svelte' , "ts_ls"} -- ts_ls = typescript
+
+
+vim.lsp.config['svelte'] = {
+    cmd = { 'svelteserver', '--stdio' },
+    filetypes = { 'svelte' },
+    settings = {
+        typescript = {
+            inlayHints = {
+                enumMemberValues = {
+                    enabled = true
+                },
+                functionLikeReturnTypes = {
+                    enabled = true
+                },
+                parameterNames = {
+                    enabled = "literals",
+                    suppressWhenArgumentMatchesName = true
+                },
+                parameterTypes = {
+                    enabled = true
+                },
+                propertyDeclarationTypes = {
+                    enabled = true
+                },
+                variableTypes = {
+                    enabled = true
+                }
+            }
+        }
+    }
+}
+vim.lsp.enable { 'svelte', "ts_ls" } -- ts_ls = typescript
 
 
 
 vim.api.nvim_create_autocmd("LspAttach",
-{
-    -- pattern={"basedpyright"},
-    callback=function(evt)
-        local lsp_client = vim.lsp.get_client_by_id(evt.data.client_id)
-        if lsp_client == nil then
-            return nil
+    {
+        -- pattern={"basedpyright"},
+        callback = function(evt)
+            local lsp_client = vim.lsp.get_client_by_id(evt.data.client_id)
+            if lsp_client == nil then
+                return nil
+            end
+            if not lsp_client:supports_method("textDocument/foldingRange") then
+                return nil
+            end
+            vim.opt_local.foldmethod = 'expr'
+            vim.opt_local.foldexpr = 'v:lua.vim.lsp.foldexpr()'
+            vim.opt_local.foldlevelstart = 99
+            vim.opt_local.foldlevel = 99
         end
-        if not lsp_client:supports_method("textDocument/foldingRange") then
-            return nil
-        end
-        vim.opt_local.foldmethod = 'expr'
-        vim.opt_local.foldexpr = 'v:lua.vim.lsp.foldexpr()'
-        vim.opt_local.foldlevelstart=99
-        vim.opt_local.foldlevel=99
-    end
-})
+    })
+
+-- TODO I am not sure whether this actually disables telemetry but how do I find out?
+
+-- vim.lsp.config['docker-language-server'] = {
+--     cmd = { 'docker-language-server', 'start', '--stdio' },
+--     filetypes = { 'dockerfile', 'yaml',},
+--     init_options = {
+--         telemetry = "off",
+--         dockercomposeExperimental = {
+--             composeSupport = true,
+--         }
+--     }
+-- }
+-- vim.lsp.enable('docker-language-server')
