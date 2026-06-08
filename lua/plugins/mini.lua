@@ -8,6 +8,7 @@ return {
         require("mini.ai").setup({
             custom_textobjects = {
                 f = spec_treesitter({ a = '@function.outer', i = '@function.inner' }),
+                C = spec_treesitter({ a = '@class.outer', i = '@class.inner' }),
             }
         })
     end
