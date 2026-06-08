@@ -25,3 +25,11 @@ vim.api.nvim_create_autocmd("User", {
         vim.wo.wrap = true
     end
 })
+
+vim.api.nvim_create_autocmd('BufEnter', {
+    desc = "Default K for help",
+    pattern = "help",
+    callback = function (args)
+        vim.print(args)
+    end
+})
