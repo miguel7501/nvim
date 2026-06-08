@@ -47,6 +47,7 @@ vim.keymap.set('t', '<Esc><Esc>', [[<C-\><C-n>]], {desc="Exit insert mode in ter
 vim.api.nvim_create_user_command('VT', functions.vt, {desc="Open a terminal in a vertical split, reusing an existing one if possible"})
 vim.api.nvim_create_user_command('Vt', functions.vt, {desc="Open a terminal in a vertical split, reusing an existing one if possible"})
 vim.api.nvim_create_user_command('Term', functions.term, {desc="Open a terminal, reusing an existing one if possible"})
+vim.api.nvim_create_user_command("EP", functions.execpaste, {nargs="+", desc="Execute a command and paste the output"})
 
 
 -- Letting go of shift is hard

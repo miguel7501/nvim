@@ -174,6 +174,19 @@ function M.gf() --TODO :term may break filenames into multiple lines and that br
     return nil
 end
 
+function M.execpaste(args)
+    local result = vim.api.nvim_exec2(args.args, {output=true})
+    local cline = vim.api.nvim_win_get_cursor(0)[1]
+
+    local replacement = {}
+    for line in string.gmatch(result.output, "[^\n]+") do
+        table.insert(replacement, line)
+    end
+    vim.print(replacement)
+    vim.api.nvim_buf_set_lines(0, cline, cline, false, replacement)
+end
+
 
 return M
+
 
