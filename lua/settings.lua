@@ -1,4 +1,4 @@
-
+require('vim._core.ui2').enable()
 vim.g.mapleader = 's'
 vim.g.maplocalleader = 's'
 vim.keymap.set({'n', 'v'}, 's', '<Nop>', {})
