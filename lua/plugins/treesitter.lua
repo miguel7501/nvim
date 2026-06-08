@@ -1,17 +1,25 @@
+-- if true then return {
+--     -- {
+--     --     "nvim-treesitter/nvim-treesitter",
+--     --     branch = "main",
+--     --     build = ":TSUpdate",
+--     -- },
+-- } end
 return {
     "nvim-treesitter/nvim-treesitter",
+    branch = "main",
     dependencies = {
-        "nvim-treesitter/nvim-treesitter-textobjects",
+        {"nvim-treesitter/nvim-treesitter-textobjects", branch="main"},
     },
     config = function()
         ---@diagnostic disable-next-line: missing-fields
-        require("nvim-treesitter.configs").setup {
+        require("nvim-treesitter").setup {
             ensure_installed = { "lua", "python", "markdown", "yaml", "toml", "xml", "ini", "csv", "comment", "sql", },
             auto_install = true,
             highlight = { enable = true },
-            -- injections = {
-            --     enable = true
-            -- },
+            injections = {
+                enable = true
+            },
             incremental_selection = {
                 enable = true,
                 keymaps = {

@@ -1,3 +1,5 @@
+if not Sad then return {} end
+
 return {
     "zbirenbaum/copilot.lua",
     -- requires = { -- not working yet
