@@ -8,8 +8,10 @@ vim.opt.timeout = false
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.clipboard = "unnamedplus"
+vim.o.mousescroll = "ver:1,hor:1" -- laptop touchpad
 if Sad then -- WSL clipboard detection takes an entire second so we do it manually. Thanks, Microsoft.
     vim.g.clipboard = "xsel"
+    vim.o.mousescroll = "ver:3,hor:6"
 end
 vim.opt.hlsearch = true
 vim.opt.scrolloff = 5

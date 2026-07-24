@@ -22,20 +22,34 @@ vim.lsp.enable('basedpyright')
 vim.lsp.enable('ruff', false) -- ruff LSP is annoying, I just use it as formatter
 
 
-local lua_libs = { "?.lua", "?/init.lua", vim.env.VIMRUNTIME, }
+local lua_libs = { "?/init.lua", "?.lua",}
+local disabled_diagnostics = {}
 local cwd = vim.fn.getcwd()
 if cwd == vim.fn.expand("~/.config/nvim") then -- we are configuring nvim
-    table.insert(lua_libs, vim.fn.stdpath("data") .. "/lazy")
-end
+    table.insert(lua_libs, vim.env.VIMRUNTIME) -- nvim builtins
+    table.insert(lua_libs, vim.fn.stdpath("data") .. "/lazy") -- all plugin code
+    table.insert(disabled_diagnostics, "PARSER_LUADOC_MISS_SEE_NAME")
+elseif string.match(cwd, "love2d") then
+    table.insert(lua_libs, vim.fs.joinpath(vim.fn.stdpath("data"), "lazy/love2d.nvim/libraries/luasocket/library"))
+    table.insert(lua_libs, vim.fs.joinpath(vim.fn.stdpath("data"), "lazy/love2d.nvim/libraries/love2d/library"))
+    table.insert(disabled_diagnostics, "duplicate-set-field")
 
-vim.lsp.config['luals'] = {
+end
+vim.lsp.config['lua_ls'] = {
     cmd = { 'lua-language-server' },
     filetypes = { 'lua' },
     settings = {
         Lua = {
+            hover = {
+                previewFields = 0 , -- no limit, default is 20 or so.
+                -- enumsLimit = 0, -- Claude mentioned that for union types, maybe I'll need it
+            },
             runtime = {
                 version = 'LuaJIT',
                 path = lua_libs,
+            },
+            diagnostics = {
+                disable = disabled_diagnostics,
             },
             workspace = {
                 library = lua_libs,
@@ -43,9 +57,13 @@ vim.lsp.config['luals'] = {
         }
     },
 }
-vim.lsp.enable('luals')
+vim.lsp.enable('lua_ls')
 
 if not Sad then
+    vim.lsp.config["glsl_analyzer"] = {
+        cmd = { "glsl_analyzer" },
+        filetypes = {"glsl"}
+    }
     vim.lsp.enable("glsl_analyzer")
 end
 
